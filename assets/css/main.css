@@ -50,7 +50,7 @@ input[type='checkbox'] {
 
   padding: 1rem;
 
-  color: #7c8081; /* grey text */
+  color: #f3f6fa; /* grey text */
   background: #3fb1a3; /* blue background */
 
   cursor: pointer;
@@ -60,7 +60,7 @@ input[type='checkbox'] {
 }
 
 .lbl-toggle:hover {
-  color: #3fb1a3; /* theme blue background */
+  color: #FFFFFF; /* white text */
 }
 
 .lbl-toggle::before {
@@ -97,7 +97,7 @@ input[type='checkbox'] {
 }
 
 .collapsible-content .content-inner {
-  background: rgba(250, 224, 66, .2);
+  background: #f3f6fa; /* background for the collapsed section */
   border-bottom: 1px solid rgba(250, 224, 66, .45);
   border-bottom-left-radius: 7px;
   border-bottom-right-radius: 7px;

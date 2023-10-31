@@ -98,7 +98,7 @@ input[type='checkbox'] {
 
 .collapsible-content .content-inner {
   background: #f3f6fa; /* background for the collapsed section */
-  border-bottom: 1px solid rgba(250, 224, 66, .45);
+  border-bottom: 1px solid rgba(63,177,163);
   border-bottom-left-radius: 7px;
   border-bottom-right-radius: 7px;
   padding: .5rem 1rem;
@@ -162,7 +162,7 @@ input[type='checkbox'] {
   transition: max-height .25s ease-in-out;
 }
 
-.toggle2:checked + .lbl-toggle2 + .collapsible-content {
+.toggle2:checked + .lbl-toggle2 + .collapsible-content2 {
   max-height: 100vh;
 }
 
@@ -173,7 +173,7 @@ input[type='checkbox'] {
 
 .collapsible-content2 .content-inner2 {
   background: #f3f6fa; /* background for the collapsed section */
-  border-bottom: 1px solid rgba(250, 224, 66, .45);
+  border-bottom: 1px solid rgba(63,177,163);
   border-bottom-left-radius: 7px;
   border-bottom-right-radius: 7px;
   padding: .5rem 1rem;
@@ -236,7 +236,7 @@ input[type='checkbox'] {
   transition: max-height .25s ease-in-out;
 }
 
-.toggle3:checked + .lbl-toggle3 + .collapsible-content {
+.toggle3:checked + .lbl-toggle3 + .collapsible-content3 {
   max-height: 100vh;
 }
 
@@ -247,7 +247,7 @@ input[type='checkbox'] {
 
 .collapsible-content3 .content-inner3 {
   background: #f3f6fa; /* background for the collapsed section */
-  border-bottom: 1px solid rgba(250, 224, 66, .45);
+  border-bottom: 1px solid rgba(63,177,163);
   border-bottom-left-radius: 7px;
   border-bottom-right-radius: 7px;
   padding: .5rem 1rem;

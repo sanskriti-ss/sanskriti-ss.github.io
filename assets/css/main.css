@@ -156,7 +156,7 @@ input[type='checkbox'] {
   transform: rotate(90deg) translateX(-3px);
 }
 
-.collapsible-content {
+.collapsible-content2 {
   max-height: 0px;
   overflow: hidden;
   transition: max-height .25s ease-in-out;
@@ -171,7 +171,7 @@ input[type='checkbox'] {
   border-bottom-left-radius: 0;
 }
 
-.collapsible-content .content-inner {
+.collapsible-content2 .content-inner2 {
   background: #f3f6fa; /* background for the collapsed section */
   border-bottom: 1px solid rgba(250, 224, 66, .45);
   border-bottom-left-radius: 7px;
@@ -230,7 +230,7 @@ input[type='checkbox'] {
   transform: rotate(90deg) translateX(-3px);
 }
 
-.collapsible-content {
+.collapsible-content3 {
   max-height: 0px;
   overflow: hidden;
   transition: max-height .25s ease-in-out;
@@ -245,7 +245,7 @@ input[type='checkbox'] {
   border-bottom-left-radius: 0;
 }
 
-.collapsible-content .content-inner {
+.collapsible-content3 .content-inner3 {
   background: #f3f6fa; /* background for the collapsed section */
   border-bottom: 1px solid rgba(250, 224, 66, .45);
   border-bottom-left-radius: 7px;

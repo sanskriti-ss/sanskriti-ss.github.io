@@ -51,7 +51,7 @@
 					<header class="special container">
 						<span class="icon solid fa-tablet-alt"></span>
 						<h2>Interests <strong></strong></h2>
-						<p>Things I'm endlessly curious about... looking for the answers to what I don't know, and for the questions I haven't thought to ask.</p>
+						<p>Things I'm endlessly curious about... looking for the answers to what I don't know, and for the questions I haven't thought to ask. Scroll down for books!</p>
 					</header>
 
 					<!-- One -->
@@ -75,7 +75,7 @@
 												</header>
 												I love to read just about everything. Sometimes the mood strikes for Martial's Epigrams, and other times, for inspiring poetry.
 												However, my favourite books are the ones that are full of fun visualizations and questions that we don't have the answers to.
-												There's a list in the Projects section :)
+												There's a list below. And because I can never resist the opportunity, read The Universe in Your Hand by Christopher Galfard! :)
 												</p>
 												<header>
 													<h3>Textiles</h3>
@@ -120,55 +120,109 @@
 						</section>
 
 					<!-- Two -->
-						<section class="wrapper style1 container special">
-							<div class="row">
-								<div class="col-4 col-12-narrower">
-
-									<section>
-										<header>
-											<h3>Teaching!</h3>
-										</header>
-										<p>
-											I've instructed students for five years through UCMAS: a mental math and abacus program. In my hometown, I've also gotten the opportunity to share the joy of robotics by running <a href="https://www.orangeville.com/news/giving-kids-confidence-in-themselves-stem-education-a-necessity-in-technology-driven-world/article_9b583ddc-042f-5e11-a50c-8dc4f4a09c0d.html">case competitions</a> for other students. 
-										</p>
-										<footer>
-											
-										</footer>
-									</section>
-
-								</div>
-								<div class="col-4 col-12-narrower">
-
-									<section>
-										<header>
-											<h3>Visual Arts</h3>
-										</header>
-										<p>
-											Pottery, mosaics, acrylics, watercolour, and origami are all mediums I use, and turn to them as a way to make time to relax. Art is more meaningful when shared - I love making pieces with friends, and for friends. Some of my work is in the Creations tab!
-										</p>
-										<footer>
-											
-										</footer>
-									</section>
-
-								</div>
-								<div class="col-4 col-12-narrower">
-
-									<section>
-										<header>
-											<h3>Longevity</h3>
-										</header>
-										<p>
-											It's fascinating, how far we've come in extending our lifespan. Our limits are now vastly associated with the process of aging. There's still so much to learn about signalling processes within our own bodies... and how we can use what we know of other animals to improve our own healthspans.
-										</p>
-										<footer>
-											
-										</footer>
-									</section>
-
-								</div>
+	
+					<!-- ► BEGIN: BOOKS SECTION ◄ -->
+					<section id="books" class="wrapper style4 container">
+						<header class="major">
+						<h2>My Favourites</h2>
+						<p> (I have self-proclaimed and friend-proclaimed good taste :)</p>
+						</header>
+					
+						<style>
+						/* Grid of book covers */
+						#books .grid {
+							display: grid;
+							grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+							gap: 1rem;
+							justify-items: center;
+						}
+						#books .book {
+							position: relative;
+							width: 100%;
+							max-width: 120px;
+							cursor: pointer;
+						}
+						#books .book img {
+							width: 100%;
+							display: block;
+							border-radius: 4px;
+							box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+						}
+						/* Tooltip container */
+						#books .book .tooltip {
+							visibility: hidden;
+							opacity: 0;
+							width: 200px;
+							background: rgba(0,0,0,0.85);
+							color: #fff;
+							text-align: left;
+							padding: 0.5rem;
+							border-radius: 4px;
+							position: absolute;
+							top: -0.5rem;
+							left: 110%;
+							transition: opacity 0.2s ease-in-out;
+							z-index: 10;
+						}
+						/* Show on hover */
+						#books .book:hover .tooltip {
+							visibility: visible;
+							opacity: 1;
+						}
+						/* Arrow */
+						#books .book .tooltip::before {
+							content: "";
+							position: absolute;
+							top: 10px;
+							right: 100%;
+							border-width: 6px;
+							border-style: solid;
+							border-color: transparent rgba(0,0,0,0.85) transparent transparent;
+						}
+						</style>
+					
+						<div class="grid">
+						<!-- Book 1 -->
+						<div class="book">
+							<img src="images/book1.jpg" alt="The Universe in Your Hand">
+							<div class="tooltip">
+							<strong>The Universe in Your Hand</strong><br>
+							Indescribably good. It uses thought experiments and visualizations to help readers understand different cool phenomena in our universe, from black holes to elementary particles.
 							</div>
-						</section>
+						</div>
+					
+						<!-- Book 2 -->
+						<div class="book">
+							<img src="images/book2.jpg" alt="We have No Idea">
+							<div class="tooltip">
+							<strong>We have No Idea</strong><br>
+							A nice follow-up to the Universe in Your Hand. It shows you that we know very little (and you can have fun making your own silly theories and later googling them to see what serious! scientists think about them)
+							</div>
+						</div>
+					
+						<!-- Book 3 -->
+						<div class="book">
+							<img src="images/book3.jpg" alt="Empire of Pain">
+							<div class="tooltip">
+							<strong>Empire of Pain</strong><br>
+							This made me believe in conspiracies a little more? To clarify, how lobbying+being rich can really do a lot to change not only policies, but also narratives that we believe.
+							</div>
+						</div>
+					
+						<!-- Add as many as you like -->
+						<!--
+						<div class="book">
+							<img src="images/book4.png" alt="Book 4 Cover">
+							<div class="tooltip">
+							<strong>Book Title 4</strong><br>
+							Summary here…
+							</div>
+						</div>
+						-->
+						</div>
+					</section>
+					<!-- ► END: BOOKS SECTION ◄ -->
+  
 
 				</article>
 

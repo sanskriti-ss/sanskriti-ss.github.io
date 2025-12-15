@@ -1,0 +1,1075 @@
+/* ================================
+   LIBRARY THEME STYLES
+   Modern ivory + purple + teal theme
+   ================================ */
+
+/* Using Lato from main.css - no additional font imports needed */
+
+/* CSS Variables */
+:root {
+  --library-bg: #f8f6f1;
+  --ivory: #faf9f5;
+  --ivory-dark: #ede9e0;
+  --shelf-wood: #d4c4b0;
+  --shelf-dark: #b8a890;
+  --shelf-light: #e8dfd0;
+  --purple-deep: #5b4a6f;
+  --purple-muted: #7d6b8f;
+  --purple-light: #a899b8;
+  --teal-deep: #2d6a6a;
+  --teal-muted: #4a8f8f;
+  --teal-light: #7eb8b8;
+  --gold-accent: #c9a962;
+  --gold-light: #dcc07a;
+  --silver-accent: #a8b0b8;
+  --silver-light: #c5ccd4;
+  --text-dark: #3d3d4a;
+  --text-muted: #6b6b7a;
+  --shadow-soft: rgba(0, 0, 0, 0.1);
+  --shadow-medium: rgba(0, 0, 0, 0.15);
+}
+
+/* Library Section */
+#library {
+  background: linear-gradient(180deg, 
+    var(--ivory) 0%, 
+    var(--library-bg) 50%, 
+    var(--ivory-dark) 100%);
+  min-height: 100vh;
+  padding: 40px 0 60px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle pattern overlay */
+#library::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(circle at 20% 50%, rgba(93, 74, 111, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 80% 30%, rgba(45, 106, 106, 0.03) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.library-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 40px;
+  position: relative;
+}
+
+/* Ambient light overlay */
+.ambient-light {
+  position: absolute;
+  top: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, 
+    rgba(201, 169, 98, 0.08) 0%, 
+    transparent 60%);
+  pointer-events: none;
+  animation: gentle-pulse 10s ease-in-out infinite;
+}
+
+@keyframes gentle-pulse {
+  0%, 100% { opacity: 0.6; transform: translateX(-50%) scale(1); }
+  50% { opacity: 0.8; transform: translateX(-50%) scale(1.05); }
+}
+
+/* Dust particles effect - more subtle */
+.dust-particles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  background-image: 
+    radial-gradient(1px 1px at 20% 30%, rgba(201, 169, 98, 0.2) 0%, transparent 100%),
+    radial-gradient(1px 1px at 40% 70%, rgba(93, 74, 111, 0.15) 0%, transparent 100%),
+    radial-gradient(1px 1px at 60% 20%, rgba(45, 106, 106, 0.15) 0%, transparent 100%),
+    radial-gradient(1px 1px at 80% 50%, rgba(201, 169, 98, 0.2) 0%, transparent 100%);
+  animation: dust-float 25s ease-in-out infinite;
+}
+
+@keyframes dust-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+/* Library Header removed - bookshelf moved up */
+
+/* ================================
+   BOOKSHELF STYLES
+   ================================ */
+
+.bookshelf {
+  position: relative;
+  margin: 0 auto 50px;
+  max-width: 900px;
+}
+
+.shelf-board {
+  position: absolute;
+  bottom: 0;
+  left: -30px;
+  right: -30px;
+  height: 25px;
+  background: linear-gradient(180deg, 
+    var(--shelf-light) 0%, 
+    var(--shelf-wood) 40%, 
+    var(--shelf-dark) 100%);
+  border-radius: 0 0 4px 4px;
+  box-shadow: 
+    0 8px 25px var(--shadow-medium),
+    inset 0 2px 3px rgba(255, 255, 255, 0.4);
+}
+
+.shelf-board::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.5) 50%,
+    transparent 100%);
+}
+
+.shelf-shadow {
+  position: absolute;
+  bottom: -20px;
+  left: 0;
+  right: 0;
+  height: 20px;
+  background: linear-gradient(180deg, 
+    rgba(0, 0, 0, 0.08) 0%, 
+    transparent 100%);
+  pointer-events: none;
+}
+
+/* Books Row */
+.books-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 4px;
+  padding: 0 20px 25px;
+  min-height: 200px;
+}
+
+/* Make books lean against each other - alternating slight rotations */
+.books-row .book:nth-child(odd) {
+  transform: rotate(-0.5deg);
+}
+
+.books-row .book:nth-child(even) {
+  transform: rotate(0.5deg);
+}
+
+.books-row .book:nth-child(3n) {
+  transform: rotate(-0.3deg);
+}
+
+.books-row .book:nth-child(4n) {
+  transform: rotate(0.7deg);
+}
+
+.books-row.compact {
+  min-height: 140px;
+  gap: 12px;
+}
+
+/* ================================
+   BOOK STYLES - Blues, Greens, Purples
+   ================================ */
+
+.book {
+  --book-color: #5b6a82;
+  --book-width: 40px;
+  --book-height: 170px;
+  --cap-color: var(--gold-accent);
+  --cap-light: var(--gold-light);
+  
+  position: relative;
+  width: var(--book-width);
+  height: var(--book-height);
+  background: linear-gradient(90deg, 
+    color-mix(in srgb, var(--book-color) 70%, black) 0%,
+    var(--book-color) 15%,
+    color-mix(in srgb, var(--book-color) 90%, white) 50%,
+    var(--book-color) 85%,
+    color-mix(in srgb, var(--book-color) 60%, black) 100%);
+  border-radius: 3px 5px 5px 3px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: bottom center;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 
+    2px 2px 10px var(--shadow-medium),
+    inset -2px 0 4px rgba(0, 0, 0, 0.15),
+    inset 2px 0 4px rgba(255, 255, 255, 0.2);
+}
+
+/* Book spine caps - top and bottom decorative bands */
+.book::before,
+.book::after {
+  content: '';
+  position: absolute;
+  left: 2px;
+  right: 2px;
+  height: 8px;
+  background: linear-gradient(90deg,
+    color-mix(in srgb, var(--cap-color) 60%, black) 0%,
+    var(--cap-color) 20%,
+    var(--cap-light) 50%,
+    var(--cap-color) 80%,
+    color-mix(in srgb, var(--cap-color) 60%, black) 100%);
+  border-radius: 2px;
+  box-shadow: 
+    inset 0 1px 2px rgba(255, 255, 255, 0.4),
+    inset 0 -1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.book::before {
+  top: 5px;
+}
+
+.book::after {
+  bottom: 5px;
+}
+
+/* Silver caps variant */
+.book.silver-caps::before,
+.book.silver-caps::after {
+  --cap-color: var(--silver-accent);
+  --cap-light: var(--silver-light);
+  background: linear-gradient(90deg,
+    color-mix(in srgb, var(--silver-accent) 60%, #555) 0%,
+    var(--silver-accent) 20%,
+    var(--silver-light) 50%,
+    var(--silver-accent) 80%,
+    color-mix(in srgb, var(--silver-accent) 60%, #555) 100%);
+}
+
+/* Book spine text */
+.book .spine-text {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: rotate(180deg);
+  font-family: 'Lato', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--gold-light);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+  padding: 20px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-height: calc(var(--book-height) - 40px);
+}
+
+/* Bookmarks - add to some books (stick out from top) */
+.book.bookmark {
+  position: relative;
+}
+
+.book.bookmark::after {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 20px;
+  background: linear-gradient(180deg, 
+    #ff6b6b 0%, 
+    #ee5a6f 50%, 
+    #c44569 100%);
+  border-radius: 2px 2px 0 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  z-index: 5;
+}
+
+.book.bookmark.bookmark-teal::after {
+  background: linear-gradient(180deg, 
+    #4ecdc4 0%, 
+    #44a08d 50%, 
+    #2d6a6a 100%);
+}
+
+.book.bookmark.bookmark-purple::after {
+  background: linear-gradient(180deg, 
+    #a899b8 0%, 
+    #7d6b8f 50%, 
+    #5b4a6f 100%);
+}
+
+.book.bookmark.bookmark-gold::after {
+  background: linear-gradient(180deg, 
+    #ffd93d 0%, 
+    #f6c23e 50%, 
+    #c9a962 100%);
+}
+
+.book.bookmark.bookmark-teal::after {
+  background: linear-gradient(180deg, 
+    #4ecdc4 0%, 
+    #44a08d 50%, 
+    #2d6a6a 100%);
+}
+
+.book.bookmark.bookmark-purple::after {
+  background: linear-gradient(180deg, 
+    #a899b8 0%, 
+    #7d6b8f 50%, 
+    #5b4a6f 100%);
+}
+
+.book.bookmark.bookmark-gold::after {
+  background: linear-gradient(180deg, 
+    #ffd93d 0%, 
+    #f6c23e 50%, 
+    #c9a962 100%);
+}
+
+.book.silver-caps .spine-text {
+  color: var(--silver-light);
+}
+
+.book.horizontal.silver-caps .spine-text {
+  color: var(--silver-light);
+}
+
+/* Book decorative details */
+.book-detail {
+  position: absolute;
+  width: 50%;
+  height: 2px;
+  background: var(--gold-accent);
+  opacity: 0.5;
+  left: 25%;
+  top: 50%;
+}
+
+/* Book hover effect - pull out from shelf */
+.book:hover {
+  transform: translateY(-15px) rotate(-2deg) !important;
+  box-shadow: 
+    4px 10px 25px var(--shadow-medium),
+    inset -2px 0 4px rgba(0, 0, 0, 0.15),
+    inset 2px 0 4px rgba(255, 255, 255, 0.25);
+  z-index: 10;
+}
+
+.book:hover .spine-text {
+  text-shadow: 0 0 8px rgba(201, 169, 98, 0.6);
+}
+
+.book.silver-caps:hover .spine-text {
+  text-shadow: 0 0 8px rgba(168, 176, 184, 0.6);
+}
+
+/* Small books */
+.book.small {
+  --book-height: 120px;
+  --book-width: 28px;
+}
+
+.book.small .spine-text {
+  font-size: 0.65rem;
+  padding: 16px 0;
+}
+
+.book.small::before,
+.book.small::after {
+  height: 6px;
+}
+
+.book.small::before {
+  top: 4px;
+}
+
+.book.small::after {
+  bottom: 4px;
+}
+
+/* ================================
+   HORIZONTAL BOOKS (Stacked)
+   ================================ */
+
+.book-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.book-stack.horizontal {
+  margin: 0 15px;
+}
+
+.book.horizontal {
+  --book-height: 28px;
+  width: 120px;
+  height: var(--book-height);
+  background: linear-gradient(180deg, 
+    color-mix(in srgb, var(--book-color) 70%, black) 0%,
+    var(--book-color) 15%,
+    color-mix(in srgb, var(--book-color) 90%, white) 50%,
+    var(--book-color) 85%,
+    color-mix(in srgb, var(--book-color) 60%, black) 100%);
+  border-radius: 3px;
+  transform-origin: center center;
+}
+
+/* Horizontal book caps - left and right */
+.book.horizontal::before,
+.book.horizontal::after {
+  width: 6px;
+  height: auto;
+  top: 2px;
+  bottom: 2px;
+  left: auto;
+  right: auto;
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--cap-color) 60%, black) 0%,
+    var(--cap-color) 20%,
+    var(--cap-light) 50%,
+    var(--cap-color) 80%,
+    color-mix(in srgb, var(--cap-color) 60%, black) 100%);
+}
+
+.book.horizontal::before {
+  left: 4px;
+  top: 2px;
+  bottom: 2px;
+}
+
+.book.horizontal::after {
+  right: 4px;
+  left: auto;
+  top: 2px;
+  bottom: 2px;
+}
+
+.book.horizontal .spine-text {
+  writing-mode: horizontal-tb !important;
+  transform: none !important;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: var(--gold-light);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+  padding: 0 12px !important;
+  white-space: nowrap;
+  overflow: visible !important;
+  max-width: none !important;
+  max-height: none !important;
+  height: 100% !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-overflow: clip;
+}
+
+.book.horizontal:hover {
+  transform: translateX(15px) rotate(2deg);
+}
+
+/* ================================
+   SHELF DECORATIONS
+   ================================ */
+
+.shelf-decor {
+  width: 40px;
+  height: 50px;
+  margin: 0 10px;
+  align-self: flex-end;
+}
+
+/* Globe decoration */
+.shelf-decor.globe {
+  width: 45px;
+  height: 55px;
+  position: relative;
+}
+
+.shelf-decor.globe::before {
+  content: '';
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background: 
+    radial-gradient(circle at 30% 30%, 
+      var(--teal-light) 0%, 
+      var(--teal-muted) 40%, 
+      var(--teal-deep) 100%);
+  box-shadow: 
+    inset -5px -5px 10px rgba(0, 0, 0, 0.2),
+    inset 3px 3px 8px rgba(255, 255, 255, 0.3),
+    2px 3px 8px var(--shadow-soft);
+}
+
+.shelf-decor.globe::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 8px;
+  background: var(--shelf-wood);
+  border-radius: 2px;
+}
+
+/* Plant image decoration */
+.shelf-decor.plant-image {
+  width: auto;
+  height: 96px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  margin: 0 10px;
+}
+
+.shelf-decor.plant-image img {
+  max-width: 80px;
+  max-height: 96px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(2px 3px 5px rgba(0, 0, 0, 0.2));
+  transition: transform 0.3s ease;
+}
+
+.shelf-decor.plant-image:hover img {
+  transform: scale(1.05);
+}
+
+/* Framed painting decoration */
+.shelf-decor.painting-frame {
+  width: auto;
+  height: 180px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  margin: 0 15px;
+  position: relative;
+}
+
+.shelf-decor.painting-frame::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: -12px;
+  right: -12px;
+  bottom: -8px;
+  background: linear-gradient(135deg, 
+    #d4c4b0 0%, 
+    #b8a890 50%, 
+    #8b7355 100%);
+  border: 3px solid #6b5a4a;
+  border-radius: 4px;
+  box-shadow: 
+    0 8px 20px rgba(0, 0, 0, 0.3),
+    inset 0 2px 4px rgba(255, 255, 255, 0.3),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.shelf-decor.painting-frame img {
+  position: relative;
+  z-index: 2;
+  max-width: 140px;
+  max-height: 160px;
+  width: auto;
+  height: auto;
+  object-fit: cover;
+  border: 2px solid #5a4a3a;
+  box-shadow: 
+    inset 0 0 10px rgba(0, 0, 0, 0.2),
+    0 2px 8px rgba(0, 0, 0, 0.3);
+  filter: sepia(5%) brightness(0.95) contrast(1.05);
+  transition: transform 0.3s ease;
+}
+
+.shelf-decor.painting-frame:hover img {
+  transform: scale(1.02);
+}
+
+/* Candle image decoration */
+.shelf-decor.candle-image {
+  width: auto;
+  height: 60px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  margin: 0 10px;
+}
+
+.shelf-decor.candle-image img {
+  max-width: 35px;
+  max-height: 60px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(2px 3px 5px rgba(0, 0, 0, 0.2));
+  transition: transform 0.3s ease;
+}
+
+.shelf-decor.candle-image:hover img {
+  transform: scale(1.05);
+}
+
+/* Candle decoration */
+.shelf-decor.candle {
+  width: 25px;
+  height: 50px;
+  position: relative;
+}
+
+.shelf-decor.candle::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 35px;
+  background: linear-gradient(90deg, var(--ivory-dark) 0%, var(--ivory) 50%, var(--ivory-dark) 100%);
+  border-radius: 2px;
+  box-shadow: 2px 2px 5px var(--shadow-soft);
+}
+
+.shelf-decor.candle::after {
+  content: '';
+  position: absolute;
+  bottom: 38px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 8px;
+  height: 15px;
+  background: 
+    radial-gradient(ellipse at 50% 80%, 
+      #ffdd88 0%, 
+      #ff9933 40%, 
+      #ff6600 70%, 
+      transparent 100%);
+  border-radius: 50% 50% 20% 20%;
+  animation: candle-flicker 2s ease-in-out infinite;
+}
+
+@keyframes candle-flicker {
+  0%, 100% { 
+    transform: translateX(-50%) scaleY(1); 
+    opacity: 1;
+  }
+  25% { 
+    transform: translateX(-45%) scaleY(1.1) rotate(3deg); 
+    opacity: 0.9;
+  }
+  50% { 
+    transform: translateX(-50%) scaleY(0.95); 
+    opacity: 1;
+  }
+  75% { 
+    transform: translateX(-55%) scaleY(1.05) rotate(-2deg); 
+    opacity: 0.95;
+  }
+}
+
+/* Inkwell decoration */
+.shelf-decor.inkwell {
+  width: 30px;
+  height: 35px;
+  position: relative;
+}
+
+.shelf-decor.inkwell::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 25px;
+  height: 25px;
+  background: linear-gradient(135deg, var(--purple-deep) 0%, var(--purple-muted) 100%);
+  border-radius: 5px 5px 8px 8px;
+  box-shadow: 
+    inset 0 5px 10px rgba(0, 0, 0, 0.3),
+    2px 2px 5px var(--shadow-soft);
+}
+
+.shelf-decor.inkwell::after {
+  content: '';
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-15deg);
+  width: 3px;
+  height: 20px;
+  background: linear-gradient(180deg, 
+    var(--shelf-light) 0%, 
+    var(--shelf-wood) 80%, 
+    var(--purple-deep) 100%);
+  border-radius: 1px;
+}
+
+/* ================================
+   PLAQUE ON THIRD SHELF
+   ================================ */
+
+.plaque-shelf {
+  margin-top: 50px;
+  perspective: 1000px;
+  perspective-origin: center center;
+}
+
+.plaque-row {
+  min-height: auto;
+  padding-bottom: 40px;
+  justify-content: center;
+  position: relative;
+}
+
+/* Back wall of shelf - subtle background */
+.plaque-row::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  height: 60%;
+  background: linear-gradient(180deg,
+    rgba(184, 168, 144, 0.1) 0%,
+    rgba(184, 168, 144, 0.2) 100%);
+  border-radius: 0 0 4px 4px;
+  z-index: 0;
+}
+
+.library-plaque {
+  max-width: 700px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+  background: linear-gradient(180deg,
+    #e8dcc4 0%,
+    #d4c4b0 50%,
+    #c4b49a 100%);
+  border: 3px solid #b8a890;
+  border-radius: 8px;
+  padding: 30px 40px;
+  transform: rotateX(8deg) translateY(10px);
+  transform-origin: bottom center;
+  transform-style: preserve-3d;
+  box-shadow: 
+    0 15px 40px rgba(0, 0, 0, 0.25),
+    0 5px 15px rgba(0, 0, 0, 0.15),
+    inset 0 2px 5px rgba(255, 255, 255, 0.4),
+    inset 0 -2px 5px rgba(0, 0, 0, 0.1);
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+/* Top edge shadow - creates depth */
+.library-plaque::after {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 5%;
+  right: 5%;
+  height: 8px;
+  background: linear-gradient(180deg,
+    rgba(0, 0, 0, 0.2) 0%,
+    transparent 100%);
+  border-radius: 8px 8px 0 0;
+  transform: rotateX(-8deg);
+  transform-origin: bottom center;
+  pointer-events: none;
+}
+
+/* Ornate border corners */
+.library-plaque::before,
+.library-plaque::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #8b7355;
+}
+
+.library-plaque::before {
+  top: 10px;
+  left: 10px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.library-plaque::after {
+  top: 10px;
+  right: 10px;
+  border-left: none;
+  border-bottom: none;
+}
+
+.plaque-content {
+  position: relative;
+  z-index: 2;
+  transform: translateZ(0);
+}
+
+.plaque-header {
+  text-align: center;
+  margin-bottom: 25px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #8b7355;
+  position: relative;
+}
+
+.plaque-header::before,
+.plaque-header::after {
+  content: '◆';
+  position: absolute;
+  bottom: -8px;
+  color: #8b7355;
+  font-size: 0.8rem;
+}
+
+.plaque-header::before {
+  left: 20%;
+}
+
+.plaque-header::after {
+  right: 20%;
+}
+
+.plaque-header h2 {
+  font-family: 'Lato', sans-serif;
+  font-size: 1.6rem;
+  color: #5b4a6f;
+  margin: 0;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
+}
+
+.plaque-body {
+  display: flex;
+  align-items: flex-start;
+  gap: 30px;
+}
+
+.plaque-portrait {
+  flex-shrink: 0;
+  width: 140px;
+  height: 140px;
+  border: 3px solid #8b7355;
+  border-radius: 50%;
+  padding: 4px;
+  background: linear-gradient(135deg, #d4c4b0 0%, #b8a890 100%);
+  box-shadow: 
+    0 6px 20px rgba(0, 0, 0, 0.3),
+    0 2px 8px rgba(0, 0, 0, 0.2),
+    inset 0 2px 4px rgba(255, 255, 255, 0.4);
+  transform: translateZ(10px);
+  position: relative;
+}
+
+.plaque-portrait img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  filter: sepia(10%) brightness(0.95);
+}
+
+.plaque-text {
+  flex: 1;
+}
+
+.plaque-text p {
+  font-family: 'Lato', sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: #3d3d4a;
+  margin-bottom: 12px;
+  text-align: left;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
+}
+
+.plaque-text p:last-child {
+  margin-bottom: 0;
+}
+
+/* Hover effect - slight lift */
+.library-plaque:hover {
+  transform: rotateX(6deg) translateY(5px);
+  box-shadow: 
+    0 20px 50px rgba(0, 0, 0, 0.3),
+    0 8px 20px rgba(0, 0, 0, 0.2),
+    inset 0 2px 5px rgba(255, 255, 255, 0.4),
+    inset 0 -2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* ================================
+   FOOTER STYLES
+   ================================ */
+
+.footer-shelf {
+  margin-top: 40px;
+}
+
+.library-footer {
+  background: var(--ivory-dark) !important;
+  border-top: 1px solid rgba(93, 74, 111, 0.1);
+  padding: 30px !important;
+}
+
+.library-footer .copyright {
+  font-family: 'Lato', sans-serif;
+  color: var(--text-muted);
+}
+
+/* ================================
+   RESPONSIVE DESIGN
+   ================================ */
+
+@media screen and (max-width: 840px) {
+  .library-header h1 {
+    font-size: 2.5rem;
+  }
+  
+  .books-row {
+    flex-wrap: wrap;
+    gap: 15px;
+    padding: 20px 10px 25px;
+  }
+  
+  .book-stack.horizontal {
+    margin: 10px 0;
+  }
+  
+  .plaque-body {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .plaque-portrait {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto;
+  }
+  
+  .library-plaque {
+    padding: 25px 25px;
+  }
+  
+  .shelf-decor {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  #library {
+    padding: 80px 0 40px;
+  }
+  
+  .library-container {
+    padding: 0 15px;
+  }
+  
+  .library-header h1 {
+    font-size: 2rem;
+  }
+  
+  .library-header .subtitle {
+    font-size: 1rem;
+  }
+  
+  .book {
+    --book-width: 35px !important;
+    --book-height: 140px !important;
+  }
+  
+  .book .spine-text {
+    font-size: 0.6rem;
+  }
+  
+  .book.horizontal {
+    width: 100px;
+  }
+  
+  .books-row {
+    min-height: 160px;
+  }
+  
+  .plaque-header h2 {
+    font-size: 1.3rem;
+  }
+  
+  .plaque-text p {
+    font-size: 0.9rem;
+  }
+  
+  .library-plaque {
+    padding: 20px 20px;
+  }
+}
+
+/* ================================
+   HEADER OVERRIDE FOR LIBRARY
+   ================================ */
+
+body.index #header.alt {
+  background: linear-gradient(180deg, 
+    rgba(248, 246, 241, 0.98) 0%, 
+    transparent 100%);
+}
+
+body.index #header.alt h1 a,
+body.index #header.alt nav a {
+  color: var(--purple-deep);
+}
+
+/* Animation for page load */
+@keyframes shelf-appear {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.bookshelf {
+  animation: shelf-appear 0.8s ease-out forwards;
+}
+
+.plaque-shelf {
+  animation: shelf-appear 0.8s ease-out 0.3s forwards;
+  opacity: 0;
+}

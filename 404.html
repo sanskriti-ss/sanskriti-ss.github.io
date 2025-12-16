@@ -1,4 +1,9 @@
 <!DOCTYPE HTML>
+<!--
+	404 PAGE - Must stay in root directory for GitHub Pages
+	Reference copy available in redirects/ folder
+	Handles typos and provides helpful navigation
+-->
 <html>
 	<head>
 		<title>Page Not Found - Sanskriti</title>
@@ -8,7 +13,7 @@
 		<link rel="stylesheet" href="assets/css/library.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 		<script>
-			// Common typo redirects
+			// Common typo redirects - handles both with and without .html extension
 			const typoMap = {
 				'painting': 'paintings.html',
 				'mandala': 'mandalas.html',
@@ -19,13 +24,19 @@
 				'hackathon': 'hackathons.html'
 			};
 
-			// Get the current path
+			// Get the current path and extract page name
 			const path = window.location.pathname;
-			const page = path.split('/').pop().replace('.html', '').toLowerCase();
+			let page = path.split('/').pop();
+			
+			// Remove .html extension if present, convert to lowercase
+			page = page.replace(/\.html$/i, '').toLowerCase();
+			
+			// Remove trailing slash if present
+			page = page.replace(/\/$/, '');
 
-			// Check if it's a known typo
+			// Check if it's a known typo and redirect immediately
 			if (typoMap[page]) {
-				window.location.href = typoMap[page];
+				window.location.replace(typoMap[page]);
 			}
 		</script>
 	</head>

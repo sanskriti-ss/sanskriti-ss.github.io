@@ -1,6 +1,12 @@
 @import url("fontawesome-all.min.css");
 @import url("https://fonts.googleapis.com/css?family=Lato:300,400,900");
 
+/* Match home page ivory background across other pages */
+body {
+	background: linear-gradient(180deg, #faf9f5 0%, #f8f6f1 50%, #ede9e0 100%);
+	min-height: 100vh;
+}
+
 /*
 	Twenty by HTML5 UP
 	html5up.net | @ajlkn

@@ -588,7 +588,7 @@
     #d4c4b0 0%, 
     #b8a890 50%, 
     #8b7355 100%);
-  border: 3px solid #6b5a4a;
+  border: 1px solid #6b5a4a;
   border-radius: 4px;
   box-shadow: 
     0 8px 20px rgba(0, 0, 0, 0.3),
@@ -605,7 +605,7 @@
   width: auto;
   height: auto;
   object-fit: cover;
-  border: 2px solid #5a4a3a;
+  border: 1px solid #5a4a3a;
   box-shadow: 
     inset 0 0 10px rgba(0, 0, 0, 0.2),
     0 2px 8px rgba(0, 0, 0, 0.3);
@@ -769,7 +769,7 @@
 }
 
 .library-plaque {
-  max-width: 700px;
+  max-width: 840px; /* increased ~20% to allow shorter plaque */
   margin: 0 auto;
   position: relative;
   z-index: 2;
@@ -779,7 +779,7 @@
     #c4b49a 100%);
   border: 3px solid #b8a890;
   border-radius: 8px;
-  padding: 30px 40px;
+  padding: 22px 40px; /* slightly reduced vertical padding so plaque can be shorter */
   transform: rotateX(8deg) translateY(10px);
   transform-origin: bottom center;
   transform-style: preserve-3d;
@@ -843,7 +843,7 @@
   text-align: center;
   margin-bottom: 25px;
   padding-bottom: 15px;
-  border-bottom: 2px solid #8b7355;
+  border-bottom: none; /* remove divider between header and plaque text */
   position: relative;
 }
 

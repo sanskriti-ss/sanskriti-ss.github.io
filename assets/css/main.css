@@ -389,7 +389,8 @@ input, select, textarea {
 	}
 
 	body {
-		background: #f3f6fa;
+		/* Use global ivory gradient background defined at the top of this file */
+		background: none;
 	}
 
 		body.is-preload *, body.is-preload *:before, body.is-preload *:after {

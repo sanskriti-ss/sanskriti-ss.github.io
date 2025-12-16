@@ -10,6 +10,7 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="assets/css/library.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 	</head>
 	<body class="projects is-preload">
@@ -49,35 +50,21 @@
 				<article id="main">
 
 					<header class="special container">
-						<span class="icon solid fa-laptop"></span>
-						<h2>Projects <strong></strong></h2>
-						<p>My explorations!</p>
+						<div class="bookshelf page-header-shelf">
+							<div class="shelf-board"></div>
+							<div class="books-row compact">
+								<a href="#" class="book horizontal silver-caps page-header-book" style="--book-color: #2d8f9a;">
+									<span class="spine-text">Projects</span>
+								</a>
+							</div>
+						</div>
 					</header>
 
 								<!-- Main --><!-- ► BEGIN: VARIOUS HAPPENINGS TABLE ◄ -->
-				<style>
-					/* optional styling — tweak or drop as you like */
-					.timeline-table       { width: 100%; border-collapse: collapse; }
-					.timeline-table th,
-					.timeline-table td    { border: none; padding: 6px 4px; }
-					.timeline-table th    { text-align: left; background:#f7f7f7; font-size:1.1em; }
-					.timeline-table .item { width: 32%; font-weight: 600; }  /* left column */
-					.timeline-table .desc { width: 68%; }                    /* right column */
-				
-
-					#various-happenings            { margin: 0 auto; max-width: 80rem; }
-					#various-happenings h2         { text-align: center; }
-					#various-happenings table      { width: 100%; }
-				</style>
-				
 				<!-- ► BEGIN: VARIOUS HAPPENINGS TABLE ◄ -->
 				<section id="various-happenings" class="wrapper style3 container">
-					<header class="major">
-					<h2>Various Happenings</h2>
-					</header>
-				
 					<style>
-					/* centre the table inside the container */
+					/* Centre the table inside the container */
 					#various-happenings .timeline-table {
 						margin: 0 auto;        /* horizontally center */
 						max-width: 800px;      /* optional: limit its width */
@@ -92,10 +79,40 @@
 						border: none;
 						padding: 6px 8px;
 					}
-					.timeline-table th {
-						background: #f7f7f7;
-						font-size: 1.1em;
-						text-align: left;
+					.timeline-table .year-shelf {
+						position: relative;
+						background: linear-gradient(180deg, #e8dcc4 0%, #d4c4b0 50%, #c4b49a 100%);
+						color: #4a3b3b;
+						font-size: 1em;
+						text-align: center;
+						text-transform: uppercase;
+						letter-spacing: 0.08em;
+						font-weight: 700;
+						border: 2px solid #b8a890;
+						border-radius: 8px;
+						padding: 10px 10px;
+						box-shadow:
+							0 10px 25px rgba(0, 0, 0, 0.18),
+							inset 0 2px 6px rgba(255, 255, 255, 0.35),
+							inset 0 -2px 6px rgba(0, 0, 0, 0.08);
+						overflow: hidden;
+					}
+					.timeline-table .year-shelf span {
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						gap: 8px;
+					}
+					.timeline-table .year-shelf::after {
+						content: '';
+						position: absolute;
+						left: 6%;
+						right: 6%;
+						bottom: -7px;
+						height: 9px;
+						background: linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, transparent 100%);
+						border-radius: 0 0 8px 8px;
+						z-index: -1;
 					}
 					.timeline-table .item { width: 32%; font-weight: 600; }
 					.timeline-table .desc { width: 68%; }
@@ -103,7 +120,11 @@
 				
 					<table class="timeline-table">
 					<!-- 2025 -->
-					<tr><th colspan="2">2025</th></tr>
+					<tr><th class="year-shelf" colspan="2"><span>2025</span></th></tr>
+					<tr>
+						<td class="item"><a href="surf-caltech.html">SURF @ Caltech</a></td>
+						<td class="desc">Used PFLOTRAN in order to simulate long-term reaction-transport dynamics for long-term carbon-sequestration, and built a pipeline for everything from deciding simulation parameters to visualizations.</td>
+					</tr>
 					<tr>
 						<td class="item">FLIQ Hackathon</td>
 						<td class="desc"> Honarable mention — toy case of using QC to reduce complexity of a classifier for determining molecular toxiicity from SMILES ID..</td>
@@ -126,7 +147,7 @@
 					</tr>
 				
 					<!-- 2024 -->
-					<tr><th colspan="2">2024</th></tr>
+					<tr><th class="year-shelf" colspan="2"><span>2024</span></th></tr>
 					<tr>
 						<td class="item">UCLA Cross-Campus Innovation Challenge</td>
 						<td class="desc">GenAI 3<sup>rd</sup> place — Philanthromatch (donor–nonprofit matching).</td>
@@ -145,7 +166,7 @@
 					</tr>
 				
 					<!-- 2023 -->
-					<tr><th colspan="2">2023</th></tr>
+					<tr><th class="year-shelf" colspan="2"><span>2023</span></th></tr>
 					<tr>
 						<td class="item">CRISPR &amp; VLP Lit Review</td>
 						<td class="desc">Co-authored review on VLP-mediated CRISPR delivery.</td>
@@ -160,7 +181,7 @@
 					<!-- no entries yet -->
 				
 					<!-- 2019–2021 -->
-					<tr><th colspan="2">2019 – 2022</th></tr>
+					<tr><th class="year-shelf" colspan="2"><span>2019 – 2022</span></th></tr>
 					<tr>
 						<td class="item">DECA IBP track</td>
 						<td class="desc">Did this every year for three years, aced provincials every time :)</td>
@@ -175,7 +196,7 @@
 					</tr>
 				
 					<!-- 2018 and earlier -->
-					<tr><th colspan="2">2018 and earlier</th></tr>
+					<tr><th class="year-shelf" colspan="2"><span>2018 and earlier</span></th></tr>
 					<tr>
 						<td class="item">Rube Goldberg Competitions</td>
 						<td class="desc">I think these might have been unnaturally popular where I grew up, but these were incredibly fun! To this day I am ready to make anything unnecessarily complicated but more exciting if prompted.</td>
@@ -195,19 +216,31 @@
 				</article>
 
 			<!-- Footer -->
-				<footer id="footer">
-
-					<ul class="icons">
-							<li><a href="#" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
-						
-						<li><a href="mailto:sanskriti.shindadkar@icloud.com" class="icon brands circle fa-github"><span class="label">Github</span></a></li>
-						<li><a href="https://ca.linkedin.com/in/sanskriti" class="icon brands circle fa-linkedin"><span class="label">Linkedin</span></a></li>
-					</ul>
-
+				<div class="bookshelf footer-shelf">
+					<div class="shelf-board"></div>
+					<div class="books-row compact">
+						<div class="shelf-decor plant-image">
+							<img src="assets/css/images/plants/plant3.png" alt="Plant decoration">
+						</div>
+						<a href="mailto:sanskriti.shindadkar@icloud.com" class="book horizontal" style="--book-color: #7a8a9a; --book-height: 28px;">
+							<span class="spine-text">Contact</span>
+						</a>
+						<a href="https://github.com/sanskriti-ss" class="book horizontal silver-caps" style="--book-color: #6a7a8a; --book-height: 26px;" target="_blank">
+							<span class="spine-text">GitHub</span>
+						</a>
+						<a href="https://ca.linkedin.com/in/sanskriti" class="book horizontal" style="--book-color: #3d6a8a; --book-height: 30px;" target="_blank">
+							<span class="spine-text">LinkedIn</span>
+						</a>
+						<div class="shelf-decor candle-image">
+							<img src="assets/css/images/plants/candle.png" alt="Candle decoration">
+						</div>
+					</div>
+					<div class="shelf-shadow"></div>
+				</div>
+				<footer id="footer" class="library-footer">
 					<ul class="copyright">
-						<li>&copy; Sanskriti </li><li></li>
+						<li>&copy; Sanskriti</li>
 					</ul>
-
 				</footer>
 
 		</div>

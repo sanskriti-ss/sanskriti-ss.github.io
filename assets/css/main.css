@@ -390,7 +390,7 @@ input, select, textarea {
 
 	body {
 		/* Use global ivory gradient background defined at the top of this file */
-		background: none;
+		/* Background gradient is set at the top of the file - don't override it */
 	}
 
 		body.is-preload *, body.is-preload *:before, body.is-preload *:after {
@@ -2554,13 +2554,14 @@ input, select, textarea {
 					color: #fff !important;
 				}
 
+		/* Make section wrappers transparent so the ivory page background shows through */
 		.wrapper.style3 {
-			background: #fff;
+			background: transparent;
 			color: inherit;
 		}
 
 		.wrapper.style4 {
-			background: #fff;
+			background: transparent;
 			color: inherit;
 			padding: 4em;
 		}
@@ -2900,6 +2901,7 @@ input, select, textarea {
 /* Main */
 
 	#main {
+		background-color: transparent;
 		background-image: url("images/dark-tl.svg"), url("images/dark-tr.svg"), url("images/dark-bl.svg"), url("images/dark-br.svg");
 		background-position: top left, top right, bottom left, bottom right;
 		background-repeat: no-repeat;
@@ -2925,6 +2927,11 @@ input, select, textarea {
 
 	body.index #main {
 		padding-top: 5em;
+	}
+
+	/* Non-home pages: bring content (and header books) closer to the nav */
+	body:not(.index) #main {
+		padding-top: 4em;
 	}
 
 /* CTA */

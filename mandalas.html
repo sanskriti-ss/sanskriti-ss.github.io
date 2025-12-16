@@ -29,6 +29,7 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="assets/css/library.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 	</head>
 	<body class="projects is-preload">
@@ -69,8 +70,14 @@
 				<article id="main">
 
 					<header class="special container">
-						<span class="icon solid fa-laptop"></span>
-						<h2>Mandalas</strong></h2>
+						<div class="bookshelf page-header-shelf">
+							<div class="shelf-board"></div>
+							<div class="books-row compact">
+								<a href="#" class="book horizontal silver-caps page-header-book" style="--book-color: #6b5a7a;">
+									<span class="spine-text">Mandalas</span>
+								</a>
+							</div>
+						</div>
 						<p>And some other creative things I'd like to share</p>
 					</header>
 
@@ -281,19 +288,31 @@
 				</article>
 
 			<!-- Footer -->
-				<footer id="footer">
-
-					<ul class="icons">
-							<li><a href="#" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
-						
-						<li><a href="mailto:sanskriti.shindadkar@icloud.com" class="icon brands circle fa-github"><span class="label">Github</span></a></li>
-						<li><a href="https://ca.linkedin.com/in/sanskriti" class="icon brands circle fa-linkedin"><span class="label">Linkedin</span></a></li>
-					</ul>
-
+				<div class="bookshelf footer-shelf">
+					<div class="shelf-board"></div>
+					<div class="books-row compact">
+						<div class="shelf-decor plant-image">
+							<img src="assets/css/images/plants/plant3.png" alt="Plant decoration">
+						</div>
+						<a href="mailto:sanskriti.shindadkar@icloud.com" class="book horizontal" style="--book-color: #7a8a9a; --book-height: 28px;">
+							<span class="spine-text">Contact</span>
+						</a>
+						<a href="https://github.com/sanskriti-ss" class="book horizontal silver-caps" style="--book-color: #6a7a8a; --book-height: 26px;" target="_blank">
+							<span class="spine-text">GitHub</span>
+						</a>
+						<a href="https://ca.linkedin.com/in/sanskriti" class="book horizontal" style="--book-color: #3d6a8a; --book-height: 30px;" target="_blank">
+							<span class="spine-text">LinkedIn</span>
+						</a>
+						<div class="shelf-decor candle-image">
+							<img src="assets/css/images/plants/candle.png" alt="Candle decoration">
+						</div>
+					</div>
+					<div class="shelf-shadow"></div>
+				</div>
+				<footer id="footer" class="library-footer">
 					<ul class="copyright">
-						<li>&copy; Sanskriti </li><li></li>
+						<li>&copy; Sanskriti</li>
 					</ul>
-
 				</footer>
 
 		</div>

@@ -492,6 +492,27 @@
   transform: translateX(15px) rotate(2deg);
 }
 
+/* Page header variant for non-homepage sections */
+.page-header-shelf {
+  margin-top: -1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.page-header-shelf .books-row.compact {
+  min-height: auto;
+  padding: 10px 0 20px;
+  margin-bottom: 8px;
+}
+
+.book.horizontal.page-header-book {
+  width: 340px;
+  --book-height: 60px;
+}
+
+.book.horizontal.page-header-book .spine-text {
+  font-size: 1.6rem;
+}
+
 /* ================================
    SHELF DECORATIONS
    ================================ */

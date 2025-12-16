@@ -1,0 +1,512 @@
+<!DOCTYPE HTML>
+<!--
+	Twenty by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+
+<html>
+	<head>
+		<title>Paintings</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="assets/css/library.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<style>
+			/* Custom styles for framed paintings */
+			.painting-container {
+				position: relative;
+				display: inline-block;
+				margin: 20px;
+				cursor: pointer;
+				transition: transform 0.3s ease, box-shadow 0.3s ease;
+			}
+
+			.painting-container:hover {
+				transform: translateY(-8px) scale(1.02);
+				box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+			}
+
+			.painting-frame-wrapper {
+				position: relative;
+				display: inline-block;
+				background: 
+					/* Wood grain texture - vertical lines */
+					repeating-linear-gradient(
+						0deg,
+						rgba(107, 90, 74, 0.3) 0px,
+						rgba(139, 115, 85, 0.2) 1px,
+						rgba(184, 168, 144, 0.25) 2px,
+						rgba(212, 196, 176, 0.2) 3px,
+						rgba(139, 115, 85, 0.3) 4px,
+						rgba(107, 90, 74, 0.25) 5px,
+						transparent 6px,
+						transparent 12px
+					),
+					/* Horizontal wood grain variation */
+					repeating-linear-gradient(
+						90deg,
+						rgba(139, 115, 85, 0.15) 0px,
+						transparent 2px,
+						rgba(107, 90, 74, 0.1) 3px,
+						transparent 5px,
+						rgba(184, 168, 144, 0.12) 6px,
+						transparent 8px
+					),
+					/* Base wood color gradient - warm brown tones */
+					linear-gradient(
+						135deg,
+						#6b5a4a 0%,
+						#8b7355 15%,
+						#a0826d 30%,
+						#b8a890 50%,
+						#a0826d 70%,
+						#8b7355 85%,
+						#6b5a4a 100%
+					);
+				padding: 14px;
+				border-radius: 3px;
+				box-shadow: 
+					/* Outer shadow for depth */
+					0 6px 16px rgba(0, 0, 0, 0.35),
+					0 2px 6px rgba(0, 0, 0, 0.25),
+					/* Inner shadow for frame depth */
+					inset 0 3px 6px rgba(0, 0, 0, 0.3),
+					inset 0 -3px 6px rgba(0, 0, 0, 0.4),
+					/* Highlight on top edge */
+					inset 0 2px 4px rgba(255, 255, 255, 0.25),
+					/* Subtle inner glow */
+					inset 0 0 20px rgba(139, 115, 85, 0.2);
+			}
+
+			/* Inner frame border (the actual wooden frame edge) */
+			.painting-frame-wrapper::before {
+				content: '';
+				position: absolute;
+				top: 10px;
+				left: 10px;
+				right: 10px;
+				bottom: 10px;
+				border: 4px solid;
+				border-color: 
+					#5a4a3a /* top - darker */
+					#7a6a5a /* right - medium */
+					#4a3a2a /* bottom - darkest */
+					#7a6a5a; /* left - medium */
+				box-shadow: 
+					/* Inner depth */
+					inset 0 2px 4px rgba(0, 0, 0, 0.5),
+					inset 0 -1px 2px rgba(255, 255, 255, 0.15),
+					/* Outer highlight */
+					0 1px 2px rgba(255, 255, 255, 0.2);
+				pointer-events: none;
+				z-index: 3;
+			}
+
+			/* Additional wood grain detail overlay */
+			.painting-frame-wrapper::after {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				background: 
+					/* Fine vertical grain lines */
+					repeating-linear-gradient(
+						0deg,
+						transparent 0px,
+						rgba(107, 90, 74, 0.2) 0.5px,
+						transparent 1px,
+						transparent 4px,
+						rgba(139, 115, 85, 0.15) 4.5px,
+						transparent 5px,
+						transparent 8px
+					);
+				pointer-events: none;
+				z-index: 1;
+				border-radius: 3px;
+			}
+
+			.painting-image {
+				display: block;
+				width: 100%;
+				height: 100%;
+				object-fit: contain;
+				position: relative;
+				z-index: 2;
+			}
+
+			.paintings-shelf {
+				display: flex;
+				flex-wrap: nowrap;
+				justify-content: flex-start;
+				align-items: flex-end;
+				gap: 30px;
+				padding: 40px 60px;
+				min-height: 250px;
+				overflow-x: auto;
+				overflow-y: visible;
+				scrollbar-width: thin;
+				scrollbar-color: rgba(139, 115, 85, 0.5) transparent;
+			}
+
+			/* Smooth scrolling */
+			.paintings-shelf {
+				scroll-behavior: smooth;
+				-webkit-overflow-scrolling: touch;
+			}
+
+			/* Custom scrollbar for webkit browsers */
+			.paintings-shelf::-webkit-scrollbar {
+				height: 8px;
+			}
+
+			.paintings-shelf::-webkit-scrollbar-track {
+				background: rgba(212, 196, 176, 0.2);
+				border-radius: 4px;
+			}
+
+			.paintings-shelf::-webkit-scrollbar-thumb {
+				background: rgba(139, 115, 85, 0.6);
+				border-radius: 4px;
+			}
+
+			.paintings-shelf::-webkit-scrollbar-thumb:hover {
+				background: rgba(139, 115, 85, 0.8);
+			}
+
+			.paintings-loading {
+				text-align: center;
+				padding: 60px;
+				color: var(--text-muted);
+				font-family: 'Lato', sans-serif;
+				font-size: 1.1rem;
+			}
+
+		</style>
+	</head>
+	<body class="paintings is-preload">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<header id="header">
+					<h1 id="logo"><a href="index.html"> Home Page <span></span></a></h1>
+					<nav id="nav"> 
+						<ul>
+							<li class="current"><a href="index.html">Welcome</a></li>
+							<li class="submenu">
+								<a href="#">More</a>
+								<ul>
+								<li>
+									<li><a href="projects.html">Projects</a></li>
+									<li><a href="interests.html">Interests</a></li>
+									<!-- <li><a href="other.html">Other</a></li>
+									<li><a href="contact.html">Contact</a></li> -->
+									<li class="submenu">
+										<a href="#">Creations</a>
+										<ul>
+											<li><a href="mandalas.html">Mandalas and Art</a></li>
+											<li><a href="paintings.html">Paintings</a></li>
+											<li><a href="oldwriting.html">Older Writing</a></li>
+											<!--<li><a href="#">Origami</a></li>
+											<li><a href="#">3D Prints</a></li>
+											<li><a href="#">Misc. Art</a></li> -->
+										</ul>
+									</li>
+								</ul>
+							</li>
+							<!--<li><a href="#" class="button primary">Sign Up</a></li> -->
+						</ul>
+					</nav>
+				</header>
+
+			<!-- Main -->
+				<article id="main">
+
+					<header class="special container">
+						<div class="bookshelf page-header-shelf">
+							<div class="shelf-board"></div>
+							<div class="books-row compact">
+								<a href="#" class="book horizontal silver-caps page-header-book" style="--book-color: #7d6b8f;">
+									<span class="spine-text">Paintings</span>
+								</a>
+							</div>
+						</div>
+						<p>A collection of my paintings</p>
+					</header>
+
+					<!-- Paintings Section -->
+					<section class="wrapper style1 container">
+						<div class="row gtr-150">
+							<div class="col-12">
+								<!-- Library-style shelf container -->
+								<div id="library">
+									<div class="library-container" style="overflow-x: visible; overflow-y: visible;">
+										<!-- Ambient lighting effects -->
+										<div class="ambient-light"></div>
+										<div class="dust-particles"></div>
+										
+										<!-- Dynamic paintings shelves will be inserted here -->
+										<div id="paintings-container">
+											<div class="paintings-loading">Loading paintings...</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</section>
+
+				</article>
+
+			<!-- Footer -->
+				<div class="bookshelf footer-shelf">
+					<div class="shelf-board"></div>
+					<div class="books-row compact">
+						<div class="shelf-decor plant-image">
+							<img src="assets/css/images/plants/plant3.png" alt="Plant decoration">
+						</div>
+						<a href="mailto:sanskriti.shindadkar@icloud.com" class="book horizontal" style="--book-color: #7a8a9a; --book-height: 28px;">
+							<span class="spine-text">Contact</span>
+						</a>
+						<a href="https://github.com/sanskriti-ss" class="book horizontal silver-caps" style="--book-color: #6a7a8a; --book-height: 26px;" target="_blank">
+							<span class="spine-text">GitHub</span>
+						</a>
+						<a href="https://ca.linkedin.com/in/sanskriti" class="book horizontal" style="--book-color: #3d6a8a; --book-height: 30px;" target="_blank">
+							<span class="spine-text">LinkedIn</span>
+						</a>
+						<div class="shelf-decor candle-image">
+							<img src="assets/css/images/plants/candle.png" alt="Candle decoration">
+						</div>
+					</div>
+					<div class="shelf-shadow"></div>
+				</div>
+				<footer id="footer" class="library-footer">
+					<ul class="copyright">
+						<li>&copy; Sanskriti</li>
+					</ul>
+				</footer>
+
+		</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.dropotron.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/jquery.scrollgress.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+			<script>
+				// List of paintings (excluding frame_images folder)
+				const paintings = [
+					'fall_walk.jpeg',
+					'lotus_puzzle.jpeg',
+					'rose_pond.jpeg',
+					'twin_fish.jpeg'
+				];
+
+			// Function to determine frame type based on aspect ratio
+			function getFrameType(width, height) {
+				const aspectRatio = width / height;
+				
+				// More granular frame types based on aspect ratio
+				if (aspectRatio < 0.6) {
+					// Very tall portrait (very narrow)
+					return 'tall-portrait';
+				} else if (aspectRatio >= 0.6 && aspectRatio < 0.75) {
+					// Standard portrait
+					return 'portrait';
+				} else if (aspectRatio >= 0.75 && aspectRatio < 0.9) {
+					// Slightly portrait / vertical
+					return 'vertical';
+				} else if (aspectRatio >= 0.9 && aspectRatio <= 1.1) {
+					// Square-ish
+					return 'square';
+				} else if (aspectRatio > 1.1 && aspectRatio <= 1.4) {
+					// Standard landscape
+					return 'landscape';
+				} else if (aspectRatio > 1.4 && aspectRatio <= 1.8) {
+					// Wide landscape
+					return 'wide-landscape';
+				} else {
+					// Very wide panorama
+					return 'panorama';
+				}
+			}
+
+				// Function to load image and get dimensions
+				function loadImage(src) {
+					return new Promise((resolve, reject) => {
+						const img = new Image();
+						img.onload = () => resolve({
+							src: src,
+							width: img.width,
+							height: img.height
+						});
+						img.onerror = reject;
+						img.src = src;
+					});
+				}
+
+			// Function to create a framed painting element
+			function createFramedPainting(paintingSrc, frameType, dimensions) {
+				const container = document.createElement('div');
+				container.className = 'painting-container';
+				
+				const frameWrapper = document.createElement('div');
+				frameWrapper.className = `painting-frame-wrapper ${frameType}-frame`;
+				
+				// Calculate appropriate size based on frame type
+				// All frames use a base height of 384px (matching portrait) for consistency
+				const baseHeight = 384;
+				let maxWidth, maxHeight;
+				
+				if (frameType === 'tall-portrait') {
+					// Very tall portrait - narrower
+					maxWidth = 200;
+					maxHeight = baseHeight;
+				} else if (frameType === 'portrait') {
+					// Standard portrait - 20% bigger
+					maxWidth = 240 * 1.2;  // 288px
+					maxHeight = baseHeight; // 384px
+				} else if (frameType === 'vertical') {
+					// Slightly vertical
+					maxWidth = 320;
+					maxHeight = baseHeight;
+				} else if (frameType === 'square') {
+					// Square
+					maxWidth = baseHeight;
+					maxHeight = baseHeight;
+				} else if (frameType === 'landscape') {
+					// Standard landscape
+					maxHeight = baseHeight;
+					maxWidth = 512; // ~1.33:1 ratio
+				} else if (frameType === 'wide-landscape') {
+					// Wide landscape
+					maxHeight = baseHeight;
+					maxWidth = 640; // ~1.67:1 ratio
+				} else { // panorama
+					// Very wide panorama
+					maxHeight = baseHeight;
+					maxWidth = 768; // ~2:1 ratio
+				}
+				
+				// Calculate painting size to fit within frame (accounting for padding)
+				const framePadding = 36; // 14px padding + 4px border on each side = 18px per side
+				const availableWidth = maxWidth - framePadding;
+				const availableHeight = maxHeight - framePadding;
+				
+				const paintingAspectRatio = dimensions.width / dimensions.height;
+				const frameAspectRatio = availableWidth / availableHeight;
+				
+				let paintingWidth, paintingHeight;
+				if (paintingAspectRatio > frameAspectRatio) {
+					// Painting is wider - fit to available width
+					paintingWidth = availableWidth;
+					paintingHeight = availableWidth / paintingAspectRatio;
+				} else {
+					// Painting is taller - fit to available height
+					paintingHeight = availableHeight;
+					paintingWidth = availableHeight * paintingAspectRatio;
+				}
+				
+				frameWrapper.style.width = maxWidth + 'px';
+				frameWrapper.style.height = maxHeight + 'px';
+				frameWrapper.style.position = 'relative';
+				
+				// Create the painting image
+				const paintingImg = document.createElement('img');
+				paintingImg.src = paintingSrc;
+				paintingImg.className = 'painting-image';
+				paintingImg.alt = paintingSrc.split('/').pop().replace(/\.[^/.]+$/, '');
+				paintingImg.style.width = paintingWidth + 'px';
+				paintingImg.style.height = paintingHeight + 'px';
+				paintingImg.style.display = 'block';
+				paintingImg.style.margin = '0 auto';
+				paintingImg.style.position = 'relative';
+				paintingImg.style.top = '50%';
+				paintingImg.style.transform = 'translateY(-50%)';
+				
+				// Add painting to the wrapper
+				frameWrapper.appendChild(paintingImg);
+				container.appendChild(frameWrapper);
+				
+				// Make it clickable to view full size
+				container.onclick = function() {
+					window.open(paintingSrc, '_blank');
+				};
+				
+				return container;
+			}
+
+				// Function to create a shelf
+				function createShelf(paintings) {
+					const shelf = document.createElement('div');
+					shelf.className = 'bookshelf';
+					
+					const shelfVines = document.createElement('div');
+					shelfVines.className = 'shelf-vines';
+					shelfVines.innerHTML = '<div class="vine vine-left-1"></div><div class="vine vine-right-1"></div>';
+					
+					const shelfBoard = document.createElement('div');
+					shelfBoard.className = 'shelf-board';
+					
+					const paintingsRow = document.createElement('div');
+					paintingsRow.className = 'paintings-shelf';
+					
+					// Add paintings to the shelf
+					paintings.forEach(painting => {
+						paintingsRow.appendChild(painting);
+					});
+					
+					const shelfShadow = document.createElement('div');
+					shelfShadow.className = 'shelf-shadow';
+					
+					shelf.appendChild(shelfVines);
+					shelf.appendChild(shelfBoard);
+					shelf.appendChild(paintingsRow);
+					shelf.appendChild(shelfShadow);
+					
+					return shelf;
+				}
+
+				// Main function to load and display all paintings
+				async function loadPaintings() {
+					const container = document.getElementById('paintings-container');
+					container.innerHTML = ''; // Clear loading message
+					
+					const paintingsPerShelf = 4; // Number of paintings per shelf (single row)
+					const paintingPromises = paintings.map(paintingName => {
+						const paintingSrc = `images/painting_images/${paintingName}`;
+						return loadImage(paintingSrc).then(dimensions => {
+							const frameType = getFrameType(dimensions.width, dimensions.height);
+							return createFramedPainting(paintingSrc, frameType, dimensions);
+						});
+					});
+					
+					try {
+						const framedPaintings = await Promise.all(paintingPromises);
+						
+						// Group paintings into shelves (one row per shelf)
+						for (let i = 0; i < framedPaintings.length; i += paintingsPerShelf) {
+							const shelfPaintings = framedPaintings.slice(i, i + paintingsPerShelf);
+							const shelf = createShelf(shelfPaintings);
+							container.appendChild(shelf);
+						}
+					} catch (error) {
+						console.error('Error loading paintings:', error);
+						container.innerHTML = '<div class="paintings-loading">Error loading paintings. Please refresh the page.</div>';
+					}
+				}
+
+				// Load paintings when page is ready
+				document.addEventListener('DOMContentLoaded', loadPaintings);
+			</script>
+
+	</body>
+</html>

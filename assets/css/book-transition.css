@@ -99,7 +99,7 @@
   left: calc(var(--spine-depth) / 2 + 10px);
   top: 10px;
   transform-origin: left center;
-  transform: rotateY(90deg) translateZ(-10px);
+  transform: rotateY(90deg);
   background: linear-gradient(to right,
     #c8c4b8 0%,
     #f0efe8 2%,
@@ -112,8 +112,9 @@
     inset 0 -2px 4px rgba(0, 0, 0, 0.08),
     -1px 0 3px rgba(0, 0, 0, 0.1),
     2px 2px 8px rgba(0, 0, 0, 0.15);
+  visibility: hidden;
   opacity: 0;
-  transition: opacity 0.5s ease, transform 0.5s ease;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
 }
 
 .book-pages::after {
@@ -172,14 +173,14 @@
   opacity: 0;
 }
 
-.animated-book.stage-2 .book-pages {
-  opacity: 1;
-  transform: rotateY(90deg) translateZ(1px);
-}
-
-/* Stage 3: Open cover */
+/* Stage 3: Open cover and reveal pages */
 .animated-book.stage-3 .book-face-front {
   transform: rotateY(90deg) rotateY(-140deg);
+}
+
+.animated-book.stage-3 .book-pages {
+  visibility: visible;
+  opacity: 1;
 }
 
 /* Stage 4: Expand and fade */

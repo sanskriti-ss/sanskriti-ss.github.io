@@ -200,7 +200,7 @@
   --cap-light: var(--gold-light);
   
   position: relative;
-  width: var(--book-width);
+  width: var(--book-width) !important;
   height: var(--book-height);
   background: linear-gradient(90deg, 
     color-mix(in srgb, var(--book-color) 70%, black) 0%,
@@ -424,7 +424,8 @@
 
 .book.horizontal {
   --book-height: 28px;
-  width: 120px;
+  --book-width: 120px;
+  width: var(--book-width);
   height: var(--book-height);
   background: linear-gradient(180deg, 
     color-mix(in srgb, var(--book-color) 70%, black) 0%,

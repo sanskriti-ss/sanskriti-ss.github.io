@@ -506,7 +506,7 @@
 }
 
 .book.horizontal.page-header-book {
-  width: 340px;
+  width: 340px !important;
   --book-height: 60px;
 }
 

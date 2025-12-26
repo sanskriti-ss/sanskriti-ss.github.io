@@ -39,44 +39,43 @@
       top: ${rect.top}px;
       width: ${rect.width}px;
       height: ${rect.height}px;
+      --spine-depth: ${rect.width}px;
     `;
     
     // Darker and lighter versions of the color
     const darkerColor = `color-mix(in srgb, ${bookColor} 70%, black)`;
     const lighterColor = `color-mix(in srgb, ${bookColor} 85%, white)`;
     
-    // Build the 3D book structure
-    // All parts are positioned relative to the spine
+    // Build the 3D book structure matching CSS class names
     book.innerHTML = `
-      <div class="book-3d-wrapper">
-        <!-- Spine (what you see on shelf) -->
-        <div class="book-spine">
-          <div class="book-spine-face" style="background: linear-gradient(to right, 
-            ${darkerColor},
-            ${bookColor},
-            ${lighterColor},
-            ${bookColor},
-            ${darkerColor});">
-            <span class="spine-text">${spineText}</span>
-          </div>
+      <div class="book-body">
+        <!-- Spine (visible on shelf) -->
+        <div class="book-face-spine" style="background: linear-gradient(to right, 
+          ${darkerColor},
+          ${bookColor},
+          ${lighterColor},
+          ${bookColor},
+          ${darkerColor});">
+          <span class="spine-text">${spineText}</span>
         </div>
         
-        <!-- Back Cover (behind pages, doesn't move) -->
-        <div class="book-back-cover" style="background: linear-gradient(135deg, 
+        <!-- Front Cover (swings open) -->
+        <div class="book-face-front">
+          <div class="book-face-front-outer" style="background: linear-gradient(135deg, 
+            ${darkerColor},
+            ${bookColor} 30%,
+            ${lighterColor} 70%,
+            ${bookColor});"></div>
+          <div class="book-face-front-inner"></div>
+        </div>
+        
+        <!-- Back Cover -->
+        <div class="book-face-back" style="background: linear-gradient(135deg, 
           ${darkerColor},
           ${bookColor});"></div>
         
-        <!-- Pages (white block) -->
+        <!-- Pages -->
         <div class="book-pages"></div>
-        
-        <!-- Front Cover (opens outward, hinged on left) -->
-        <div class="book-front-cover">
-          <div class="book-front-cover-outer" style="background: linear-gradient(135deg, 
-            ${darkerColor},
-            ${bookColor},
-            ${lighterColor});"></div>
-          <div class="book-front-cover-inner"></div>
-        </div>
       </div>
     `;
     

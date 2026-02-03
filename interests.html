@@ -137,96 +137,195 @@
 						</header>
 					
 						<style>
-						/* Grid of book covers */
-						#books .grid {
-							display: grid;
-							grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-							gap: 1rem;
-							justify-items: center;
-						}
-						#books .book {
+						/* Bookshelf container */
+						#books .bookshelf-container {
 							position: relative;
-							width: 100%;
-							max-width: 120px;
-							cursor: pointer;
+							margin: 2rem auto;
+							max-width: 900px;
+							padding: 0 20px;
 						}
-						#books .book img {
+						
+						/* Grid of book covers */
+						#books .book-covers-grid {
+							display: flex;
+							flex-wrap: wrap;
+							justify-content: center;
+							gap: 1.5rem;
+							padding-bottom: 30px;
+							align-items: flex-end;
+						}
+						
+						#books .book-cover {
+							position: relative;
+							width: 150px;
+							cursor: pointer;
+							transition: transform 0.3s ease, box-shadow 0.3s ease;
+							z-index: 1;
+						}
+						
+						#books .book-cover img {
 							width: 100%;
+							height: auto;
 							display: block;
 							border-radius: 4px;
-							box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+							box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+							transition: box-shadow 0.3s ease;
+							position: relative;
+							z-index: 1;
 						}
+						
+						#books .book-cover:hover {
+							transform: translateY(-8px);
+							z-index: 1000;
+						}
+						
+						#books .book-cover:hover img {
+							box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+						}
+						
 						/* Tooltip container */
-						#books .book .tooltip {
+						#books .book-cover .tooltip {
 							visibility: hidden;
 							opacity: 0;
-							width: 200px;
-							background: rgba(0,0,0,0.85);
+							width: 220px;
+							background: rgba(0,0,0,0.9);
 							color: #fff;
 							text-align: left;
-							padding: 0.5rem;
-							border-radius: 4px;
+							padding: 0.75rem;
+							border-radius: 6px;
 							position: absolute;
 							top: -0.5rem;
 							left: 110%;
 							transition: opacity 0.2s ease-in-out;
-							z-index: 10;
+							z-index: 1001;
+							font-size: 0.9rem;
+							line-height: 1.5;
+							pointer-events: none;
 						}
+						
 						/* Show on hover */
-						#books .book:hover .tooltip {
+						#books .book-cover:hover .tooltip {
 							visibility: visible;
 							opacity: 1;
 						}
+						
 						/* Arrow */
-						#books .book .tooltip::before {
+						#books .book-cover .tooltip::before {
 							content: "";
 							position: absolute;
-							top: 10px;
+							top: 12px;
 							right: 100%;
-							border-width: 6px;
+							border-width: 8px;
 							border-style: solid;
-							border-color: transparent rgba(0,0,0,0.85) transparent transparent;
+							border-color: transparent rgba(0,0,0,0.9) transparent transparent;
+						}
+						
+						/* Shelf styling */
+						#books .book-shelf {
+							position: relative;
+							margin-top: 20px;
+						}
+						
+						#books .shelf-board {
+							position: absolute;
+							bottom: 0;
+							left: -30px;
+							right: -30px;
+							height: 25px;
+							background: linear-gradient(180deg, 
+								#e8dfd0 0%, 
+								#d4c4b0 40%, 
+								#b8a890 100%);
+							border-radius: 0 0 4px 4px;
+							box-shadow: 
+								0 8px 25px rgba(0, 0, 0, 0.15),
+								inset 0 2px 3px rgba(255, 255, 255, 0.4);
+						}
+						
+						#books .shelf-board::before {
+							content: '';
+							position: absolute;
+							top: 0;
+							left: 0;
+							right: 0;
+							height: 4px;
+							background: linear-gradient(90deg,
+								transparent 0%,
+								rgba(255, 255, 255, 0.5) 50%,
+								transparent 100%);
+						}
+						
+						#books .shelf-shadow {
+							position: absolute;
+							bottom: -20px;
+							left: 0;
+							right: 0;
+							height: 20px;
+							background: linear-gradient(180deg, 
+								rgba(0, 0, 0, 0.08) 0%, 
+								transparent 100%);
+							pointer-events: none;
+						}
+						
+						/* Responsive */
+						@media screen and (max-width: 600px) {
+							#books .book-cover {
+								width: 120px;
+							}
+							
+							#books .book-cover .tooltip {
+								width: 180px;
+								font-size: 0.85rem;
+							}
 						}
 						</style>
 					
-						<div class="grid">
-						<!-- Book 1 -->
-						<div class="book">
-							<img src="images/book1.jpg" alt="The Universe in Your Hand">
-							<div class="tooltip">
-							<strong>The Universe in Your Hand</strong><br>
-							Indescribably good. It uses thought experiments and visualizations to help readers understand different cool phenomena in our universe, from black holes to elementary particles.
+						<div class="bookshelf-container">
+							<div class="book-covers-grid">
+								<!-- Book 1 -->
+								<div class="book-cover">
+									<img src="images/book1.jpg" alt="The Universe in Your Hand">
+									<div class="tooltip">
+									<strong>The Universe in Your Hand</strong><br>
+									Indescribably good. It uses thought experiments and visualizations to help readers understand different cool phenomena in our universe, from black holes to elementary particles.
+									</div>
+								</div>
+							
+								<!-- Book 2 -->
+								<div class="book-cover">
+									<img src="images/book2.jpg" alt="We have No Idea">
+									<div class="tooltip">
+									<strong>We have No Idea</strong><br>
+									A nice follow-up to the Universe in Your Hand. It shows you that we know very little (and you can have fun making your own silly theories and later googling them to see what serious! scientists think about them)
+									</div>
+								</div>
+							
+								<!-- Book 3 -->
+								<div class="book-cover">
+									<img src="images/book3.jpg" alt="Empire of Pain">
+									<div class="tooltip">
+									<strong>Empire of Pain</strong><br>
+									This made me believe in conspiracies a little more? To clarify, how lobbying+being rich can really do a lot to change not only policies, but also narratives that we believe.
+									</div>
+								</div>
+							
+								<!-- Add as many as you like -->
+								<!--
+								<div class="book-cover">
+									<img src="images/book4.png" alt="Book 4 Cover">
+									<div class="tooltip">
+									<strong>Book Title 4</strong><br>
+									Summary here…
+									</div>
+								</div>
+								-->
 							</div>
-						</div>
-					
-						<!-- Book 2 -->
-						<div class="book">
-							<img src="images/book2.jpg" alt="We have No Idea">
-							<div class="tooltip">
-							<strong>We have No Idea</strong><br>
-							A nice follow-up to the Universe in Your Hand. It shows you that we know very little (and you can have fun making your own silly theories and later googling them to see what serious! scientists think about them)
+							
+							<!-- Shelf below books -->
+							<div class="book-shelf">
+								<div class="shelf-board"></div>
+								<div class="shelf-shadow"></div>
 							</div>
-						</div>
-					
-						<!-- Book 3 -->
-						<div class="book">
-							<img src="images/book3.jpg" alt="Empire of Pain">
-							<div class="tooltip">
-							<strong>Empire of Pain</strong><br>
-							This made me believe in conspiracies a little more? To clarify, how lobbying+being rich can really do a lot to change not only policies, but also narratives that we believe.
-							</div>
-						</div>
-					
-						<!-- Add as many as you like -->
-						<!--
-						<div class="book">
-							<img src="images/book4.png" alt="Book 4 Cover">
-							<div class="tooltip">
-							<strong>Book Title 4</strong><br>
-							Summary here…
-							</div>
-						</div>
-						-->
 						</div>
 					</section>
 					<!-- ► END: BOOKS SECTION ◄ -->

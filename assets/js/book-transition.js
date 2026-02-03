@@ -30,7 +30,7 @@
     const thickness = 0.26;
     const coverW = 1.15;
     const height = 2;
-    const spineW = 0.06;
+    const spineW = 0.14;
     const halfT = thickness / 2;
     const halfH = height / 2;
 
@@ -44,11 +44,10 @@
 
     const group = new THREE.Group();
 
-    // --- SPINE: at origin. When open: between front (left) and back (right).
-    const spineGeom = new THREE.PlaneGeometry(spineW, height);
+    // --- SPINE: solid box with visible width between front and back when open.
+    const spineGeom = new THREE.BoxGeometry(spineW, height, thickness);
     const spineMesh = new THREE.Mesh(spineGeom, mat({ color: bookColor }));
-    spineMesh.position.set(0, 0, halfT);
-    spineMesh.rotation.y = Math.PI / 2;
+    spineMesh.position.set(0, 0, 0);
     spineMesh.userData.name = 'spine';
     group.add(spineMesh);
 
@@ -83,17 +82,17 @@
     pagesMesh.visible = false;
     group.add(pagesMesh);
 
-    // --- FLIP PAGES: hinge at spine, wider to reach spine. Render on TOP.
-    const pageW = coverW * 0.96;
+    // --- FLIP PAGES: pivot centered at spine (x=0). Pages extend from right edge of spine.
+    const pageW = coverW;
     const pageH = height * 0.92;
     const pageGeom = new THREE.PlaneGeometry(pageW, pageH);
     const flipPageGroups = [];
     for (var i = 0; i < 5; i++) {
       var pg = new THREE.Group();
-      pg.position.set(spineW / 2, 0, halfT - 0.01 - i * 0.008);
+      pg.position.set(0, 0, halfT - 0.01 - i * 0.008);
       pg.visible = false;
       var page = new THREE.Mesh(pageGeom, mat({ color: 0xf2efe6, metalness: 0, roughness: 1 }));
-      page.position.set(pageW / 2, 0, 0);
+      page.position.set(spineW / 2 + pageW / 2, 0, 0);
       page.rotation.y = -Math.PI / 2;
       page.renderOrder = 100 + i;
       pg.add(page);

@@ -1,44 +1,235 @@
-/* Book Opening Transition - Three.js overlay */
+/* ================================
+   BOOK OPENING TRANSITION — Pure CSS 3D
+   Elegant pull-from-shelf → open → page flip → dissolve
+   ================================ */
 
 .book-transition-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   z-index: 10000;
   pointer-events: none;
-  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.25s ease, background 0.4s ease;
 }
 
 .book-transition-overlay.active {
   pointer-events: all;
-  background: rgba(0, 0, 0, 0.02);
+  opacity: 1;
+  background: radial-gradient(ellipse at center, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.82) 100%);
+  perspective: 1000px;
 }
 
-#book-transition-canvas-container {
-  position: fixed;
-  top: 0;
-  left: 0;
+/* The 3D book container */
+.book-3d {
+  position: relative;
+  width: 220px;
+  height: 320px;
+  transform-style: preserve-3d;
+  transform: scale(0.2) rotateX(4deg) rotateY(-20deg);
+  opacity: 0;
+}
+
+.book-3d.animate-enter {
+  animation: bookEnter 0.65s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+.book-3d.animate-open {
+  transform: scale(1) rotateX(4deg) rotateY(-20deg);
+  opacity: 1;
+}
+
+.book-3d.animate-exit {
+  animation: bookExit 0.45s cubic-bezier(0.4, 0, 1, 1) forwards;
+}
+
+@keyframes bookEnter {
+  0% {
+    transform: scale(0.2) rotateX(4deg) rotateY(-20deg);
+    opacity: 0;
+  }
+  30% { opacity: 1; }
+  100% {
+    transform: scale(1) rotateX(4deg) rotateY(-20deg);
+    opacity: 1;
+  }
+}
+
+@keyframes bookExit {
+  0% {
+    transform: scale(1) rotateX(4deg) rotateY(-20deg);
+    opacity: 1;
+    filter: blur(0);
+  }
+  100% {
+    transform: scale(1.2) rotateX(4deg) rotateY(-20deg);
+    opacity: 0;
+    filter: blur(8px);
+  }
+}
+
+/* ---- Book structure ---- */
+
+/* Back cover */
+.book-3d .back-cover {
+  position: absolute;
   width: 100%;
   height: 100%;
-  z-index: 10001;
+  background: var(--book-clr, #5b6a82);
+  border-radius: 2px 5px 5px 2px;
+  transform: translateZ(-20px);
+  box-shadow: inset 2px 0 8px rgba(0,0,0,0.25);
+}
+
+/* Spine — left edge connecting front and back */
+.book-3d .spine {
+  position: absolute;
+  width: 40px;
+  height: 100%;
+  left: -20px;
+  background: linear-gradient(90deg,
+    color-mix(in srgb, var(--book-clr, #5b6a82) 50%, black) 0%,
+    var(--book-clr, #5b6a82) 35%,
+    color-mix(in srgb, var(--book-clr, #5b6a82) 65%, black) 100%);
+  transform: rotateY(90deg) translateZ(0px);
+  transform-origin: right center;
+}
+
+/* Page edges — visible stack of pages between covers */
+.book-3d .page-edges {
+  position: absolute;
+  width: calc(100% - 6px);
+  height: calc(100% - 6px);
+  top: 3px;
+  right: 3px;
+  background: linear-gradient(90deg,
+    #ddd5c6 0%, #f0ebe0 6%, #ede8dc 50%, #f2ede3 94%, #ddd5c6 100%);
+  transform: translateZ(-18px);
+  border-radius: 0 3px 3px 0;
+}
+
+/* Front cover — hinges open to the left */
+.book-3d .front-cover {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg,
+    color-mix(in srgb, var(--book-clr, #5b6a82) 92%, white) 0%,
+    var(--book-clr, #5b6a82) 35%,
+    color-mix(in srgb, var(--book-clr, #5b6a82) 82%, black) 100%);
+  border-radius: 2px 5px 5px 2px;
+  transform-origin: left center;
+  transform: rotateY(0deg);
+  transition: transform 0.85s cubic-bezier(0.36, 1.2, 0.5, 1);
+  box-shadow:
+    3px 0 10px rgba(0,0,0,0.18),
+    inset -3px 0 8px rgba(0,0,0,0.12),
+    inset 3px 0 5px rgba(255,255,255,0.06);
+  z-index: 10;
+  transform-style: preserve-3d;
+}
+
+/* Gold border trim on front cover */
+.book-3d .front-cover::after {
+  content: '';
+  position: absolute;
+  inset: 14px;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: 2px;
   pointer-events: none;
 }
 
-#book-transition-canvas-container canvas {
-  display: block;
-  width: 100%;
-  height: 100%;
+/* Cover title text */
+.book-3d .cover-title {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Lato', serif;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.88);
+  text-shadow: 0 1px 4px rgba(0,0,0,0.35);
+  padding: 24px;
+  text-align: center;
+  backface-visibility: hidden;
 }
 
+/* Cover opened state */
+.book-3d.cover-open .front-cover {
+  transform: rotateY(-155deg);
+}
+
+/* ---- Flip pages ---- */
+.book-3d .flip-page {
+  position: absolute;
+  width: calc(100% - 6px);
+  height: calc(100% - 6px);
+  top: 3px;
+  left: 0;
+  transform-origin: left center;
+  transform: rotateY(0deg);
+  z-index: 5;
+  transform-style: preserve-3d;
+}
+
+.book-3d .flip-page-front,
+.book-3d .flip-page-back {
+  position: absolute;
+  inset: 0;
+  border-radius: 0 3px 3px 0;
+  backface-visibility: hidden;
+}
+
+.book-3d .flip-page-front {
+  background: linear-gradient(90deg, #e4ddd0 0%, #f6f3ec 6%, #faf8f3 100%);
+  box-shadow: inset 2px 0 5px rgba(0,0,0,0.04);
+}
+
+/* Faint "text" lines */
+.book-3d .flip-page-front::after {
+  content: '';
+  position: absolute;
+  top: 14%;
+  left: 10%;
+  right: 10%;
+  height: 58%;
+  background: repeating-linear-gradient(
+    180deg,
+    transparent 0px, transparent 10px,
+    rgba(0,0,0,0.035) 10px, rgba(0,0,0,0.035) 11px
+  );
+}
+
+.book-3d .flip-page-back {
+  background: linear-gradient(270deg, #e4ddd0 0%, #f4f1ea 6%, #f0ede5 100%);
+  transform: rotateY(180deg);
+}
+
+/* Page flip transition */
+.book-3d.pages-flip .flip-page {
+  transition: transform 0.65s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.book-3d.pages-flip .flip-page.flipped {
+  transform: rotateY(-150deg);
+}
+
+/* Stack z-ordering (children 5-7 are flip-pages, after back/spine/edges/front) */
+.book-3d .flip-page:nth-child(5) { z-index: 9; }
+.book-3d .flip-page:nth-child(6) { z-index: 8; }
+.book-3d .flip-page:nth-child(7) { z-index: 7; }
+
+/* Page flash for final navigation transition */
 .page-flash {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: white;
+  inset: 0;
+  background: linear-gradient(135deg, #faf8f5 0%, #f5f2ec 100%);
   opacity: 0;
   z-index: 9999;
   pointer-events: none;
@@ -49,11 +240,13 @@
   opacity: 1;
 }
 
+/* Subtle pulse on the clicked shelf book */
 @keyframes book-pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.03); }
+  0%, 100% { transform: translateY(-15px) rotate(-2deg) scale(1); }
+  50% { transform: translateY(-20px) rotate(-2deg) scale(1.05); }
 }
 
 .book.opening {
-  animation: book-pulse 0.3s ease;
+  animation: book-pulse 0.25s ease;
+  z-index: 10 !important;
 }

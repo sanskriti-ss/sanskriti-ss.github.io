@@ -121,57 +121,30 @@
   left: -30px;
   right: -30px;
   height: 28px;
-  background: linear-gradient(180deg,
-    var(--shelf-light) 0%,
-    var(--shelf-wood) 40%,
-    var(--shelf-dark) 100%);
+  background:
+    /* Wood grain texture on top */
+    url("images/wood-grain.png"),
+    /* Base gradient underneath */
+    linear-gradient(180deg,
+      var(--shelf-light) 0%,
+      var(--shelf-wood) 40%,
+      var(--shelf-dark) 100%);
+  background-size: 800px 100%, 100% 100%;
+  background-repeat: repeat-x, no-repeat;
+  background-blend-mode: multiply, normal;
   border-radius: 0 0 4px 4px;
   box-shadow:
     0 8px 25px var(--shadow-medium),
     inset 0 2px 3px rgba(255, 255, 255, 0.4);
-  /* Wood grain texture — layered grain lines at slightly varied angles */
-  background-image:
-    linear-gradient(180deg,
-      var(--shelf-light) 0%,
-      var(--shelf-wood) 40%,
-      var(--shelf-dark) 100%),
-    repeating-linear-gradient(91deg,
-      transparent 0px,
-      transparent 11px,
-      rgba(105, 75, 40, 0.28) 11px,
-      rgba(105, 75, 40, 0.22) 12.5px,
-      transparent 12.5px,
-      transparent 19px,
-      rgba(90, 65, 35, 0.18) 19px,
-      rgba(90, 65, 35, 0.18) 20px),
-    repeating-linear-gradient(89.5deg,
-      transparent 0px,
-      transparent 28px,
-      rgba(120, 90, 55, 0.22) 28px,
-      rgba(120, 90, 55, 0.18) 30px,
-      transparent 30px,
-      transparent 50px,
-      rgba(100, 75, 45, 0.12) 50px,
-      rgba(100, 75, 45, 0.12) 51px),
-    repeating-linear-gradient(90.3deg,
-      transparent 0px,
-      transparent 4px,
-      rgba(130, 100, 65, 0.09) 4px,
-      rgba(130, 100, 65, 0.09) 5px);
-  background-blend-mode: normal, overlay, overlay, overlay;
 }
 
-/* SVG noise grain overlay */
+/* Reserved for additional shelf effects */
 .shelf-board::after {
   content: '';
   position: absolute;
   inset: 0;
-  border-radius: 0 0 4px 4px;
-  background:
-    url("data:image/svg+xml,%3Csvg viewBox='0 0 300 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9 0.15' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='30' filter='url(%23n)' opacity='0.14'/%3E%3C/svg%3E");
-  background-size: 300px 30px;
+  border-radius: 0 0 5px 5px;
   pointer-events: none;
-  mix-blend-mode: multiply;
 }
 
 .shelf-board::before {
@@ -358,20 +331,20 @@
   font-weight: 700;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  /* Metallic gold gradient on text */
+  /* Metallic gold gradient on text — toned down 30% */
   background: linear-gradient(180deg,
-    #ffd700 0%,
-    #fff1a8 18%,
-    #c9a033 35%,
-    #ffe88a 50%,
-    #b8922a 65%,
-    #fff1a8 82%,
-    #dab440 100%);
+    #e2c44e 0%,
+    #f0e0a0 18%,
+    #c9a54a 35%,
+    #e8d88a 50%,
+    #bfa04a 65%,
+    #eedfa0 82%,
+    #d4b855 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   /* Deep shadow for pressed/embossed look */
-  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.7)) drop-shadow(0 0 4px rgba(218, 185, 100, 0.4));
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.5)) drop-shadow(0 0 3px rgba(218, 185, 100, 0.25));
   padding: 20px 0;
   white-space: nowrap;
   overflow: hidden;
@@ -447,21 +420,32 @@
 
 .book.silver-caps .spine-text {
   background: linear-gradient(180deg,
-    #c0c8d0 0%,
-    #e8edf2 18%,
-    #98a4b0 35%,
-    #dce2e8 50%,
-    #8a96a4 65%,
-    #e0e6ec 82%,
-    #aab4be 100%);
+    #b4bcc6 0%,
+    #d8dee5 18%,
+    #a0aab5 35%,
+    #cdd4db 50%,
+    #96a0ac 65%,
+    #d4dae2 82%,
+    #acb6c0 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.7)) drop-shadow(0 0 4px rgba(180, 195, 215, 0.4));
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.5)) drop-shadow(0 0 3px rgba(180, 195, 215, 0.25));
 }
 
 .book.horizontal.silver-caps .spine-text {
-  color: var(--silver-light);
+  background: linear-gradient(90deg,
+    #b4bcc6 0%,
+    #d8dee5 18%,
+    #a0aab5 35%,
+    #cdd4db 50%,
+    #96a0ac 65%,
+    #d4dae2 82%,
+    #acb6c0 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.5)) drop-shadow(0 0 3px rgba(180, 195, 215, 0.25));
 }
 
 /* Book spine raised panel — inset rectangle giving embossed look */
@@ -616,19 +600,19 @@
   color: var(--gold-light);
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  /* Metallic gold gradient on horizontal text */
+  /* Metallic gold gradient on horizontal text — toned down 30% */
   background: linear-gradient(90deg,
-    #ffd700 0%,
-    #fff1a8 18%,
-    #c9a033 35%,
-    #ffe88a 50%,
-    #b8922a 65%,
-    #fff1a8 82%,
-    #dab440 100%);
+    #e2c44e 0%,
+    #f0e0a0 18%,
+    #c9a54a 35%,
+    #e8d88a 50%,
+    #bfa04a 65%,
+    #eedfa0 82%,
+    #d4b855 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.7)) drop-shadow(0 0 4px rgba(218, 185, 100, 0.4));
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.5)) drop-shadow(0 0 3px rgba(218, 185, 100, 0.25));
   padding: 0 12px !important;
   white-space: nowrap;
   overflow: visible !important;

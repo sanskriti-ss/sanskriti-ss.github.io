@@ -165,6 +165,14 @@
   transform: rotateY(-155deg);
 }
 
+/* Hide spine when cover opens — it pokes out awkwardly otherwise */
+.book-3d .spine {
+  transition: opacity 0.3s ease;
+}
+.book-3d.cover-open .spine {
+  opacity: 0;
+}
+
 /* ---- Flip pages ---- */
 .book-3d .flip-page {
   position: absolute;

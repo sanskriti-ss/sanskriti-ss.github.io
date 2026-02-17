@@ -120,15 +120,58 @@
   bottom: 0;
   left: -30px;
   right: -30px;
-  height: 25px;
-  background: linear-gradient(180deg, 
-    var(--shelf-light) 0%, 
-    var(--shelf-wood) 40%, 
+  height: 28px;
+  background: linear-gradient(180deg,
+    var(--shelf-light) 0%,
+    var(--shelf-wood) 40%,
     var(--shelf-dark) 100%);
   border-radius: 0 0 4px 4px;
-  box-shadow: 
+  box-shadow:
     0 8px 25px var(--shadow-medium),
     inset 0 2px 3px rgba(255, 255, 255, 0.4);
+  /* Wood grain texture — layered grain lines at slightly varied angles */
+  background-image:
+    linear-gradient(180deg,
+      var(--shelf-light) 0%,
+      var(--shelf-wood) 40%,
+      var(--shelf-dark) 100%),
+    repeating-linear-gradient(91deg,
+      transparent 0px,
+      transparent 11px,
+      rgba(105, 75, 40, 0.28) 11px,
+      rgba(105, 75, 40, 0.22) 12.5px,
+      transparent 12.5px,
+      transparent 19px,
+      rgba(90, 65, 35, 0.18) 19px,
+      rgba(90, 65, 35, 0.18) 20px),
+    repeating-linear-gradient(89.5deg,
+      transparent 0px,
+      transparent 28px,
+      rgba(120, 90, 55, 0.22) 28px,
+      rgba(120, 90, 55, 0.18) 30px,
+      transparent 30px,
+      transparent 50px,
+      rgba(100, 75, 45, 0.12) 50px,
+      rgba(100, 75, 45, 0.12) 51px),
+    repeating-linear-gradient(90.3deg,
+      transparent 0px,
+      transparent 4px,
+      rgba(130, 100, 65, 0.09) 4px,
+      rgba(130, 100, 65, 0.09) 5px);
+  background-blend-mode: normal, overlay, overlay, overlay;
+}
+
+/* SVG noise grain overlay */
+.shelf-board::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 0 0 4px 4px;
+  background:
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 300 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9 0.15' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='30' filter='url(%23n)' opacity='0.14'/%3E%3C/svg%3E");
+  background-size: 300px 30px;
+  pointer-events: none;
+  mix-blend-mode: multiply;
 }
 
 .shelf-board::before {
@@ -142,6 +185,7 @@
     transparent 0%,
     rgba(255, 255, 255, 0.5) 50%,
     transparent 100%);
+  z-index: 1;
 }
 
 .shelf-shadow {
@@ -162,7 +206,7 @@
   align-items: flex-end;
   justify-content: center;
   gap: 4px;
-  padding: 0 20px 25px;
+  padding: 0 20px 28px;
   min-height: 200px;
 }
 
@@ -229,25 +273,36 @@
   position: absolute;
   left: 2px;
   right: 2px;
-  height: 8px;
-  background: linear-gradient(90deg,
-    color-mix(in srgb, var(--cap-color) 60%, black) 0%,
-    var(--cap-color) 20%,
-    var(--cap-light) 50%,
-    var(--cap-color) 80%,
-    color-mix(in srgb, var(--cap-color) 60%, black) 100%);
+  height: 10px;
+  background:
+    linear-gradient(180deg,
+      rgba(255, 255, 255, 0.15) 0%,
+      transparent 20%,
+      transparent 80%,
+      rgba(0, 0, 0, 0.1) 100%),
+    linear-gradient(90deg,
+      color-mix(in srgb, var(--cap-color) 50%, black) 0%,
+      var(--cap-color) 12%,
+      var(--cap-light) 30%,
+      var(--cap-color) 50%,
+      var(--cap-light) 70%,
+      var(--cap-color) 88%,
+      color-mix(in srgb, var(--cap-color) 50%, black) 100%);
   border-radius: 2px;
-  box-shadow: 
-    inset 0 1px 2px rgba(255, 255, 255, 0.4),
-    inset 0 -1px 2px rgba(0, 0, 0, 0.2);
+  box-shadow:
+    inset 0 1px 2px rgba(255, 255, 255, 0.5),
+    inset 0 -1px 2px rgba(0, 0, 0, 0.25),
+    0 1px 3px rgba(0, 0, 0, 0.15);
 }
 
 .book::before {
   top: 5px;
+  border-bottom: 1px solid color-mix(in srgb, var(--cap-color) 40%, black);
 }
 
 .book::after {
   bottom: 5px;
+  border-top: 1px solid color-mix(in srgb, var(--cap-color) 40%, black);
 }
 
 /* Silver caps variant */
@@ -255,15 +310,31 @@
 .book.silver-caps::after {
   --cap-color: var(--silver-accent);
   --cap-light: var(--silver-light);
-  background: linear-gradient(90deg,
-    color-mix(in srgb, var(--silver-accent) 60%, #555) 0%,
-    var(--silver-accent) 20%,
-    var(--silver-light) 50%,
-    var(--silver-accent) 80%,
-    color-mix(in srgb, var(--silver-accent) 60%, #555) 100%);
+  background:
+    linear-gradient(180deg,
+      rgba(255, 255, 255, 0.2) 0%,
+      transparent 20%,
+      transparent 80%,
+      rgba(0, 0, 0, 0.08) 100%),
+    linear-gradient(90deg,
+      color-mix(in srgb, var(--silver-accent) 50%, #444) 0%,
+      var(--silver-accent) 12%,
+      var(--silver-light) 30%,
+      var(--silver-accent) 50%,
+      var(--silver-light) 70%,
+      var(--silver-accent) 88%,
+      color-mix(in srgb, var(--silver-accent) 50%, #444) 100%);
 }
 
-/* Book spine text */
+.book.silver-caps::before {
+  border-bottom-color: color-mix(in srgb, var(--silver-accent) 40%, #333);
+}
+
+.book.silver-caps::after {
+  border-top-color: color-mix(in srgb, var(--silver-accent) 40%, #333);
+}
+
+/* Spine embossed decorative lines */
 .book .spine-text {
   writing-mode: vertical-rl;
   text-orientation: mixed;
@@ -274,12 +345,41 @@
   color: var(--gold-light);
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+  text-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.5),
+    0 0 6px rgba(201, 169, 98, 0.15);
   padding: 20px 0;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   max-height: calc(var(--book-height) - 40px);
+  position: relative;
+}
+
+/* Decorative embossed lines above and below spine text */
+.book .spine-text::before,
+.book .spine-text::after {
+  content: '';
+  display: block;
+  width: 60%;
+  margin: 0 auto;
+  height: 0;
+  border-top: 1px solid rgba(201, 169, 98, 0.35);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+  flex-shrink: 0;
+}
+
+.book .spine-text::before {
+  margin-bottom: 8px;
+}
+
+.book .spine-text::after {
+  margin-top: 8px;
+}
+
+/* Spine texture overlay for depth */
+.book > .spine-text ~ .spine-text {
+  display: none;
 }
 
 /* Bookmarks - add to some books (stick out from top) */
@@ -348,10 +448,35 @@
 
 .book.silver-caps .spine-text {
   color: var(--silver-light);
+  text-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.5),
+    0 0 6px rgba(168, 176, 184, 0.2);
+}
+
+.book.silver-caps .spine-text::before,
+.book.silver-caps .spine-text::after {
+  border-top-color: rgba(168, 176, 184, 0.4);
 }
 
 .book.horizontal.silver-caps .spine-text {
   color: var(--silver-light);
+}
+
+/* Book spine raised panel — inset rectangle giving embossed look */
+.book .spine-panel {
+  position: absolute;
+  top: 20px;
+  bottom: 20px;
+  left: 4px;
+  right: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-top-color: rgba(255, 255, 255, 0.12);
+  border-bottom-color: rgba(0, 0, 0, 0.1);
+  border-radius: 1px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.08);
+  pointer-events: none;
 }
 
 /* Book decorative details */
@@ -440,18 +565,31 @@
 /* Horizontal book caps - left and right */
 .book.horizontal::before,
 .book.horizontal::after {
-  width: 6px;
+  width: 8px;
   height: auto;
   top: 2px;
   bottom: 2px;
   left: auto;
   right: auto;
-  background: linear-gradient(180deg,
-    color-mix(in srgb, var(--cap-color) 60%, black) 0%,
-    var(--cap-color) 20%,
-    var(--cap-light) 50%,
-    var(--cap-color) 80%,
-    color-mix(in srgb, var(--cap-color) 60%, black) 100%);
+  border: none;
+  background:
+    linear-gradient(90deg,
+      rgba(255, 255, 255, 0.15) 0%,
+      transparent 20%,
+      transparent 80%,
+      rgba(0, 0, 0, 0.1) 100%),
+    linear-gradient(180deg,
+      color-mix(in srgb, var(--cap-color) 50%, black) 0%,
+      var(--cap-color) 12%,
+      var(--cap-light) 30%,
+      var(--cap-color) 50%,
+      var(--cap-light) 70%,
+      var(--cap-color) 88%,
+      color-mix(in srgb, var(--cap-color) 50%, black) 100%);
+  box-shadow:
+    inset 1px 0 2px rgba(255, 255, 255, 0.4),
+    inset -1px 0 2px rgba(0, 0, 0, 0.2),
+    1px 0 3px rgba(0, 0, 0, 0.12);
 }
 
 .book.horizontal::before {

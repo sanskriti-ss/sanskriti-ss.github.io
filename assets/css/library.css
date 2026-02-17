@@ -239,57 +239,58 @@
     inset 2px 0 4px rgba(255, 255, 255, 0.2);
 }
 
-/* Book spine caps - top and bottom decorative bands */
+/* Book spine caps - thin layered decorative bands at top and bottom */
 .book::before,
 .book::after {
   content: '';
   position: absolute;
   left: 2px;
   right: 2px;
-  height: 10px;
+  height: 12px;
   background:
+    /* Sheen overlay */
     linear-gradient(180deg,
-      rgba(255, 255, 255, 0.15) 0%,
+      rgba(255, 255, 255, 0.10) 0%,
       transparent 20%,
       transparent 80%,
-      rgba(0, 0, 0, 0.1) 100%),
+      rgba(0, 0, 0, 0.06) 100%),
+    /* Layered bands: hairline — band — hairline */
+    linear-gradient(180deg,
+      transparent 0px,
+      var(--cap-color) 1px,
+      transparent 2px,
+      transparent 3px,
+      color-mix(in srgb, var(--cap-color) 50%, black) 3px,
+      var(--cap-color) 4px,
+      var(--cap-light) 6px,
+      var(--cap-color) 8px,
+      color-mix(in srgb, var(--cap-color) 50%, black) 9px,
+      transparent 9px,
+      transparent 10px,
+      var(--cap-color) 11px,
+      transparent 12px),
+    /* Metallic base shimmer */
     linear-gradient(90deg,
-      color-mix(in srgb, var(--cap-color) 50%, black) 0%,
-      var(--cap-color) 12%,
-      var(--cap-light) 30%,
+      color-mix(in srgb, var(--cap-color) 40%, black) 0%,
+      var(--cap-color) 15%,
+      var(--cap-light) 35%,
       var(--cap-color) 50%,
-      var(--cap-light) 70%,
-      var(--cap-color) 88%,
-      color-mix(in srgb, var(--cap-color) 50%, black) 100%);
-  border-radius: 2px;
+      var(--cap-light) 65%,
+      var(--cap-color) 85%,
+      color-mix(in srgb, var(--cap-color) 40%, black) 100%);
+  border-radius: 1px;
   box-shadow:
-    inset 0 1px 2px rgba(255, 255, 255, 0.5),
-    inset 0 -1px 2px rgba(0, 0, 0, 0.25),
-    0 1px 3px rgba(0, 0, 0, 0.15);
+    inset 0 1px 1px rgba(255, 255, 255, 0.4),
+    inset 0 -1px 1px rgba(0, 0, 0, 0.2),
+    0 1px 2px rgba(0, 0, 0, 0.12);
 }
 
 .book::before {
-  top: 5px;
-  border-bottom: 1px solid color-mix(in srgb, var(--cap-color) 40%, black);
-  /* Accent hairline below the top cap */
-  box-shadow:
-    inset 0 1px 2px rgba(255, 255, 255, 0.5),
-    inset 0 -1px 2px rgba(0, 0, 0, 0.25),
-    0 1px 3px rgba(0, 0, 0, 0.15),
-    0 5px 0 -4px var(--cap-color),
-    0 6px 0 -4px rgba(0, 0, 0, 0.15);
+  top: 4px;
 }
 
 .book::after {
-  bottom: 5px;
-  border-top: 1px solid color-mix(in srgb, var(--cap-color) 40%, black);
-  /* Accent hairline above the bottom cap */
-  box-shadow:
-    inset 0 1px 2px rgba(255, 255, 255, 0.5),
-    inset 0 -1px 2px rgba(0, 0, 0, 0.25),
-    0 1px 3px rgba(0, 0, 0, 0.15),
-    0 -5px 0 -4px var(--cap-color),
-    0 -6px 0 -4px rgba(0, 0, 0, 0.15);
+  bottom: 4px;
 }
 
 /* Silver caps variant */
@@ -548,10 +549,10 @@
   transform-origin: center center;
 }
 
-/* Horizontal book caps - left and right */
+/* Horizontal book caps - left and right (thin layered bands) */
 .book.horizontal::before,
 .book.horizontal::after {
-  width: 8px;
+  width: 10px;
   height: auto;
   top: 2px;
   bottom: 2px;
@@ -560,32 +561,43 @@
   border: none;
   background:
     linear-gradient(90deg,
-      rgba(255, 255, 255, 0.15) 0%,
+      rgba(255, 255, 255, 0.10) 0%,
       transparent 20%,
       transparent 80%,
-      rgba(0, 0, 0, 0.1) 100%),
+      rgba(0, 0, 0, 0.05) 100%),
+    linear-gradient(90deg,
+      transparent 0px,
+      var(--cap-color) 1px,
+      transparent 2px,
+      color-mix(in srgb, var(--cap-color) 50%, black) 3px,
+      var(--cap-color) 4px,
+      var(--cap-light) 5px,
+      var(--cap-color) 7px,
+      transparent 8px,
+      var(--cap-color) 9px,
+      transparent 10px),
     linear-gradient(180deg,
-      color-mix(in srgb, var(--cap-color) 50%, black) 0%,
-      var(--cap-color) 12%,
-      var(--cap-light) 30%,
+      color-mix(in srgb, var(--cap-color) 40%, black) 0%,
+      var(--cap-color) 15%,
+      var(--cap-light) 35%,
       var(--cap-color) 50%,
-      var(--cap-light) 70%,
-      var(--cap-color) 88%,
-      color-mix(in srgb, var(--cap-color) 50%, black) 100%);
+      var(--cap-light) 65%,
+      var(--cap-color) 85%,
+      color-mix(in srgb, var(--cap-color) 40%, black) 100%);
   box-shadow:
-    inset 1px 0 2px rgba(255, 255, 255, 0.4),
-    inset -1px 0 2px rgba(0, 0, 0, 0.2),
-    1px 0 3px rgba(0, 0, 0, 0.12);
+    inset 1px 0 1px rgba(255, 255, 255, 0.35),
+    inset -1px 0 1px rgba(0, 0, 0, 0.18),
+    1px 0 2px rgba(0, 0, 0, 0.10);
 }
 
 .book.horizontal::before {
-  left: 4px;
+  left: 3px;
   top: 2px;
   bottom: 2px;
 }
 
 .book.horizontal::after {
-  right: 4px;
+  right: 3px;
   left: auto;
   top: 2px;
   bottom: 2px;

@@ -7,6 +7,179 @@
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<link rel="stylesheet" href="assets/css/library.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<style>
+			/* ── Manuscript page cards ── */
+			.manuscript-card {
+				background: #faf7f0;
+				border: 1px solid #d4c4a8;
+				border-radius: 3px;
+				max-width: 860px;
+				margin: 0 auto 40px;
+				padding: 40px 44px;
+				position: relative;
+				box-shadow:
+					inset 0 0 30px rgba(139, 119, 90, 0.08),
+					0 2px 12px rgba(0, 0, 0, 0.06);
+			}
+
+			/* Decorative top/bottom rules */
+			.manuscript-card::before,
+			.manuscript-card::after {
+				content: '';
+				display: block;
+				height: 1px;
+				background: linear-gradient(
+					90deg,
+					transparent 0%,
+					#c4a86c 15%,
+					#b89a5a 50%,
+					#c4a86c 85%,
+					transparent 100%
+				);
+				position: absolute;
+				left: 20px;
+				right: 20px;
+			}
+			.manuscript-card::before { top: 12px; }
+			.manuscript-card::after  { bottom: 12px; }
+
+			/* Double rule — inner line via box-shadow trick on a pseudo */
+			.manuscript-card-inner {
+				border-top: 1px solid rgba(180, 160, 120, 0.25);
+				border-bottom: 1px solid rgba(180, 160, 120, 0.25);
+				padding: 28px 0;
+			}
+
+			/* Project titles */
+			.manuscript-card h3 {
+				font-family: 'Lato', sans-serif;
+				font-weight: 700;
+				font-size: 1.3em;
+				color: #3a2a1f;
+				text-transform: none;
+				margin: 0 0 14px;
+				letter-spacing: 0.02em;
+			}
+
+			.manuscript-card p {
+				font-family: 'Lato', sans-serif;
+				font-size: 0.95em;
+				line-height: 1.65;
+				color: #2a1a0f;
+				margin: 0;
+			}
+
+			.manuscript-card a {
+				color: #5a4a3a;
+				text-decoration: underline;
+				text-underline-offset: 2px;
+			}
+			.manuscript-card a:hover {
+				color: #3a2a1f;
+			}
+
+			/* ── Two-column layout for dinosaur project ── */
+			.project-split {
+				display: flex;
+				gap: 32px;
+				align-items: flex-start;
+			}
+			.project-split .project-image {
+				flex: 0 0 260px;
+				border-radius: 3px;
+				overflow: hidden;
+				box-shadow: 0 1px 6px rgba(0,0,0,0.1);
+			}
+			.project-split .project-image img {
+				display: block;
+				width: 100%;
+				height: 320px;
+				object-fit: cover;
+			}
+			.project-split .project-text {
+				flex: 1;
+				padding-top: 4px;
+			}
+
+			/* ── Radar chart grid ── */
+			.radar-grid {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 12px;
+				max-width: 520px;
+				margin: 20px auto 0;
+			}
+			.radar-grid img {
+				width: 100%;
+				border-radius: 3px;
+			}
+
+			/* ── Decorative section divider ── */
+			.section-divider {
+				text-align: center;
+				margin: 10px auto 30px;
+				max-width: 860px;
+				position: relative;
+				height: 20px;
+			}
+			.section-divider::before {
+				content: '';
+				position: absolute;
+				top: 50%;
+				left: 10%;
+				right: 10%;
+				height: 1px;
+				background: linear-gradient(
+					90deg,
+					transparent 0%,
+					#c4a86c 30%,
+					#b89a5a 50%,
+					#c4a86c 70%,
+					transparent 100%
+				);
+			}
+			.section-divider::after {
+				content: '◆';
+				position: relative;
+				display: inline-block;
+				background: var(--library-bg, #2c2420);
+				padding: 0 12px;
+				color: #c4a86c;
+				font-size: 0.6em;
+				line-height: 20px;
+			}
+
+			/* Links row */
+			.project-links {
+				margin-top: 16px;
+				font-size: 0.92em;
+			}
+			.project-links a {
+				margin-right: 6px;
+			}
+
+			/* ── Responsive ── */
+			@media (max-width: 700px) {
+				.manuscript-card {
+					padding: 28px 22px;
+					margin-left: 12px;
+					margin-right: 12px;
+				}
+				.project-split {
+					flex-direction: column;
+				}
+				.project-split .project-image {
+					flex: none;
+					width: 100%;
+				}
+				.project-split .project-image img {
+					height: 220px;
+				}
+				.radar-grid {
+					max-width: 100%;
+				}
+			}
+		</style>
 	</head>
 	<body class="projects is-preload">
 		<div id="page-wrapper">
@@ -49,44 +222,57 @@
 					</div>
 				</header>
 
-				<!-- Mini Code Projects Content -->
+				<!-- Projects Content -->
 				<section id="mini-code-projects-content" class="wrapper style1 container" style="margin-top: -20px;">
 					<div class="row gtr-150">
 						<div class="col-12">
-							<div id="mini-projects-library">
-								<div class="library-container" style="overflow-x: visible; overflow-y: visible; padding: 20px;">
-									
-									<!-- UCLA Dinosaur Game Project -->
-									<div class="project-book" style="position: relative; width: 800px; height: 560px; background-image: url('images/general_pagebgs/openbook.png'); background-repeat: no-repeat; background-position: center; background-size: contain; margin: 20px auto;">
-										<!-- Screenshot on left page -->
-										<img src="images/general_pagebgs/gamejam_ss.png" alt="Unity Game Screenshot" style="position: absolute; top: 15%; left: 12%; width: 280px; height: 360px; object-fit: cover; border-radius: 4px;">
-										
-										<!-- Project title on right page -->
-										<h3 style="position: absolute; top: 15%; right: 8%; width: 40%; margin: 0; font-size: 1.2em; color: #3a2a1f; font-weight: bold; text-transform: none;">UCLA-Themed Dinosaur Game</h3>
-										
-										<!-- Project description on right page -->
-										<p style="position: absolute; top: 35%; right: 8%; width: 40%; margin: 0; line-height: 1.4; font-size: 0.9em; color: #000;">This is a Unity game I created with a couple of friends, inspired by the classic dinosaur game. It features UCLA-themed elements like squirrels and The Birds^TM. The game challenges players to jump through obstacles.<br><br><a href="https://github.com/sanskriti-ss/gamejam" target="_blank" style="color: #3a2a1f; text-decoration: underline;">Play it here</a></p>
+
+							<!-- LLM Agreeability Benchmark -->
+							<div class="manuscript-card">
+								<div class="manuscript-card-inner">
+									<h3>LLM Agreeability Benchmark</h3>
+									<p>
+										Built at a hackathon — a tool that tests how sycophantic LLMs are when users present misconceptions.
+										Sends the same questions to multiple models and scores responses on four axes:
+										<em>sycophancy</em>, <em>factual accuracy</em>, <em>placating behavior</em>, and <em>epistemic transparency</em>.
+										Claude scored highest on factual accuracy and epistemic transparency; GPT-4o showed the most placating behavior.
+									</p>
+									<div class="radar-grid">
+										<img src="images/benchmarking/radar_claude_sonnet_4.png" alt="Claude Sonnet 4 Radar">
+										<img src="images/benchmarking/radar_gpt-4o.png" alt="GPT-4o Radar">
+										<img src="images/benchmarking/radar_gemini_25_flash.png" alt="Gemini 2.5 Flash Radar">
+										<img src="images/benchmarking/radar_grok_3.png" alt="Grok 3 Radar">
 									</div>
-									
-									<!-- Template for more projects -->
-									<!-- Add more project-book divs here with the same structure -->
-									
+									<p class="project-links">
+										<a href="https://benchmarking-vx8p.onrender.com/" target="_blank">Try it live</a>&ensp;·&ensp;<a href="https://github.com/sanskriti-ss/benchmarking" target="_blank">GitHub</a>
+									</p>
 								</div>
 							</div>
-						</div>
-					</div>
-				</section>
 
+							<div class="section-divider"></div>
 
-				<section id="mini-extensions" class="wrapper style3 container">
-					<div class="content">
-						<div class="bookshelf page-header-shelf">
-							<div class="shelf-board"></div>
-							<div class="books-row compact">
-								<a href="#mini-extensions" class="book horizontal silver-caps page-header-book" style="--book-color: #6a5acd;">
-									<span class="spine-text">Mini Extensions</span>
-								</a>
+							<!-- UCLA Dinosaur Game -->
+							<div class="manuscript-card">
+								<div class="manuscript-card-inner">
+									<div class="project-split">
+										<div class="project-image">
+											<img src="images/general_pagebgs/gamejam_ss.png" alt="Unity Game Screenshot">
+										</div>
+										<div class="project-text">
+											<h3>UCLA-Themed Dinosaur Game</h3>
+											<p>
+												A Unity game I created with a couple of friends, inspired by the classic dinosaur game.
+												It features UCLA-themed elements like squirrels and The Birds&trade;.
+												The game challenges players to jump through obstacles.
+											</p>
+											<p class="project-links">
+												<a href="https://github.com/sanskriti-ss/gamejam" target="_blank">Play it here</a>
+											</p>
+										</div>
+									</div>
+								</div>
 							</div>
+
 						</div>
 					</div>
 				</section>

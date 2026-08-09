@@ -185,8 +185,48 @@
     animateBookOpen(el, href);
   }
 
+  function addLinkedInTips() {
+    var message = "You'll find more interesting stuff on my website :)";
+    document.querySelectorAll('a.book[href*="linkedin"]').forEach(function(el) {
+      if (el.dataset.tipBound === '1') return;
+      el.dataset.tipBound = '1';
+      el.classList.add('has-tip');
+      el.setAttribute('aria-label', 'LinkedIn. ' + message);
+
+      var tip = document.createElement('span');
+      tip.className = 'book-hover-tip';
+      tip.setAttribute('aria-hidden', 'true');
+      tip.textContent = message;
+      document.body.appendChild(tip);
+
+      function placeTip() {
+        var rect = el.getBoundingClientRect();
+        tip.style.left = (rect.left + rect.width / 2) + 'px';
+        tip.style.top = (rect.top - 12) + 'px';
+      }
+
+      function showTip() {
+        placeTip();
+        tip.classList.add('is-visible');
+      }
+
+      function hideTip() {
+        tip.classList.remove('is-visible');
+      }
+
+      el.addEventListener('mouseenter', showTip);
+      el.addEventListener('focus', showTip);
+      el.addEventListener('mouseleave', hideTip);
+      el.addEventListener('blur', hideTip);
+      window.addEventListener('scroll', function() {
+        if (tip.classList.contains('is-visible')) placeTip();
+      }, { passive: true });
+    });
+  }
+
   function init() {
     createTransitionElements();
+    addLinkedInTips();
     document.querySelectorAll('a.book').forEach(function(book) {
       var href = book.getAttribute('href');
       if (href && href.endsWith('.html') && !href.startsWith('http')) {

@@ -38,7 +38,8 @@
   min-height: 100vh;
   padding: 40px 0 60px;
   position: relative;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: visible;
 }
 
 /* Subtle pattern overlay */
@@ -246,25 +247,26 @@
   position: absolute;
   left: 2px;
   right: 2px;
-  height: 18px;
+  height: 12px;
   background: linear-gradient(90deg,
     color-mix(in srgb, var(--cap-color) 55%, #4a4034) 0%,
-    color-mix(in srgb, var(--cap-light) 70%, #f2ebe0) 28%,
+    color-mix(in srgb, var(--cap-light) 75%, #f7f1e6) 28%,
     var(--cap-color) 50%,
-    color-mix(in srgb, var(--cap-light) 70%, #f2ebe0) 72%,
+    color-mix(in srgb, var(--cap-light) 75%, #f7f1e6) 72%,
     color-mix(in srgb, var(--cap-color) 55%, #4a4034) 100%);
-  -webkit-mask-image: url("images/flourish-s.svg");
-  mask-image: url("images/flourish-s.svg");
+  -webkit-mask-image: url("images/flourish-s.png?v=3");
+  mask-image: url("images/flourish-s.png?v=3");
   -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;
   -webkit-mask-position: center;
   mask-position: center;
-  -webkit-mask-size: 96% 100%;
-  mask-size: 96% 100%;
-  opacity: 0.62;
+  -webkit-mask-size: 70% 100%;
+  mask-size: 70% 100%;
+  opacity: 0.86;
   border-radius: 0;
   box-shadow: none;
   pointer-events: none;
+  z-index: 2;
 }
 
 .book::before {
@@ -276,23 +278,23 @@
   transform: scaleX(-1);
 }
 
-/* Alternate flourish on every other book for variety */
-.books-row > .book:nth-of-type(3n)::before,
-.books-row > .book:nth-of-type(3n)::after {
-  -webkit-mask-image: url("images/flourish-wave.svg");
-  mask-image: url("images/flourish-wave.svg");
-  -webkit-mask-size: 88% 100%;
-  mask-size: 88% 100%;
-  height: 14px;
+/* Alternate flourish on every other vertical book for variety */
+.books-row > .book:not(.horizontal):nth-of-type(3n)::before,
+.books-row > .book:not(.horizontal):nth-of-type(3n)::after {
+  -webkit-mask-image: url("images/flourish-wave.png?v=3");
+  mask-image: url("images/flourish-wave.png?v=3");
+  height: 11px;
+  -webkit-mask-size: 66% 100%;
+  mask-size: 66% 100%;
 }
 
-.books-row > .book:nth-of-type(4n)::before,
-.books-row > .book:nth-of-type(4n)::after {
-  -webkit-mask-image: url("images/flourish-bow.svg");
-  mask-image: url("images/flourish-bow.svg");
-  -webkit-mask-size: 84% 100%;
-  mask-size: 84% 100%;
-  height: 15px;
+.books-row > .book:not(.horizontal):nth-of-type(4n)::before,
+.books-row > .book:not(.horizontal):nth-of-type(4n)::after {
+  -webkit-mask-image: url("images/flourish-bow.png?v=3");
+  mask-image: url("images/flourish-bow.png?v=3");
+  height: 11px;
+  -webkit-mask-size: 64% 100%;
+  mask-size: 64% 100%;
 }
 
 /* Silver caps variant */
@@ -300,7 +302,7 @@
 .book.silver-caps::after {
   --cap-color: var(--silver-accent);
   --cap-light: var(--silver-light);
-  opacity: 0.55;
+  opacity: 0.8;
 }
 
 /* Spine text — soft foil, less metallic glare */
@@ -407,13 +409,13 @@
 
 .book.horizontal.silver-caps .spine-text {
   background: linear-gradient(90deg,
-    color-mix(in srgb, var(--silver-light) 65%, #eef1f4) 0%,
-    color-mix(in srgb, var(--silver-accent) 75%, #c5ccd4) 45%,
-    color-mix(in srgb, var(--silver-light) 60%, #e8ecf0) 100%);
+    color-mix(in srgb, var(--silver-light) 48%, #f0ece6) 0%,
+    color-mix(in srgb, var(--silver-accent) 58%, #d4cfc8) 50%,
+    color-mix(in srgb, var(--silver-light) 46%, #ebe6e0) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 1px 0.5px rgba(0, 0, 0, 0.28));
+  filter: drop-shadow(0 1px 0.5px rgba(0, 0, 0, 0.16));
 }
 
 /* Book spine raised panel — inset rectangle giving embossed look */
@@ -516,48 +518,55 @@
   transform-origin: center center;
 }
 
-/* Horizontal book caps — calligraphic flourishes on left/right */
+/* Horizontal book caps — compact vertical end marks (beat nth-of-type vertical masks) */
+.books-row > .book.horizontal::before,
+.books-row > .book.horizontal::after,
 .book.horizontal::before,
 .book.horizontal::after {
-  width: 14px;
+  width: 11px;
   height: auto;
-  top: 3px;
-  bottom: 3px;
   left: auto;
   right: auto;
   border: none;
   border-radius: 0;
-  opacity: 0.52;
+  opacity: 0.78;
   background: linear-gradient(180deg,
-    color-mix(in srgb, var(--cap-color) 55%, #4a4034) 0%,
-    color-mix(in srgb, var(--cap-light) 70%, #f2ebe0) 28%,
-    var(--cap-color) 50%,
-    color-mix(in srgb, var(--cap-light) 70%, #f2ebe0) 72%,
-    color-mix(in srgb, var(--cap-color) 55%, #4a4034) 100%);
-  -webkit-mask-image: url("images/flourish-s.svg");
-  mask-image: url("images/flourish-s.svg");
+    color-mix(in srgb, var(--cap-color) 48%, #4a4034) 0%,
+    color-mix(in srgb, var(--cap-light) 72%, #f7f1e6) 40%,
+    color-mix(in srgb, var(--cap-color) 58%, #6a5e4e) 100%);
+  -webkit-mask-image: url("images/flourish-end.svg?v=3");
+  mask-image: url("images/flourish-end.svg?v=3");
   -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;
   -webkit-mask-position: center;
   mask-position: center;
-  -webkit-mask-size: 100% 88%;
-  mask-size: 100% 88%;
+  -webkit-mask-size: contain;
+  mask-size: contain;
   box-shadow: none;
-  transform: rotate(90deg);
+  transform: none;
+  z-index: 2;
 }
 
+.books-row > .book.horizontal::before,
 .book.horizontal::before {
-  left: 2px;
-  top: 3px;
-  bottom: 3px;
+  left: 4px;
+  top: 14%;
+  bottom: 14%;
+  right: auto;
 }
 
+.books-row > .book.horizontal::after,
 .book.horizontal::after {
-  right: 2px;
+  right: 4px;
   left: auto;
-  top: 3px;
-  bottom: 3px;
-  transform: rotate(90deg) scaleX(-1);
+  top: 14%;
+  bottom: 14%;
+  transform: scaleX(-1);
+}
+
+.book.horizontal.silver-caps::before,
+.book.horizontal.silver-caps::after {
+  opacity: 0.7;
 }
 
 .book.horizontal .spine-text {
@@ -570,14 +579,14 @@
   letter-spacing: 0.1em;
   text-transform: uppercase;
   background: linear-gradient(90deg,
-    color-mix(in srgb, var(--gold-light) 70%, #f4eee0) 0%,
-    color-mix(in srgb, var(--gold-accent) 80%, #d8c9a4) 45%,
-    color-mix(in srgb, var(--gold-light) 65%, #efe6d2) 100%);
+    color-mix(in srgb, var(--gold-light) 52%, #f2ebe0) 0%,
+    color-mix(in srgb, var(--gold-accent) 62%, #d4c6a8) 45%,
+    color-mix(in srgb, var(--gold-light) 50%, #efe6d2) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 1px 0.5px rgba(0, 0, 0, 0.28));
-  padding: 0 12px !important;
+  filter: drop-shadow(0 1px 0.5px rgba(0, 0, 0, 0.18));
+  padding: 0 18px !important;
   white-space: nowrap;
   overflow: visible !important;
   max-width: none !important;
@@ -590,15 +599,15 @@
 }
 
 .book.horizontal:hover {
-  transform: translateX(15px) rotate(2deg);
+  transform: translateX(10px);
 }
 
 .book.horizontal:hover .spine-text {
-  text-shadow: 0 0 4px rgba(184, 154, 106, 0.25);
+  text-shadow: 0 0 4px rgba(184, 154, 106, 0.2);
 }
 
 .book.horizontal.silver-caps:hover .spine-text {
-  text-shadow: 0 0 4px rgba(154, 163, 171, 0.25);
+  text-shadow: 0 0 4px rgba(154, 163, 171, 0.2);
 }
 
 /* Page header variant for non-homepage sections */
@@ -615,12 +624,71 @@
 
 .book.horizontal.page-header-book {
   width: 340px !important;
-  --book-height: 60px;
+  --book-height: 58px;
+  border-radius: 4px;
+  box-shadow:
+    2px 4px 14px rgba(55, 45, 70, 0.14),
+    inset -1px 0 3px rgba(0, 0, 0, 0.1),
+    inset 1px 0 3px rgba(255, 255, 255, 0.16);
+}
+
+/* Header books: top/bottom title ornament (not side-crushed end marks) */
+.books-row > .book.horizontal.page-header-book::before,
+.books-row > .book.horizontal.page-header-book::after,
+.book.horizontal.page-header-book::before,
+.book.horizontal.page-header-book::after {
+  width: auto;
+  height: 12px;
+  left: 20%;
+  right: 20%;
+  top: auto;
+  bottom: auto;
+  transform: none;
+  opacity: 0.68;
+  background: linear-gradient(90deg,
+    color-mix(in srgb, var(--cap-color) 42%, #5a5044) 0%,
+    color-mix(in srgb, var(--cap-light) 68%, #f4eee4) 40%,
+    color-mix(in srgb, var(--cap-color) 50%, #6a5e4e) 100%);
+  -webkit-mask-image: url("images/flourish-header.svg?v=3");
+  mask-image: url("images/flourish-header.svg?v=3");
+  -webkit-mask-size: 72% 100%;
+  mask-size: 72% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+}
+
+.books-row > .book.horizontal.page-header-book::before,
+.book.horizontal.page-header-book::before {
+  top: 9px;
+  left: 20%;
+  right: 20%;
+  bottom: auto;
+}
+
+.books-row > .book.horizontal.page-header-book::after,
+.book.horizontal.page-header-book::after {
+  bottom: 9px;
+  left: 20%;
+  right: 20%;
+  top: auto;
+  transform: scaleY(-1);
 }
 
 .book.horizontal.page-header-book .spine-text {
-  font-size: 1.6rem;
+  font-size: 1.55rem;
   font-family: 'Cormorant Garamond', Georgia, serif;
+  letter-spacing: 0.14em;
+  padding: 0 28px !important;
+  background: linear-gradient(90deg,
+    color-mix(in srgb, var(--silver-light, #c8cdd2) 48%, #f0ece6) 0%,
+    color-mix(in srgb, var(--silver-accent, #9aa3ab) 58%, #d4cfc8) 50%,
+    color-mix(in srgb, var(--silver-light, #c8cdd2) 46%, #ebe6e0) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 1px 0.5px rgba(0, 0, 0, 0.16));
 }
 
 /* Serif headers sitewide for library pages */
@@ -1430,5 +1498,65 @@ body.landing-minimal .library-footer .copyright {
 
   body.landing-minimal .bookshelf {
     margin-bottom: 34px;
+  }
+}
+
+/* Soft LinkedIn hover tip (fixed, so shelves never clip it) */
+.book.has-tip {
+  overflow: visible;
+  z-index: 5;
+}
+
+.book-hover-tip {
+  position: fixed;
+  left: 0;
+  top: 0;
+  transform: translate(-50%, calc(-100% - 6px));
+  width: max-content;
+  max-width: 240px;
+  padding: 9px 13px;
+  border-radius: 8px;
+  background: #3f3550;
+  color: #f7f3ea;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 0.95rem;
+  font-style: italic;
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: 0.01em;
+  text-align: center;
+  white-space: normal;
+  writing-mode: horizontal-tb;
+  -webkit-text-fill-color: #f7f3ea;
+  opacity: 0;
+  pointer-events: none;
+  box-shadow: 0 10px 24px rgba(40, 30, 50, 0.22);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 10050;
+}
+
+.book-hover-tip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: #3f3550;
+}
+
+.book-hover-tip.is-visible {
+  opacity: 1;
+  transform: translate(-50%, calc(-100% - 12px));
+}
+
+.book.has-tip:hover,
+.book.has-tip:focus-visible {
+  z-index: 20;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .book-hover-tip {
+    transition: none;
   }
 }

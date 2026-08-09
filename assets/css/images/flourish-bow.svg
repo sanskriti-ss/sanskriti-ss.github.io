@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 36" fill="none">
+  <!-- Centered infinity / bow flourish -->
+  <path
+    stroke="black"
+    stroke-width="1.7"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    d="M20 18
+       C20 10.5, 27 7, 35 7
+       C48 7, 56 18, 70 18
+       C84 18, 92 7, 105 7
+       C113 7, 120 10.5, 120 18
+       C120 25.5, 113 29, 105 29
+       C92 29, 84 18, 70 18
+       C56 18, 48 29, 35 29
+       C27 29, 20 25.5, 20 18 Z"
+  />
+  <path
+    stroke="black"
+    stroke-width="0.75"
+    stroke-linecap="round"
+    opacity="0.8"
+    d="M24 18
+       C24 12.5, 29.5 10, 35.5 10
+       C46.5 10, 54.5 18, 70 18
+       C85.5 18, 93.5 10, 104.5 10
+       C110.5 10, 116 12.5, 116 18
+       C116 23.5, 110.5 26, 104.5 26
+       C93.5 26, 85.5 18, 70 18
+       C54.5 18, 46.5 26, 35.5 26
+       C29.5 26, 24 23.5, 24 18 Z"
+  />
+  <!-- End flicks -->
+  <path
+    stroke="black"
+    stroke-width="1.4"
+    stroke-linecap="round"
+    d="M20 18 C14 15.5, 10 15, 7 16.5 M120 18 C126 15.5, 130 15, 133 16.5"
+  />
+</svg>

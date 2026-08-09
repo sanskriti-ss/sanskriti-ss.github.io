@@ -1,7 +1,6 @@
 /* ================================
    BOOK OPENING TRANSITION — Pure CSS 3D
-   No Three.js dependency. Uses CSS transforms + perspective
-   for a clean, elegant book-open animation.
+   Pulls from clicked shelf book, opens cover, turns pages, soft dissolve.
    ================================ */
 
 (function() {
@@ -12,7 +11,7 @@
     debug: false
   };
 
-  var overlay, flash, book3d;
+  var overlay, flash, book3d, stage;
   var isAnimating = false;
 
   function createTransitionElements() {
@@ -33,22 +32,18 @@
     book.className = 'book-3d';
     book.style.setProperty('--book-clr', color);
 
-    // Back cover
     var back = document.createElement('div');
     back.className = 'back-cover';
     book.appendChild(back);
 
-    // Spine
     var spine = document.createElement('div');
     spine.className = 'spine';
     book.appendChild(spine);
 
-    // Pages block (visible stack between covers)
     var pages = document.createElement('div');
     pages.className = 'page-edges';
     book.appendChild(pages);
 
-    // Front cover with title
     var front = document.createElement('div');
     front.className = 'front-cover';
     var titleEl = document.createElement('div');
@@ -57,12 +52,11 @@
     front.appendChild(titleEl);
     book.appendChild(front);
 
-    // Individual flip pages (3 pages — cleaner, less cluttered)
-    for (var i = 0; i < 3; i++) {
+    for (var i = 0; i < 4; i++) {
       var page = document.createElement('div');
       page.className = 'flip-page';
-      page.style.transform = 'translateZ(' + (-2 - i * 3) + 'px) rotateY(0deg)';
-      page.dataset.index = i;
+      page.style.transform = 'translateZ(' + (-2 - i * 2.5) + 'px) rotateY(0deg)';
+      page.dataset.index = String(i);
 
       var pageFront = document.createElement('div');
       pageFront.className = 'flip-page-front';
@@ -82,13 +76,32 @@
     if (book3d && book3d.parentNode) {
       book3d.parentNode.removeChild(book3d);
     }
+    if (stage && stage.parentNode) {
+      stage.parentNode.removeChild(stage);
+    }
     overlay.classList.remove('active');
     flash.classList.remove('active');
     book3d = null;
+    stage = null;
     isAnimating = false;
     document.querySelectorAll('.book.opening').forEach(function(b) {
       b.classList.remove('opening');
     });
+  }
+
+  function setOriginFromBook(bookElement) {
+    var rect = bookElement.getBoundingClientRect();
+    var cx = rect.left + rect.width / 2;
+    var cy = rect.top + rect.height / 2;
+    var vx = window.innerWidth / 2;
+    var vy = window.innerHeight / 2;
+    var ox = cx - vx;
+    var oy = cy - vy;
+    var os = Math.max(0.12, Math.min(0.28, Math.max(rect.width, rect.height) / 340));
+
+    book3d.style.setProperty('--ox', ox + 'px');
+    book3d.style.setProperty('--oy', oy + 'px');
+    book3d.style.setProperty('--os', String(os));
   }
 
   function animateBookOpen(bookElement, href) {
@@ -101,62 +114,73 @@
 
     bookElement.classList.add('opening');
 
-    // Create the 3D book
+    stage = document.createElement('div');
+    stage.className = 'book-stage';
     book3d = create3DBook(color, title);
-    overlay.appendChild(book3d);
+    setOriginFromBook(bookElement);
+    stage.appendChild(book3d);
+    overlay.appendChild(stage);
 
-    // Phase 1: Darken background, book enters (scale up from shelf)
     requestAnimationFrame(function() {
       overlay.classList.add('active');
       book3d.classList.add('animate-enter');
     });
 
-    // Phase 2: Open the front cover (after enter completes)
+    // Settle, then open cover
     setTimeout(function() {
+      if (!book3d) return;
       book3d.classList.remove('animate-enter');
       book3d.classList.add('animate-open');
       book3d.classList.add('cover-open');
-    }, 650);
+    }, 740);
 
-    // Phase 3: Enable page flip transitions, then flip pages sequentially
+    // Enable page flips
     setTimeout(function() {
+      if (!book3d) return;
       book3d.classList.add('pages-flip');
-    }, 1100);
+    }, 1140);
 
     var flipPages = book3d.querySelectorAll('.flip-page');
-    var flipStart = 1250;
-    var flipInterval = 250;
+    var flipStart = 1240;
+    var flipInterval = 170;
     for (var i = 0; i < flipPages.length; i++) {
       (function(page, delay) {
         setTimeout(function() {
-          page.classList.add('flipped');
+          if (page) page.classList.add('flipped');
         }, delay);
       })(flipPages[i], flipStart + i * flipInterval);
     }
 
-    // Phase 4: Flash white and fade out book
-    var exitTime = flipStart + flipPages.length * flipInterval + 500;
+    var exitTime = flipStart + flipPages.length * flipInterval + 280;
 
     setTimeout(function() {
+      if (!book3d) return;
       flash.classList.add('active');
       book3d.classList.add('animate-exit');
     }, exitTime);
 
-    // Phase 5: Navigate (or reset in debug mode)
     setTimeout(function() {
       if (CONFIG.debug) {
-        setTimeout(resetAnimation, 1500);
+        setTimeout(resetAnimation, 1200);
       } else {
         window.location.href = href;
       }
-    }, exitTime + 500);
+    }, exitTime + 420);
   }
 
   function handleBookClick(event) {
     if (!CONFIG.enableTransition) return;
+
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      return;
+    }
+
     var el = event.currentTarget;
     var href = el.getAttribute('href');
-    if (!href || href.startsWith('http') || href.startsWith('mailto:') || href.startsWith('#') || !href.endsWith('.html')) return;
+    if (!href || href.startsWith('http') || href.startsWith('mailto:') || href.startsWith('#') || !href.endsWith('.html')) {
+      return;
+    }
+
     event.preventDefault();
     animateBookOpen(el, href);
   }

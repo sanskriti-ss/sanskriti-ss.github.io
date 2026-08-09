@@ -19,10 +19,10 @@
   --teal-deep: #2d6a6a;
   --teal-muted: #4a8f8f;
   --teal-light: #7eb8b8;
-  --gold-accent: #c9a962;
-  --gold-light: #dcc07a;
-  --silver-accent: #a8b0b8;
-  --silver-light: #c5ccd4;
+  --gold-accent: #b89a6a;
+  --gold-light: #d0b88a;
+  --silver-accent: #9aa3ab;
+  --silver-light: #c6ccd3;
   --text-dark: #3d3d4a;
   --text-muted: #6b6b7a;
   --shadow-soft: rgba(0, 0, 0, 0.1);
@@ -239,58 +239,60 @@
     inset 2px 0 4px rgba(255, 255, 255, 0.2);
 }
 
-/* Book spine caps - thin layered decorative bands at top and bottom */
+/* Book spine caps — calligraphic gold/silver flourishes */
 .book::before,
 .book::after {
   content: '';
   position: absolute;
   left: 2px;
   right: 2px;
-  height: 12px;
-  background:
-    /* Sheen overlay */
-    linear-gradient(180deg,
-      rgba(255, 255, 255, 0.10) 0%,
-      transparent 20%,
-      transparent 80%,
-      rgba(0, 0, 0, 0.06) 100%),
-    /* Layered bands: hairline — band — hairline */
-    linear-gradient(180deg,
-      transparent 0px,
-      var(--cap-color) 1px,
-      transparent 2px,
-      transparent 3px,
-      color-mix(in srgb, var(--cap-color) 50%, black) 3px,
-      var(--cap-color) 4px,
-      var(--cap-light) 6px,
-      var(--cap-color) 8px,
-      color-mix(in srgb, var(--cap-color) 50%, black) 9px,
-      transparent 9px,
-      transparent 10px,
-      var(--cap-color) 11px,
-      transparent 12px),
-    /* Metallic base shimmer */
-    linear-gradient(90deg,
-      color-mix(in srgb, var(--cap-color) 40%, black) 0%,
-      var(--cap-color) 15%,
-      var(--cap-light) 35%,
-      var(--cap-color) 50%,
-      var(--cap-light) 65%,
-      var(--cap-color) 85%,
-      color-mix(in srgb, var(--cap-color) 40%, black) 100%);
-  border-radius: 1px;
-  box-shadow:
-    inset 0 1px 1px rgba(255, 255, 255, 0.4),
-    inset 0 -1px 1px rgba(0, 0, 0, 0.2),
-    0 1px 2px rgba(0, 0, 0, 0.12);
+  height: 18px;
+  background: linear-gradient(90deg,
+    color-mix(in srgb, var(--cap-color) 55%, #4a4034) 0%,
+    color-mix(in srgb, var(--cap-light) 70%, #f2ebe0) 28%,
+    var(--cap-color) 50%,
+    color-mix(in srgb, var(--cap-light) 70%, #f2ebe0) 72%,
+    color-mix(in srgb, var(--cap-color) 55%, #4a4034) 100%);
+  -webkit-mask-image: url("images/flourish-s.svg");
+  mask-image: url("images/flourish-s.svg");
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: 96% 100%;
+  mask-size: 96% 100%;
+  opacity: 0.62;
+  border-radius: 0;
+  box-shadow: none;
+  pointer-events: none;
 }
 
 .book::before {
-  top: 4px;
+  top: 5px;
 }
 
 .book::after {
-  bottom: 4px;
+  bottom: 5px;
+  transform: scaleX(-1);
+}
+
+/* Alternate flourish on every other book for variety */
+.books-row > .book:nth-of-type(3n)::before,
+.books-row > .book:nth-of-type(3n)::after {
+  -webkit-mask-image: url("images/flourish-wave.svg");
+  mask-image: url("images/flourish-wave.svg");
+  -webkit-mask-size: 88% 100%;
+  mask-size: 88% 100%;
+  height: 14px;
+}
+
+.books-row > .book:nth-of-type(4n)::before,
+.books-row > .book:nth-of-type(4n)::after {
+  -webkit-mask-image: url("images/flourish-bow.svg");
+  mask-image: url("images/flourish-bow.svg");
+  -webkit-mask-size: 84% 100%;
+  mask-size: 84% 100%;
+  height: 15px;
 }
 
 /* Silver caps variant */
@@ -298,54 +300,27 @@
 .book.silver-caps::after {
   --cap-color: var(--silver-accent);
   --cap-light: var(--silver-light);
-  background:
-    linear-gradient(180deg,
-      rgba(255, 255, 255, 0.2) 0%,
-      transparent 20%,
-      transparent 80%,
-      rgba(0, 0, 0, 0.08) 100%),
-    linear-gradient(90deg,
-      color-mix(in srgb, var(--silver-accent) 50%, #444) 0%,
-      var(--silver-accent) 12%,
-      var(--silver-light) 30%,
-      var(--silver-accent) 50%,
-      var(--silver-light) 70%,
-      var(--silver-accent) 88%,
-      color-mix(in srgb, var(--silver-accent) 50%, #444) 100%);
+  opacity: 0.55;
 }
 
-.book.silver-caps::before {
-  border-bottom-color: color-mix(in srgb, var(--silver-accent) 40%, #333);
-}
-
-.book.silver-caps::after {
-  border-top-color: color-mix(in srgb, var(--silver-accent) 40%, #333);
-}
-
-/* Spine text — metallic foil effect using gradient text */
+/* Spine text — soft foil, less metallic glare */
 .book .spine-text {
   writing-mode: vertical-rl;
   text-orientation: mixed;
   transform: rotate(180deg);
-  font-family: 'Lato', sans-serif;
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.15em;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  /* Metallic gold gradient on text — toned down 30% */
   background: linear-gradient(180deg,
-    #e2c44e 0%,
-    #f0e0a0 18%,
-    #c9a54a 35%,
-    #e8d88a 50%,
-    #bfa04a 65%,
-    #eedfa0 82%,
-    #d4b855 100%);
+    color-mix(in srgb, var(--gold-light) 70%, #f4eee0) 0%,
+    color-mix(in srgb, var(--gold-accent) 80%, #d8c9a4) 45%,
+    color-mix(in srgb, var(--gold-light) 65%, #efe6d2) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  /* Deep shadow for pressed/embossed look */
-  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.5)) drop-shadow(0 0 3px rgba(218, 185, 100, 0.25));
+  filter: drop-shadow(0 1px 0.5px rgba(0, 0, 0, 0.28));
   padding: 20px 0;
   white-space: nowrap;
   overflow: hidden;
@@ -421,32 +396,24 @@
 
 .book.silver-caps .spine-text {
   background: linear-gradient(180deg,
-    #b4bcc6 0%,
-    #d8dee5 18%,
-    #a0aab5 35%,
-    #cdd4db 50%,
-    #96a0ac 65%,
-    #d4dae2 82%,
-    #acb6c0 100%);
+    color-mix(in srgb, var(--silver-light) 65%, #eef1f4) 0%,
+    color-mix(in srgb, var(--silver-accent) 75%, #c5ccd4) 45%,
+    color-mix(in srgb, var(--silver-light) 60%, #e8ecf0) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.5)) drop-shadow(0 0 3px rgba(180, 195, 215, 0.25));
+  filter: drop-shadow(0 1px 0.5px rgba(0, 0, 0, 0.28));
 }
 
 .book.horizontal.silver-caps .spine-text {
   background: linear-gradient(90deg,
-    #b4bcc6 0%,
-    #d8dee5 18%,
-    #a0aab5 35%,
-    #cdd4db 50%,
-    #96a0ac 65%,
-    #d4dae2 82%,
-    #acb6c0 100%);
+    color-mix(in srgb, var(--silver-light) 65%, #eef1f4) 0%,
+    color-mix(in srgb, var(--silver-accent) 75%, #c5ccd4) 45%,
+    color-mix(in srgb, var(--silver-light) 60%, #e8ecf0) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.5)) drop-shadow(0 0 3px rgba(180, 195, 215, 0.25));
+  filter: drop-shadow(0 1px 0.5px rgba(0, 0, 0, 0.28));
 }
 
 /* Book spine raised panel — inset rectangle giving embossed look */
@@ -488,11 +455,11 @@
 }
 
 .book:hover .spine-text {
-  text-shadow: 0 0 8px rgba(201, 169, 98, 0.6);
+  text-shadow: 0 0 4px rgba(184, 154, 106, 0.25);
 }
 
 .book.silver-caps:hover .spine-text {
-  text-shadow: 0 0 8px rgba(168, 176, 184, 0.6);
+  text-shadow: 0 0 4px rgba(154, 163, 171, 0.25);
 }
 
 /* Small books */
@@ -549,82 +516,67 @@
   transform-origin: center center;
 }
 
-/* Horizontal book caps - left and right (thin layered bands) */
+/* Horizontal book caps — calligraphic flourishes on left/right */
 .book.horizontal::before,
 .book.horizontal::after {
-  width: 10px;
+  width: 14px;
   height: auto;
-  top: 2px;
-  bottom: 2px;
+  top: 3px;
+  bottom: 3px;
   left: auto;
   right: auto;
   border: none;
-  background:
-    linear-gradient(90deg,
-      rgba(255, 255, 255, 0.10) 0%,
-      transparent 20%,
-      transparent 80%,
-      rgba(0, 0, 0, 0.05) 100%),
-    linear-gradient(90deg,
-      transparent 0px,
-      var(--cap-color) 1px,
-      transparent 2px,
-      color-mix(in srgb, var(--cap-color) 50%, black) 3px,
-      var(--cap-color) 4px,
-      var(--cap-light) 5px,
-      var(--cap-color) 7px,
-      transparent 8px,
-      var(--cap-color) 9px,
-      transparent 10px),
-    linear-gradient(180deg,
-      color-mix(in srgb, var(--cap-color) 40%, black) 0%,
-      var(--cap-color) 15%,
-      var(--cap-light) 35%,
-      var(--cap-color) 50%,
-      var(--cap-light) 65%,
-      var(--cap-color) 85%,
-      color-mix(in srgb, var(--cap-color) 40%, black) 100%);
-  box-shadow:
-    inset 1px 0 1px rgba(255, 255, 255, 0.35),
-    inset -1px 0 1px rgba(0, 0, 0, 0.18),
-    1px 0 2px rgba(0, 0, 0, 0.10);
+  border-radius: 0;
+  opacity: 0.52;
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--cap-color) 55%, #4a4034) 0%,
+    color-mix(in srgb, var(--cap-light) 70%, #f2ebe0) 28%,
+    var(--cap-color) 50%,
+    color-mix(in srgb, var(--cap-light) 70%, #f2ebe0) 72%,
+    color-mix(in srgb, var(--cap-color) 55%, #4a4034) 100%);
+  -webkit-mask-image: url("images/flourish-s.svg");
+  mask-image: url("images/flourish-s.svg");
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: 100% 88%;
+  mask-size: 100% 88%;
+  box-shadow: none;
+  transform: rotate(90deg);
 }
 
 .book.horizontal::before {
-  left: 3px;
-  top: 2px;
-  bottom: 2px;
+  left: 2px;
+  top: 3px;
+  bottom: 3px;
 }
 
 .book.horizontal::after {
-  right: 3px;
+  right: 2px;
   left: auto;
-  top: 2px;
-  bottom: 2px;
+  top: 3px;
+  bottom: 3px;
+  transform: rotate(90deg) scaleX(-1);
 }
 
 .book.horizontal .spine-text {
   writing-mode: horizontal-tb !important;
   transform: none !important;
-  font-family: 'Lato', sans-serif;
-  font-size: 0.65rem;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 0.78rem;
   font-weight: 600;
   color: var(--gold-light);
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  /* Metallic gold gradient on horizontal text — toned down 30% */
   background: linear-gradient(90deg,
-    #e2c44e 0%,
-    #f0e0a0 18%,
-    #c9a54a 35%,
-    #e8d88a 50%,
-    #bfa04a 65%,
-    #eedfa0 82%,
-    #d4b855 100%);
+    color-mix(in srgb, var(--gold-light) 70%, #f4eee0) 0%,
+    color-mix(in srgb, var(--gold-accent) 80%, #d8c9a4) 45%,
+    color-mix(in srgb, var(--gold-light) 65%, #efe6d2) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.5)) drop-shadow(0 0 3px rgba(218, 185, 100, 0.25));
+  filter: drop-shadow(0 1px 0.5px rgba(0, 0, 0, 0.28));
   padding: 0 12px !important;
   white-space: nowrap;
   overflow: visible !important;
@@ -642,11 +594,11 @@
 }
 
 .book.horizontal:hover .spine-text {
-  text-shadow: 0 0 8px rgba(201, 169, 98, 0.6);
+  text-shadow: 0 0 4px rgba(184, 154, 106, 0.25);
 }
 
 .book.horizontal.silver-caps:hover .spine-text {
-  text-shadow: 0 0 8px rgba(168, 176, 184, 0.6);
+  text-shadow: 0 0 4px rgba(154, 163, 171, 0.25);
 }
 
 /* Page header variant for non-homepage sections */
@@ -668,6 +620,17 @@
 
 .book.horizontal.page-header-book .spine-text {
   font-size: 1.6rem;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+}
+
+/* Serif headers sitewide for library pages */
+.header.major h2,
+header.major h2,
+.plaque-header h2,
+#main h2,
+#main h3 {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  letter-spacing: 0.02em;
 }
 
 /* ================================
@@ -1250,4 +1213,222 @@ body.index #header.alt nav a {
 .plaque-shelf {
   animation: shelf-appear 0.8s ease-out 0.3s forwards;
   opacity: 0;
+}
+
+/* ================================
+   LANDING — CLEAN MINIMAL BOOKSTORE
+   ================================ */
+
+body.landing-minimal {
+  --landing-serif: 'Cormorant Garamond', Georgia, serif;
+  --landing-sans: 'Source Sans 3', 'Lato', sans-serif;
+}
+
+body.landing-minimal #library {
+  padding: 28px 0 48px;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(123, 107, 143, 0.06) 0%, transparent 42%),
+    radial-gradient(ellipse at 80% 40%, rgba(74, 122, 138, 0.05) 0%, transparent 38%),
+    linear-gradient(180deg, #faf8f3 0%, #f5f1ea 48%, #efe9df 100%);
+}
+
+body.landing-minimal #library::before {
+  opacity: 0.55;
+}
+
+body.landing-minimal .ambient-light {
+  width: 420px;
+  height: 420px;
+  background: radial-gradient(circle,
+    rgba(201, 169, 98, 0.05) 0%,
+    transparent 64%);
+  animation: none;
+  opacity: 0.7;
+}
+
+body.landing-minimal .dust-particles {
+  opacity: 0.35;
+  animation: none;
+}
+
+body.landing-minimal .library-container {
+  max-width: 980px;
+  padding: 0 32px;
+}
+
+body.landing-minimal .landing-header {
+  background: transparent !important;
+}
+
+body.landing-minimal #header.alt #logo {
+  opacity: 0;
+  pointer-events: none;
+}
+
+body.landing-minimal #header.alt h1 a,
+body.landing-minimal #header.alt nav a {
+  color: #4a3f58;
+  font-family: var(--landing-sans);
+  letter-spacing: 0.04em;
+}
+
+body.landing-minimal .library-brand {
+  text-align: center;
+  margin: 28px auto 44px;
+  max-width: 620px;
+  animation: shelf-appear 0.9s ease-out forwards;
+}
+
+body.landing-minimal .library-brand-mark {
+  margin: 0;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(3.4rem, 7vw, 5rem);
+  font-weight: 600;
+  letter-spacing: 0.045em;
+  color: #3f3550;
+  line-height: 0.95;
+}
+
+body.landing-minimal .library-brand-line {
+  margin: 14px 0 0;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.2rem;
+  font-weight: 500;
+  font-style: italic;
+  color: #6d6678;
+  letter-spacing: 0.03em;
+  line-height: 1.45;
+}
+
+body.landing-minimal .bookshelf {
+  margin: 0 auto 42px;
+  max-width: 860px;
+}
+
+body.landing-minimal .bookshelf.primary-shelf {
+  animation-delay: 0.08s;
+}
+
+body.landing-minimal .bookshelf.secondary-shelf {
+  animation-delay: 0.18s;
+  margin-bottom: 48px;
+}
+
+body.landing-minimal .books-row {
+  gap: 8px;
+  padding: 0 18px 30px;
+  min-height: 210px;
+}
+
+body.landing-minimal .books-row .book:nth-child(odd),
+body.landing-minimal .books-row .book:nth-child(even),
+body.landing-minimal .books-row .book:nth-child(3n),
+body.landing-minimal .books-row .book:nth-child(4n) {
+  transform: none;
+}
+
+body.landing-minimal .book {
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.35s ease,
+    filter 0.35s ease;
+}
+
+body.landing-minimal .book:hover {
+  transform: translateY(-14px) !important;
+  box-shadow:
+    3px 14px 28px rgba(55, 45, 70, 0.18),
+    inset -2px 0 4px rgba(0, 0, 0, 0.12),
+    inset 2px 0 4px rgba(255, 255, 255, 0.22);
+  filter: saturate(1.05);
+}
+
+body.landing-minimal .book.horizontal:hover {
+  transform: translateX(10px) !important;
+}
+
+body.landing-minimal .book .spine-text {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+}
+
+body.landing-minimal .painting-frame--small {
+  height: 148px;
+  margin: 0 10px;
+}
+
+body.landing-minimal .painting-frame--small img {
+  max-width: 118px;
+  max-height: 140px;
+}
+
+body.landing-minimal .painting-frame--small::before {
+  left: -8px;
+  right: -8px;
+  top: -3px;
+  bottom: -3px;
+}
+
+body.landing-minimal .plaque-shelf {
+  margin-top: 18px;
+}
+
+body.landing-minimal .library-plaque {
+  background: linear-gradient(165deg, #fbf9f4 0%, #f3eee5 100%);
+  border: 1px solid rgba(184, 168, 144, 0.45);
+  box-shadow:
+    0 16px 36px rgba(60, 50, 40, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+body.landing-minimal .plaque-text p {
+  font-family: var(--landing-sans);
+  font-size: 1rem;
+  line-height: 1.65;
+  color: #4d4658;
+}
+
+body.landing-minimal .footer-shelf {
+  margin-top: 8px;
+}
+
+body.landing-minimal .library-footer {
+  padding-top: 8px;
+}
+
+body.landing-minimal .library-footer .copyright {
+  font-family: var(--landing-sans);
+  color: #8a8494;
+  letter-spacing: 0.06em;
+}
+
+@media screen and (max-width: 900px) {
+  body.landing-minimal .library-brand {
+    margin-bottom: 28px;
+  }
+
+  body.landing-minimal .books-row {
+    gap: 6px;
+    min-height: 190px;
+  }
+}
+
+@media screen and (max-width: 736px) {
+  body.landing-minimal #library {
+    padding: 64px 0 36px;
+  }
+
+  body.landing-minimal .library-brand-mark {
+    font-size: 2.5rem;
+  }
+
+  body.landing-minimal .library-brand-line {
+    font-size: 0.98rem;
+    padding: 0 12px;
+  }
+
+  body.landing-minimal .bookshelf {
+    margin-bottom: 34px;
+  }
 }

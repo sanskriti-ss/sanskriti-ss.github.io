@@ -4,164 +4,133 @@
 		<title>Sanskriti</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet" />
 		<link rel="stylesheet" href="assets/css/main.css" />
-		<link rel="stylesheet" href="assets/css/library.css" />
-		<link rel="stylesheet" href="assets/css/book-transition.css" />
+		<link rel="stylesheet" href="assets/css/library.css?v=landing7" />
+		<link rel="stylesheet" href="assets/css/book-transition.css?v=landing3" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 	</head>
-	<body class="index is-preload">
+	<body class="index is-preload landing-minimal">
 		<div id="page-wrapper">
 
-			<!-- Header -->
-				<header id="header" class="alt">
-					<h1 id="logo"><a href="index.html">Sanskriti <span></span></a></h1>
-					<nav id="nav">
-						<ul>
-							<li class="submenu">
-								<a href="#">More</a>
-								<ul>
-									<li><a href="projects.html">Projects</a></li>
-									<li><a href="interests.html">Interests</a></li>
-									<li class="submenu">
-										<a href="#">Creations</a>
-										<ul>
-											<li><a href="mandalas.html">Mandalas and Art</a></li>
-											<li><a href="paintings.html">Paintings</a></li>
-											<li><a href="oldwriting.html">Older Writing</a></li>
-										</ul>
-									</li>
-								</ul>
-							</li>
-						</ul>
-					</nav>
-				</header>
+			<header id="header" class="alt landing-header">
+				<h1 id="logo"><a href="index.html">Sanskriti</a></h1>
+				<nav id="nav">
+					<ul>
+						<li class="submenu">
+							<a href="#">More</a>
+							<ul>
+								<li><a href="projects.html">Projects</a></li>
+								<li><a href="interests.html">Interests</a></li>
+								<li class="submenu">
+									<a href="#">Creations</a>
+									<ul>
+										<li><a href="mandalas.html">Mandalas and Art</a></li>
+										<li><a href="paintings.html">Paintings</a></li>
+										<li><a href="oldwriting.html">Older Writing</a></li>
+									</ul>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</nav>
+			</header>
 
-			<!-- Library Section -->
 			<section id="library">
 				<div class="library-container">
-					<!-- Ambient lighting effects -->
 					<div class="ambient-light"></div>
 					<div class="dust-particles"></div>
-					
-					<!-- Bookshelf 1 -->
-					<div class="bookshelf">
-						<div class="shelf-vines">
-							<div class="vine vine-left-1"></div>
-							<div class="vine vine-right-1"></div>
-						</div>
+
+					<div class="library-brand">
+						<p class="library-brand-mark">Sanskriti</p>
+						<p class="library-brand-line">Projects, Notes, and Curiosities</p>
+					</div>
+
+					<!-- Primary shelf -->
+					<div class="bookshelf primary-shelf">
 						<div class="shelf-board"></div>
 						<div class="books-row">
-							<!-- Framed painting on left -->
-							<div class="shelf-decor painting-frame" style="margin-left: -10px;">
+							<div class="shelf-decor painting-frame painting-frame--small">
 								<img src="assets/css/images/mandala_shield.jpg" alt="Mandala Shield Art">
 							</div>
-							
-							<!-- Horizontal stack - Teal/Blue tones -->
-							<div class="book-stack horizontal">
-								<a href="https://sanskritis.substack.com/" class="book horizontal" style="--book-color: #4a7c8c; --book-height: 30px; --book-width: 120px;" target="_blank">
-									<span class="spine-text">Blog</span>
-								</a>
-								<!-- Linked books in the stack below "Blog" -->
-								<a href="https://sanskritis.substack.com/p/the-universe-in-your-hand" class="book horizontal silver-caps" style="--book-color: #3d6b7a; --book-height: 28px; --book-width: 120px;" target="_blank">
-									<span class="spine-text">∿∿∿</span>
-								</a>
-								<a href="https://sanskritis.substack.com/p/books-i-enjoyed" class="book horizontal" style="--book-color: #5a8a9a; --book-height: 25px; --book-width: 120px;" target="_blank">
-									<span class="spine-text">~~~</span>
-								</a>
-							</div>
-							
-							<!-- Vertical books - Blues, Greens, Purples -->
-							<a href="projects.html" class="book" style="--book-color: #5b6a82; --book-width: 45px; --book-height: 180px;">
+
+							<a href="projects.html" class="book" style="--book-color: #5b6a82; --book-width: 48px; --book-height: 188px;">
 								<span class="spine-text">Projects</span>
 							</a>
-							
-							<a href="interests.html" class="book silver-caps" style="--book-color: #4a8f8f; --book-width: 38px; --book-height: 170px;">
+
+							<a href="interests.html" class="book silver-caps" style="--book-color: #4a7a8a; --book-width: 40px; --book-height: 176px;">
 								<span class="spine-text">Interests</span>
 							</a>
-							
-							<!-- Small decorative items -->
+
+							<a href="mini-projects.html" class="book" style="--book-color: #6a5a7a; --book-width: 44px; --book-height: 182px;">
+								<span class="spine-text">Code</span>
+							</a>
+
 							<div class="shelf-decor plant-image">
-								<img src="assets/css/images/plants/plant1.png" alt="Plant decoration">
+								<img src="assets/css/images/plants/plant1.png" alt="">
 							</div>
-							
-							<a href="paintings.html" class="book" style="--book-color: #6b5a7a; --book-width: 42px; --book-height: 175px;">
+
+							<a href="paintings.html" class="book silver-caps" style="--book-color: #6b5a7a; --book-width: 42px; --book-height: 172px;">
 								<span class="spine-text">Paintings</span>
 							</a>
-							
-							<a href="oldwriting.html" class="book silver-caps" style="--book-color: #3d5a6a; --book-width: 35px; --book-height: 165px;">
+
+							<a href="oldwriting.html" class="book" style="--book-color: #3d5a6a; --book-width: 36px; --book-height: 164px;">
 								<span class="spine-text">Writing</span>
 							</a>
+
+							<div class="book-stack horizontal">
+								<a href="https://sanskritis.substack.com/" class="book horizontal" style="--book-color: #4a7c8c; --book-height: 30px; --book-width: 128px;" target="_blank" rel="noopener">
+									<span class="spine-text">Blog</span>
+								</a>
+								<a href="hackathons.html" class="book horizontal silver-caps" style="--book-color: #5d7a6a; --book-height: 26px; --book-width: 128px;">
+									<span class="spine-text">Hackathons</span>
+								</a>
+							</div>
 						</div>
 						<div class="shelf-shadow"></div>
 					</div>
 
-					<!-- Bookshelf 2 -->
-					<div class="bookshelf">
-						<div class="shelf-vines">
-							<div class="vine vine-left-2"></div>
-							<div class="vine vine-right-2"></div>
-							<div class="vine vine-center-2"></div>
-						</div>
+					<!-- Secondary shelf -->
+					<div class="bookshelf secondary-shelf">
 						<div class="shelf-board"></div>
 						<div class="books-row">
-							<a href="hackathons.html" class="book silver-caps" style="--book-color: #5d7a6a; --book-width: 50px; --book-height: 185px;">
-								<span class="spine-text">Hackathons</span>
-							</a>
-							
-							<a href="interests.html" class="book" style="--book-color: #2d6a6a; --book-width: 32px; --book-height: 160px;">
-								<span class="spine-text">Science</span>
-							</a>
-							
-			<!-- Horizontal stack - Purple/Blue tones -->
-			<div class="book-stack horizontal purple-blue-stack">
-				<a href="mini-projects.html" class="book horizontal silver-caps" style="--book-color: #6a6a8a; --book-height: 32px; --book-width: 180px;">
-					<span class="spine-text">Mini Code Projects</span>
-				</a>
-				<a href="mini-projects.html#data-projects" class="book horizontal" style="--book-color: #6a5a7a; --book-height: 26px; --book-width: 180px;">
-					<span class="spine-text">Data Projects</span>
-				</a>
-			</div>							<!-- Decorative plant -->
-							<div class="shelf-decor plant-image">
-								<img src="assets/css/images/plants/plant2.png" alt="Plant decoration">
-							</div>
-							
-			<a href="https://sanskritis.substack.com/" class="book" style="--book-color: #7d6b8f; --book-width: 40px; --book-height: 172px;" target="_blank">
-				<span class="spine-text">~~~</span>
-			</a>							<a href="mandalas.html" class="book silver-caps" style="--book-color: #5b4a6f; --book-width: 36px; --book-height: 168px;">
+							<a href="mandalas.html" class="book silver-caps" style="--book-color: #5b4a6f; --book-width: 38px; --book-height: 168px;">
 								<span class="spine-text">Mandalas</span>
 							</a>
-							
-							<a href="interests.html" class="book" style="--book-color: #4a6a7a; --book-width: 44px; --book-height: 178px;">
-								<span class="spine-text">Curiosities</span>
+
+							<a href="mini-projects.html#data-projects" class="book" style="--book-color: #5a6a8a; --book-width: 42px; --book-height: 178px;">
+								<span class="spine-text">Data</span>
 							</a>
-							
-							<!-- Framed painting on right (replaced per request) -->
-							<div class="shelf-decor painting-frame">
+
+							<div class="shelf-decor plant-image">
+								<img src="assets/css/images/plants/plant2.png" alt="">
+							</div>
+
+							<a href="papers.html" class="book silver-caps" style="--book-color: #7d6b8f; --book-width: 46px; --book-height: 184px;">
+								<span class="spine-text">Papers</span>
+							</a>
+
+							<div class="shelf-decor painting-frame painting-frame--small">
 								<img src="images/mandala_images/mandalaendless.jpg" alt="Endless Mandala">
 							</div>
 						</div>
 						<div class="shelf-shadow"></div>
 					</div>
 
-					<!-- About Me Plaque on Third Shelf -->
+					<!-- About -->
 					<div class="bookshelf plaque-shelf">
-						<div class="shelf-vines">
-							<div class="vine vine-left-3"></div>
-							<div class="vine vine-right-3"></div>
-						</div>
 						<div class="shelf-board"></div>
 						<div class="books-row plaque-row">
 							<div class="library-plaque">
 								<div class="plaque-content">
-									<!-- About Me header removed per request -->
 									<div class="plaque-body">
 										<div class="plaque-portrait">
 											<img src="images/picofsanskriti.png" alt="Sanskriti">
 										</div>
 										<div class="plaque-text">
-											<p>Hey! I'm Sanskriti, an independent researcher who is exploring what interests me while continuing to improve at what I already do.. I completed my bioengineering major at UCLA.
-											I love working on ideas (new and old) with people who are equally excited about them.
-											You can usually find me tinkering away in a makerspace, or reading outside with a friend.
+											<p>Hey! I'm Sanskriti, an independent researcher exploring what interests me while continuing to improve at what I already do. I completed my bioengineering major at UCLA. I love working on ideas with people who are equally excited about them. You can usually find me tinkering in a makerspace, or reading outside with a friend.</p>
 										</div>
 									</div>
 								</div>
@@ -170,24 +139,24 @@
 						<div class="shelf-shadow"></div>
 					</div>
 
-					<!-- Footer bookshelf -->
+					<!-- Contact shelf -->
 					<div class="bookshelf footer-shelf">
 						<div class="shelf-board"></div>
 						<div class="books-row compact">
 							<div class="shelf-decor plant-image">
-								<img src="assets/css/images/plants/plant3.png" alt="Plant decoration">
+								<img src="assets/css/images/plants/plant3.png" alt="">
 							</div>
 							<a href="mailto:sanskriti.shindadkar@icloud.com" class="book horizontal" style="--book-color: #7a8a9a; --book-height: 28px;">
 								<span class="spine-text">Contact</span>
 							</a>
-							<a href="https://github.com/sanskriti-ss" class="book horizontal silver-caps" style="--book-color: #6a7a8a; --book-height: 26px;" target="_blank">
+							<a href="https://github.com/sanskriti-ss" class="book horizontal silver-caps" style="--book-color: #6a7a8a; --book-height: 26px;" target="_blank" rel="noopener">
 								<span class="spine-text">GitHub</span>
 							</a>
-							<a href="https://ca.linkedin.com/in/sanskriti" class="book horizontal" style="--book-color: #3d6a8a; --book-height: 30px;" target="_blank">
+							<a href="https://ca.linkedin.com/in/sanskriti" class="book horizontal" style="--book-color: #3d6a8a; --book-height: 30px;" target="_blank" rel="noopener">
 								<span class="spine-text">LinkedIn</span>
 							</a>
 							<div class="shelf-decor candle-image">
-								<img src="assets/css/images/plants/candle.png" alt="Candle decoration">
+								<img src="assets/css/images/plants/candle.png" alt="">
 							</div>
 						</div>
 						<div class="shelf-shadow"></div>
@@ -196,25 +165,23 @@
 				</div>
 			</section>
 
-			<!-- Footer -->
-				<footer id="footer" class="library-footer">
-					<ul class="copyright">
-						<li>&copy; Sanskriti</li>
-					</ul>
-				</footer>
+			<footer id="footer" class="library-footer">
+				<ul class="copyright">
+					<li>&copy; Sanskriti</li>
+				</ul>
+			</footer>
 
 		</div>
 
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.dropotron.min.js"></script>
-			<script src="assets/js/jquery.scrolly.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/jquery.dropotron.min.js"></script>
+		<script src="assets/js/jquery.scrolly.min.js"></script>
+		<script src="assets/js/jquery.scrollex.min.js"></script>
+		<script src="assets/js/browser.min.js"></script>
 		<script src="assets/js/breakpoints.min.js"></script>
 		<script src="assets/js/util.js"></script>
 		<script src="assets/js/main.js"></script>
-		<script src="assets/js/book-transition.js"></script>
+		<script src="assets/js/book-transition.js?v=landing4"></script>
 
 	</body>
 </html>

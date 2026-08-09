@@ -1,12 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 20" fill="black">
-  <!-- Filled title ornament — reliable under CSS mask -->
-  <rect x="14" y="8" width="46" height="4" rx="2"/>
-  <rect x="100" y="8" width="46" height="4" rx="2"/>
-  <!-- end caps -->
-  <circle cx="12" cy="10" r="3"/>
-  <circle cx="148" cy="10" r="3"/>
-  <!-- center diamond + satellites -->
-  <polygon points="80,3.5 87,10 80,16.5 73,10"/>
-  <circle cx="66" cy="10" r="2.2"/>
-  <circle cx="94" cy="10" r="2.2"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 16" fill="black">
+  <!-- Compact filled title ornament; keep aspect via mask-size: auto -->
+  <rect x="8" y="6.5" width="34" height="3" rx="1.5"/>
+  <rect x="78" y="6.5" width="34" height="3" rx="1.5"/>
+  <circle cx="6" cy="8" r="2.5"/>
+  <circle cx="114" cy="8" r="2.5"/>
+  <circle cx="48" cy="8" r="1.8"/>
+  <circle cx="72" cy="8" r="1.8"/>
+  <polygon points="60,2.5 66.5,8 60,13.5 53.5,8"/>
 </svg>

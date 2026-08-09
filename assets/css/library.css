@@ -518,55 +518,13 @@
   transform-origin: center center;
 }
 
-/* Horizontal book caps — compact vertical end marks (beat nth-of-type vertical masks) */
-.books-row > .book.horizontal::before,
-.books-row > .book.horizontal::after,
-.book.horizontal::before,
-.book.horizontal::after {
-  width: 11px;
-  height: auto;
-  left: auto;
-  right: auto;
-  border: none;
-  border-radius: 0;
-  opacity: 0.78;
-  background: linear-gradient(180deg,
-    color-mix(in srgb, var(--cap-color) 48%, #4a4034) 0%,
-    color-mix(in srgb, var(--cap-light) 72%, #f7f1e6) 40%,
-    color-mix(in srgb, var(--cap-color) 58%, #6a5e4e) 100%);
-  -webkit-mask-image: url("images/flourish-end.svg?v=3");
-  mask-image: url("images/flourish-end.svg?v=3");
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-  -webkit-mask-position: center;
-  mask-position: center;
-  -webkit-mask-size: contain;
-  mask-size: contain;
-  box-shadow: none;
-  transform: none;
-  z-index: 2;
-}
-
-.books-row > .book.horizontal::before,
-.book.horizontal::before {
-  left: 4px;
-  top: 14%;
-  bottom: 14%;
-  right: auto;
-}
-
-.books-row > .book.horizontal::after,
-.book.horizontal::after {
-  right: 4px;
-  left: auto;
-  top: 14%;
-  bottom: 14%;
-  transform: scaleX(-1);
-}
-
-.book.horizontal.silver-caps::before,
-.book.horizontal.silver-caps::after {
-  opacity: 0.7;
+/* Thin horizontal shelf books: no end flourishes (too short for ornaments) */
+.books-row > .book.horizontal:not(.page-header-book)::before,
+.books-row > .book.horizontal:not(.page-header-book)::after,
+.book.horizontal:not(.page-header-book)::before,
+.book.horizontal:not(.page-header-book)::after {
+  content: none;
+  display: none;
 }
 
 .book.horizontal .spine-text {
@@ -586,7 +544,7 @@
   background-clip: text;
   -webkit-text-fill-color: transparent;
   filter: drop-shadow(0 1px 0.5px rgba(0, 0, 0, 0.18));
-  padding: 0 18px !important;
+  padding: 0 12px !important;
   white-space: nowrap;
   overflow: visible !important;
   max-width: none !important;
@@ -633,47 +591,61 @@
 }
 
 /* Header books: top/bottom title ornament (not side-crushed end marks) */
-.books-row > .book.horizontal.page-header-book::before,
-.books-row > .book.horizontal.page-header-book::after,
 .book.horizontal.page-header-book::before,
 .book.horizontal.page-header-book::after {
+  content: '';
+  display: block;
   width: auto;
-  height: 12px;
-  left: 20%;
-  right: 20%;
+  height: 11px;
+  left: 0;
+  right: 0;
   top: auto;
   bottom: auto;
   transform: none;
-  opacity: 0.68;
+  opacity: 0.58;
   background: linear-gradient(90deg,
-    color-mix(in srgb, var(--cap-color) 42%, #5a5044) 0%,
-    color-mix(in srgb, var(--cap-light) 68%, #f4eee4) 40%,
-    color-mix(in srgb, var(--cap-color) 50%, #6a5e4e) 100%);
-  -webkit-mask-image: url("images/flourish-header.svg?v=3");
-  mask-image: url("images/flourish-header.svg?v=3");
-  -webkit-mask-size: 72% 100%;
-  mask-size: 72% 100%;
+    color-mix(in srgb, var(--cap-color) 38%, #5a5044) 0%,
+    color-mix(in srgb, var(--cap-light) 64%, #f4eee4) 45%,
+    color-mix(in srgb, var(--cap-color) 45%, #6a5e4e) 100%);
+  -webkit-mask-image: url("images/flourish-header.svg?v=4");
+  mask-image: url("images/flourish-header.svg?v=4");
+  -webkit-mask-size: auto 100%;
+  mask-size: auto 100%;
   -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;
   -webkit-mask-position: center;
   mask-position: center;
+  pointer-events: none;
+  z-index: 2;
 }
 
 .books-row > .book.horizontal.page-header-book::before,
 .book.horizontal.page-header-book::before {
   top: 9px;
-  left: 20%;
-  right: 20%;
+  left: 0;
+  right: 0;
   bottom: auto;
 }
 
+/* Bottom: soft hairline only — avoids a second crushed ornament on the shelf edge */
 .books-row > .book.horizontal.page-header-book::after,
 .book.horizontal.page-header-book::after {
-  bottom: 9px;
-  left: 20%;
-  right: 20%;
+  bottom: 11px;
+  left: 26%;
+  right: 26%;
   top: auto;
-  transform: scaleY(-1);
+  height: 1.5px;
+  opacity: 0.42;
+  border-radius: 1px;
+  transform: none;
+  -webkit-mask-image: none;
+  mask-image: none;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    color-mix(in srgb, var(--cap-light) 55%, #efe8dc) 25%,
+    color-mix(in srgb, var(--cap-color) 50%, #7a7060) 50%,
+    color-mix(in srgb, var(--cap-light) 55%, #efe8dc) 75%,
+    transparent 100%);
 }
 
 .book.horizontal.page-header-book .spine-text {

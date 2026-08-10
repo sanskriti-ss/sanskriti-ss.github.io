@@ -581,9 +581,13 @@
 }
 
 .book.horizontal.page-header-book {
-  width: 340px !important;
-  --book-height: 58px;
+  width: max-content !important;
+  max-width: min(92vw, 560px);
+  min-width: 260px;
+  --book-height: 72px;
+  height: var(--book-height) !important;
   border-radius: 4px;
+  overflow: hidden;
   box-shadow:
     2px 4px 14px rgba(55, 45, 70, 0.14),
     inset -1px 0 3px rgba(0, 0, 0, 0.1),
@@ -596,13 +600,13 @@
   content: '';
   display: block;
   width: auto;
-  height: 11px;
+  height: 9px;
   left: 0;
   right: 0;
   top: auto;
   bottom: auto;
   transform: none;
-  opacity: 0.58;
+  opacity: 0.55;
   background: linear-gradient(90deg,
     color-mix(in srgb, var(--cap-color) 38%, #5a5044) 0%,
     color-mix(in srgb, var(--cap-light) 64%, #f4eee4) 45%,
@@ -621,7 +625,7 @@
 
 .books-row > .book.horizontal.page-header-book::before,
 .book.horizontal.page-header-book::before {
-  top: 9px;
+  top: 8px;
   left: 0;
   right: 0;
   bottom: auto;
@@ -630,12 +634,12 @@
 /* Bottom: soft hairline only — avoids a second crushed ornament on the shelf edge */
 .books-row > .book.horizontal.page-header-book::after,
 .book.horizontal.page-header-book::after {
-  bottom: 11px;
-  left: 26%;
-  right: 26%;
+  bottom: 10px;
+  left: 28%;
+  right: 28%;
   top: auto;
   height: 1.5px;
-  opacity: 0.42;
+  opacity: 0.4;
   border-radius: 1px;
   transform: none;
   -webkit-mask-image: none;
@@ -649,18 +653,25 @@
 }
 
 .book.horizontal.page-header-book .spine-text {
-  font-size: 1.55rem;
+  font-size: clamp(1.05rem, 2.4vw, 1.3rem);
   font-family: 'Cormorant Garamond', Georgia, serif;
-  letter-spacing: 0.14em;
-  padding: 0 28px !important;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  line-height: 1;
+  padding: 0 2.25rem !important;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  white-space: nowrap;
+  /* Soft foil, still readable against teal */
   background: linear-gradient(90deg,
-    color-mix(in srgb, var(--silver-light, #c8cdd2) 48%, #f0ece6) 0%,
-    color-mix(in srgb, var(--silver-accent, #9aa3ab) 58%, #d4cfc8) 50%,
-    color-mix(in srgb, var(--silver-light, #c8cdd2) 46%, #ebe6e0) 100%);
+    color-mix(in srgb, var(--silver-light, #c8cdd2) 62%, #f7f4ef) 0%,
+    color-mix(in srgb, var(--silver-accent, #9aa3ab) 70%, #ddd6cc) 50%,
+    color-mix(in srgb, var(--silver-light, #c8cdd2) 58%, #f2eee8) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 1px 0.5px rgba(0, 0, 0, 0.16));
+  filter: drop-shadow(0 1px 0.5px rgba(0, 0, 0, 0.22));
 }
 
 /* Serif headers sitewide for library pages */

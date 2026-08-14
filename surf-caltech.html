@@ -67,6 +67,13 @@
 						<p>To make the software accessible to a wider range of scientific users, we created a Python module that generates custom Fortran input files compatible with PFLOTRAN. Our package allows users to generate files representing environment- and experiment-specific conditions, incorporate custom sandbox reactions, and process simulation outputs using integrated visualization tools.</p>
 						<p>To support our own research, we have applied the package to generate PFLOTRAN input files for modeling methanogenic carbon flux and estimating the sequestration potential of bio-based carbon capture and sequestration systems. Model outputs were then compared with results from our experimental work.</p>
 
+						<figure style="margin: 2em 0; text-align: center;">
+							<img src="images/surf_images/graphical_abstract.png" alt="pflotran-py workflow: define the simulation, build and run, analyze and compare" style="max-width: 100%; height: auto; border: 1px solid #ccc;">
+							<figcaption style="margin-top: 0.5em; font-style: italic; color: #666;">
+								<strong>Graphical abstract:</strong> pflotran-py is a reusable workflow for PFLOTRAN setup, execution, and analysis—from parameter configuration and input generation through batch runs to visualization and experimental comparison.
+							</figcaption>
+						</figure>
+
 						<h3>2. Statement of Need</h3>
 						<p>Transport-flow reaction models that allow modeling over decadal or century-scale timescales are essential for extrapolating laboratory results to long-term environmental effects. For example, understanding the long-term potential of carbon sequestration solutions requires modeling processes such as methanogenesis and the release of CO<sub>2</sub> from sequestered carbon.</p>
 						<p>Other potential applications include modeling the status of stored nuclear waste over millennia, radionuclide transport, and optimizing wastewater management to prevent contaminant transport into the environment.</p>
@@ -83,9 +90,16 @@
 						<p>While the default workflow generates input files that sweep over different salinity concentrations, the sweep parameters can be modified by the user—for example, over the concentration of a particular ion or over surface area.</p>
 
 						<figure style="margin: 2em 0; text-align: center;">
-							<img src="images/surf_images/figure5_placeholder.png" alt="Simplified diagram of the reactions represented in the model" style="max-width: 100%; height: auto; border: 1px solid #ccc;">
+							<img src="images/surf_images/features.png" alt="Overview of pflotran-py modules: generator, sandbox, visualizer, and compare" style="max-width: 100%; height: auto; border: 1px solid #ccc;">
 							<figcaption style="margin-top: 0.5em; font-style: italic; color: #666;">
-								<strong>Figure 1:</strong> Simplified diagram of the reactions represented in the model. These are configurable through the sandbox.
+								<strong>Figure 1:</strong> Overview of the repository workflow—input generation and optional sandbox reactions, PFLOTRAN execution, then visualization and cross-run comparison.
+							</figcaption>
+						</figure>
+
+						<figure style="margin: 2em 0; text-align: center;">
+							<img src="images/surf_images/reaction_network.png" alt="Simplified diagram of the reactions represented in the model" style="max-width: 100%; height: auto; border: 1px solid #ccc;">
+							<figcaption style="margin-top: 0.5em; font-style: italic; color: #666;">
+								<strong>Figure 2:</strong> Simplified diagram of the reactions represented in the model. These are configurable through the sandbox.
 							</figcaption>
 						</figure>
 
@@ -142,30 +156,23 @@
 						<p>The experimental comparisons below evaluate model predictions using experiments separate from those used for selected parameter tuning. Although selected parameters were tuned using other experiments, including chloride-concentration experiments, the PFLOTRAN-based predictions reproduce the approximate trends and magnitudes observed experimentally.</p>
 
 						<figure style="margin: 2em 0; text-align: center;">
-							<img src="images/surf_images/figure4_placeholder.png" alt="Modeled versus experimental methane and carbon dioxide concentrations" style="max-width: 100%; height: auto; border: 1px solid #ccc;">
+							<img src="images/surf_images/methane_validation.png" alt="Modeled versus experimental methane concentrations" style="max-width: 100%; height: auto; border: 1px solid #ccc;">
 							<figcaption style="margin-top: 0.5em; font-style: italic; color: #666;">
-								<strong>Figures 2–3:</strong> Modeled versus experimental methane and carbon dioxide concentrations in the bottle using the generated PFLOTRAN input files. Sodium chloride, magnesium chloride, and artificial sea salt experiments vary the corresponding salt concentration while other experimental conditions are held constant.
+								<strong>Figure 3:</strong> Modeled versus experimental methane concentrations in the bottle using the generated PFLOTRAN input files. Sodium chloride, magnesium chloride, and artificial sea salt experiments vary the corresponding salt concentration while other experimental conditions are held constant.
 							</figcaption>
 						</figure>
 
 						<figure style="margin: 2em 0; text-align: center;">
-							<img src="images/surf_images/figure1_placeholder.png" alt="Total concentrations of different ions in a PFLOTRAN redox simulation" style="max-width: 100%; height: auto; border: 1px solid #ccc;">
+							<img src="images/surf_images/co2_validation.png" alt="Modeled versus experimental carbon dioxide concentrations" style="max-width: 100%; height: auto; border: 1px solid #ccc;">
 							<figcaption style="margin-top: 0.5em; font-style: italic; color: #666;">
-								<strong>Figure 4:</strong> Total concentrations of different ions in a PFLOTRAN redox simulation within a 1.0 × 10<sup>1</sup> m × 1.0 × 10<sup>1</sup> m × 1.0 × 10<sup>1</sup> m grid at day 1. The corresponding HTML output is interactive and allows users to visualize changes in concentration over the simulation timeframe.
+								<strong>Figure 4:</strong> Modeled versus experimental carbon dioxide concentrations in the bottle using the generated PFLOTRAN input files. Sodium chloride, magnesium chloride, and artificial sea salt experiments vary the corresponding salt concentration while other experimental conditions are held constant.
 							</figcaption>
 						</figure>
 
 						<figure style="margin: 2em 0; text-align: center;">
-							<img src="images/surf_images/figure2_placeholder.png" alt="Surface CO2 and CH4 flux visualization from PFLOTRAN post-processing" style="max-width: 100%; height: auto; border: 1px solid #ccc;">
+							<img src="images/surf_images/ion_concentrations_day1.png" alt="Total concentrations of different ions in a PFLOTRAN redox simulation at day 1" style="max-width: 100%; height: auto; border: 1px solid #ccc;">
 							<figcaption style="margin-top: 0.5em; font-style: italic; color: #666;">
-								<strong>Figure 5:</strong> Example surface-flux visualization from the post-processing pipeline (CO<sub>2</sub> and CH<sub>4</sub>). Hover interactions expose exact flux values at grid coordinates.
-							</figcaption>
-						</figure>
-
-						<figure style="margin: 2em 0; text-align: center;">
-							<img src="images/surf_images/figure3_placeholder.png" alt="Methane flux dependence on water activity" style="max-width: 100%; height: auto; border: 1px solid #ccc;">
-							<figcaption style="margin-top: 0.5em; font-style: italic; color: #666;">
-								<strong>Figure 6:</strong> Modeled methane flux dependence on water activity. Different water activities were achieved with different concentrations of seawater, approximated using the top four ions: chloride (Cl⁻), sodium (Na⁺), sulfate (SO₄²⁻), and magnesium (Mg²⁺).
+								<strong>Figure 5:</strong> Total concentrations of different ions in a PFLOTRAN redox simulation within a 1.0 × 10<sup>1</sup> m × 1.0 × 10<sup>1</sup> m × 1.0 × 10<sup>1</sup> m grid at day 1. The corresponding HTML output is interactive and allows users to visualize changes in concentration over the simulation timeframe.
 							</figcaption>
 						</figure>
 

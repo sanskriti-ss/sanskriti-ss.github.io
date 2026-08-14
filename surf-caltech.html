@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>SURF @ Caltech</title>
+		<title>pflotran-py · SURF @ Caltech</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -52,88 +52,134 @@
 				<section class="wrapper style3 container">
 					<div class="content">
 						<header class="major">
-							<h2>Modeling Methane Flux for Long-Term Organic Carbon Sequestration</h2>
-							<p><strong>Sanskriti Shindadkar</strong><br>
-							Mentored by Madison Dunitz</p>
+							<h2>pflotran-py: A Python Wrapper for Generating PFLOTRAN Input Files and Processing Simulation Results</h2>
+							<p><strong>Sanskriti Shindadkar</strong><sup>1</sup> and <strong>Madison Dunitz</strong><sup>2</sup><br>
+							<sup>1</sup>Department of Bioengineering, University of California, Berkeley<br>
+							<sup>2</sup>California Institute of Technology<br>
+							<span style="display:inline-block; margin-top:0.6em;">Begun during SURF @ Caltech · Mentored by Madison Dunitz</span></p>
+							<p class="project-links" style="margin-top: 0.75em;">
+								<a href="https://github.com/MDunitz/saltyBiomass/tree/main/software_module" target="_blank" rel="noopener">Code repository</a>
+							</p>
 						</header>
 
-						<h3>I. Abstract</h3>
-						<p>One promising method for scalable carbon sequestration is industrial algal biomass farming in seawater. Evaporation of the sea water media increases the overall salt content for long term storage, reducing degradation and methane production. However, measuring the long-term emissions is a difficult task to do purely experimentally. Building on PFLOTRAN (a massively parallelized reactive-transport program) we model the relevant microbial reactions and molecular transport, to predict the flux of carbon dioxide and methane from the sequestered biomass. By modelling reactions such as acetaclastic methanogenesis, methylotrophic methanogenesis, and hydrogenotrophic methanogenesis, along with fermentation and acetogenesis, the model is able to forecast the net production and concentration of different chemical species on a 100-year timescale, to ultimately predict methane and carbon dioxide flux, beyond what we can experimentally test in a lab. The forecasted gas production from the model will be compared with future experimental data collected on samples on the order of weeks, months, and perhaps years.</p>
+						<h3>1. Summary</h3>
+						<p>Reactive transport models represent a variety of environmental conditions and areas of scientific inquiry. From nuclear waste to wastewater runoff, many scientific problems can be modeled as a combination of metabolic or chemical reactions and physical transport over varying timescales and environmental conditions. PFLOTRAN is a Fortran-based software package that allows users to model and test a variety of environmental conditions, reactions, and transport processes in a highly parallelized way.</p>
+						<p>To make the software accessible to a wider range of scientific users, we created a Python module that generates custom Fortran input files compatible with PFLOTRAN. Our package allows users to generate files representing environment- and experiment-specific conditions, incorporate custom sandbox reactions, and process simulation outputs using integrated visualization tools.</p>
+						<p>To support our own research, we have applied the package to generate PFLOTRAN input files for modeling methanogenic carbon flux and estimating the sequestration potential of bio-based carbon capture and sequestration systems. Model outputs were then compared with results from our experimental work.</p>
 
-						<h3>II. Introduction</h3>
-						<p>Carbon sequestration is an essential step we need to take, and scale, in order to reduce humanity's carbon footprint. Reducing emissions is insufficient to counter the rising levels of greenhouse gases in our atmosphere. We emit around 40 billion tons of carbon dioxide every year.<sup>1</sup> If a decade of emissions were compressed into a mountain with the density of diamonds, it would be the size of Mount Everest. Many carbon sequestration options alternatives are infeasible: reforestation would require over half of our arable land,<sup>2</sup> and direct carbon-air capture costs $500-1000 per ton.<sup>3</sup> One promising solution is carbon sequestration through growing algae populations, salting them to prevent degradation, and compacting them underground (e.g. through filling in mines).</p>
+						<h3>2. Statement of Need</h3>
+						<p>Transport-flow reaction models that allow modeling over decadal or century-scale timescales are essential for extrapolating laboratory results to long-term environmental effects. For example, understanding the long-term potential of carbon sequestration solutions requires modeling processes such as methanogenesis and the release of CO<sub>2</sub> from sequestered carbon.</p>
+						<p>Other potential applications include modeling the status of stored nuclear waste over millennia, radionuclide transport, and optimizing wastewater management to prevent contaminant transport into the environment.</p>
+						<p>Historically, PFLOTRAN has been used to investigate approaches for detecting CO<sub>2</sub> leakage in aquifers and to reproduce environmental conditions in salt-marsh systems in order to examine their effects on biogeochemical processes.<sup>1</sup> PFLOTRAN has also been integrated into other modeling frameworks, including dfnWorks, a computational framework for generating three-dimensional discrete fracture networks, and used to simulate flow and transport in fractured media.</p>
 
-						<h3>III. Methods</h3>
-						<p>There are two main essential steps that need to be taken in order for effective modelling of reducing carbon flux for carbon sequestration using biomass. First, collecting relevant experimental data: both ourselves, and from various research papers. Second, building a reaction-transport model and initializing it with our collected data.</p>
+						<h3>3. State of the Field</h3>
+						<p>Although many scientific projects require flow-transport reaction models, relatively few modular frameworks allow researchers to easily configure and run reactive transport simulations tailored to their own experimental conditions. Such simulations can extend wet-laboratory research into conditions that may be difficult or impractical to validate experimentally—including rainfall, different soil porosities, changing environmental conditions, or decadal-scale timeframes.</p>
+						<p>PFLOTRAN, a parallel subsurface flow and reactive transport simulator implemented primarily in Fortran, can simulate these systems using customizable reactions, initial conditions, and constraints. However, configuring PFLOTRAN can present a substantial learning curve for researchers unfamiliar with its input-file structure or with Fortran-based scientific software. Users may need to manually define species and reactions and inspect example input files to determine how individual parameters should be changed.</p>
+						<p>A Python wrapper that generates experiment-specific input files and provides a convenient interface for running and analyzing simulations can therefore make PFLOTRAN-based reactive transport modeling more accessible across scientific fields.</p>
 
-						<p>I assisted with the data collection; for example, I prepared incubations containing mixtures of biomass, sludge, sea salt, and magnesium chloride across a range of water activities in order to determine water activity as a function of these different variables. I continued collecting water activity data from these samples, working in collaboration with another SURF student. He uses an Integrated Single Quadrupole machine (ISQ) to measure methane and CO<sub>2</sub> flux in the incubations we created earlier this summer. This provided gas production data that I used to better constrain my reaction-transport model, with more accurate rate constants and other needed variables.</p>
+						<h3>4. Software Design</h3>
+						<p>We present an integrated workflow for PFLOTRAN focused on saline-sediment microbial redox modeling, with an emphasis on the inhibition of methanogenesis. Through development for our own research, we iteratively updated and refactored the software to ensure that the repository correctly interfaces with PFLOTRAN while reducing the amount of direct PFLOTRAN configuration required from the user.</p>
+						<p>The software includes three configurable methanogenesis pathways and additional constraints for water-activity inhibition. The overall workflow is designed so that users can modify experimental parameters in a central configuration file, allowing the same framework to represent simulations ranging from several days to several centuries and across different initial concentrations, salinity conditions, and inhibition parameters.</p>
+						<p>While the default workflow generates input files that sweep over different salinity concentrations, the sweep parameters can be modified by the user—for example, over the concentration of a particular ion or over surface area.</p>
 
-						<p>For the model: I've been basing my work off of a working model for a Redox Network for Coastal Saltmarsh Systems, published by O'Meara.<sup>4</sup> They use PFLOTRAN, a parallel subsurface flow and reactive transport simulator that runs on fortran. After exploring PFLOTRAN tutorials and demo files, we worked on replicating the paper's findings by running the referenced code. During a meeting with the corresponding author we discussed the model, and were able to answer many questions we had about her methodology in preparing the model, and numerous strategies she used. To offer just one simple example, she created 'tracker' species, and tracked their concentrations in order to carefully track the relative abundance of how different reactions were producing and consuming different substrates.</p>
-
-						<p>Some of the changes I've made include:</p>
-						<ul>
-							<li>Changing the grid layout to a 3D model instead of a 1D model.</li>
-							<li>Modifying atmospheric constraints and boundary constraints to position the cube underground.</li>
-							<li>Simulating 'rain' events, as well as constant drainage.</li>
-							<li>Modifying the soil properties (e.g. porosity, permeability) to more closely model the biomass we'll be sequestering.</li>
-							<li>Adding methylotrophic, hydrogenotrophic, and acetoclastic methanogenic pathways.</li>
-						</ul>
-
-						<p>It is important to note that due to differences in the favorability of different metabolic pathways, many processes become unfavorable at different water activities. To define the term, the water activity is a unitless ratio, on a scale of 0 to 1, that indicates the amount of free water available for microbial growth and chemical reactions. Many sources concur that the lowest approximate water activity after which microbial cell division halts is around 0.61 a<sub>w</sub>.<sup>5,6</sup> Many microbial pathways are also influenced by different factors; for instance, consider methanogenesis pathways. There are three main pathways: hydrogenotrophic (reducing CO<sub>2</sub> with H<sub>2</sub>), acetoclastic (breaking acetate into CH<sub>4</sub> and CO<sub>2</sub>), and methylotrophic (reducing methylated compounds like methanol). The acetoclastic pathway can be inhibited by sulfate, as the sulfate reduction pathway creates competition.<sup>7</sup></p>
-
-						<p>As such, I took advantage of PFLOTRAN's customizability by coding custom reaction sandboxes in order to inhibit the methanogenic pathways at a water activity of 0.5. Templates for adding these custom inhibitions are available in the repository. The code can be found at <a href="https://github.com/MDunitz/saltyBiomass/tree/main/software_module" target="_blank">https://github.com/MDunitz/saltyBiomass/tree/main/software_module</a> for reproducibility. I've also written code for visualization of .tec and .df5 files, which can also be found in the repository. Visualizations that use this code are found in the Results and Discussion section.</p>
-
-						<h3>IV. Results and Discussion</h3>
-						
 						<figure style="margin: 2em 0; text-align: center;">
-							<img src="images/surf_images/figure1_placeholder.png" alt="Figure 1: Total concentrations of different ions, of a 1D PFLOTRAN Redox reaction, in a 10 m cubed grid, at Day 1 of the simulation" style="max-width: 100%; height: auto; border: 1px solid #ccc;">
+							<img src="images/surf_images/figure5_placeholder.png" alt="Simplified diagram of the reactions represented in the model" style="max-width: 100%; height: auto; border: 1px solid #ccc;">
 							<figcaption style="margin-top: 0.5em; font-style: italic; color: #666;">
-								<strong>Figure 1:</strong> Total concentrations of different ions, of a 1D PFLOTRAN Redox reaction, in a 10 m cubed grid, at Day 1 of the simulation. The html file produced is interactive, and allows the user to visualize how the concentration shifts over the model's timeframe.
+								<strong>Figure 1:</strong> Simplified diagram of the reactions represented in the model. These are configurable through the sandbox.
+							</figcaption>
+						</figure>
+
+						<h4>Main features</h4>
+						<div style="overflow-x: auto; margin: 1.5em 0;">
+							<table style="width: 100%; border-collapse: collapse; font-size: 0.95em;">
+								<thead>
+									<tr>
+										<th style="text-align: left; padding: 0.55em 0.75em; border-bottom: 1px solid #c9c0b0;">Feature</th>
+										<th style="text-align: left; padding: 0.55em 0.75em; border-bottom: 1px solid #c9c0b0;">Purpose</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td style="padding: 0.55em 0.75em; vertical-align: top; border-bottom: 1px solid #e6dfd4;"><strong>Template and parameter separation</strong></td>
+										<td style="padding: 0.55em 0.75em; border-bottom: 1px solid #e6dfd4;">Parameter values are stored in <code>pflotran_generator.py</code>, allowing users to modify experimental variables without manually searching through a large PFLOTRAN input file.</td>
+									</tr>
+									<tr>
+										<td style="padding: 0.55em 0.75em; vertical-align: top; border-bottom: 1px solid #e6dfd4;"><strong>Sandbox extensibility</strong></td>
+										<td style="padding: 0.55em 0.75em; border-bottom: 1px solid #e6dfd4;">Includes water-activity inhibition of methanogenesis and a customizable structure for implementing additional reactions beyond PFLOTRAN’s built-in kinetics.</td>
+									</tr>
+									<tr>
+										<td style="padding: 0.55em 0.75em; vertical-align: top; border-bottom: 1px solid #e6dfd4;"><strong>Post-processing</strong></td>
+										<td style="padding: 0.55em 0.75em; border-bottom: 1px solid #e6dfd4;">Converts species concentrations across the simulation grid into concentration fields, gradients, diffusive-flux estimates, and time-series visualizations (including interactive Bokeh and Plotly options).</td>
+									</tr>
+									<tr>
+										<td style="padding: 0.55em 0.75em; vertical-align: top; border-bottom: 1px solid #e6dfd4;"><strong>Parameter-sweep generation</strong></td>
+										<td style="padding: 0.55em 0.75em; border-bottom: 1px solid #e6dfd4;"><code>create_modified_files.py</code> generates variations of a base PFLOTRAN input file at different salinity levels, and can be modified to sweep other parameters.</td>
+									</tr>
+									<tr>
+										<td style="padding: 0.55em 0.75em; vertical-align: top; border-bottom: 1px solid #e6dfd4;"><strong>Batch execution</strong></td>
+										<td style="padding: 0.55em 0.75em; border-bottom: 1px solid #e6dfd4;"><code>run_pflotran_batch.sh</code> runs multiple <code>.in</code> files sequentially with logging for batched experiments and systematic comparisons.</td>
+									</tr>
+									<tr>
+										<td style="padding: 0.55em 0.75em; vertical-align: top; border-bottom: 1px solid #e6dfd4;"><strong>Output-format switching</strong></td>
+										<td style="padding: 0.55em 0.75em; border-bottom: 1px solid #e6dfd4;">Both <code>.tec</code> and HDF5 outputs are supported—HDF5 for compact storage of larger simulations, <code>.tec</code> for debugging and smaller visualization workflows.</td>
+									</tr>
+									<tr>
+										<td style="padding: 0.55em 0.75em; vertical-align: top; border-bottom: 1px solid #e6dfd4;"><strong>Updated <code>hanford.dat</code></strong></td>
+										<td style="padding: 0.55em 0.75em; border-bottom: 1px solid #e6dfd4;">Includes species required by the modeled reaction network that are not present in the default PFLOTRAN database.</td>
+									</tr>
+									<tr>
+										<td style="padding: 0.55em 0.75em; vertical-align: top;"><strong>Jupyter notebooks</strong></td>
+										<td style="padding: 0.55em 0.75em;">Configurable notebooks for generating convenient versions of input data files and visualizations.</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+
+						<h3>5. Research Impact</h3>
+						<p>The software is being used by the authors to model a novel approach for scalable carbon capture. Algae and other halophilic photo-autotrophs are grown to sequester carbon as biomass and subsequently stored underground in a high-salt environment. Release of the stored carbon via respiration or methanogenesis could reduce the amount of carbon retained—or reverse the project’s impact on warming.</p>
+						<p>The software allows researchers to estimate the long-term consequences of carbon flux over hundreds of years under conditions that are difficult to reproduce experimentally, including changes in water activity, sulfate concentration, surface-area-to-volume ratio, and rainfall.</p>
+						<p>The implementation includes three primary methanogenesis pathways: hydrogenotrophic methanogenesis, in which CO<sub>2</sub> is reduced using H<sub>2</sub>; acetoclastic methanogenesis, in which acetate is converted to CH<sub>4</sub> and inorganic carbon; and methylotrophic methanogenesis, in which methylated compounds such as methanol contribute to methane production.<sup>2</sup></p>
+						<p>The experimental comparisons below evaluate model predictions using experiments separate from those used for selected parameter tuning. Although selected parameters were tuned using other experiments, including chloride-concentration experiments, the PFLOTRAN-based predictions reproduce the approximate trends and magnitudes observed experimentally.</p>
+
+						<figure style="margin: 2em 0; text-align: center;">
+							<img src="images/surf_images/figure4_placeholder.png" alt="Modeled versus experimental methane and carbon dioxide concentrations" style="max-width: 100%; height: auto; border: 1px solid #ccc;">
+							<figcaption style="margin-top: 0.5em; font-style: italic; color: #666;">
+								<strong>Figures 2–3:</strong> Modeled versus experimental methane and carbon dioxide concentrations in the bottle using the generated PFLOTRAN input files. Sodium chloride, magnesium chloride, and artificial sea salt experiments vary the corresponding salt concentration while other experimental conditions are held constant.
 							</figcaption>
 						</figure>
 
 						<figure style="margin: 2em 0; text-align: center;">
-							<img src="images/surf_images/figure2_placeholder.png" alt="Figure 2: Total CO2 and CH4 flux at the surface of a 1 meter cubed grid, at Day 2 of the simulation" style="max-width: 100%; height: auto; border: 1px solid #ccc;">
+							<img src="images/surf_images/figure1_placeholder.png" alt="Total concentrations of different ions in a PFLOTRAN redox simulation" style="max-width: 100%; height: auto; border: 1px solid #ccc;">
 							<figcaption style="margin-top: 0.5em; font-style: italic; color: #666;">
-								<strong>Figure 2:</strong> Total CO<sub>2</sub> and CH<sub>4</sub> flux at the surface of a 1 meter cubed grid, at Day 2 of the simulation. The visualization for the flux is still undergoing improvement. If the user hovers over any point, the graph provides a pop-up with exact numbers for the gas flux at that X/Y coordinate, and with the different Z coordinates as well. The lighter the colour, the relatively higher the flux (the legends are normed to each gas). Although there is a great contrast in the methane surface flux, the magnitude of the flux is less than atmospheric methane concentration.
+								<strong>Figure 4:</strong> Total concentrations of different ions in a PFLOTRAN redox simulation within a 1.0 × 10<sup>1</sup> m × 1.0 × 10<sup>1</sup> m × 1.0 × 10<sup>1</sup> m grid at day 1. The corresponding HTML output is interactive and allows users to visualize changes in concentration over the simulation timeframe.
 							</figcaption>
 						</figure>
 
 						<figure style="margin: 2em 0; text-align: center;">
-							<img src="images/surf_images/figure3_placeholder.png" alt="Figure 3: Flux of methane, at day one, of the modelled cube, dependent on the water activity" style="max-width: 100%; height: auto; border: 1px solid #ccc;">
+							<img src="images/surf_images/figure2_placeholder.png" alt="Surface CO2 and CH4 flux visualization from PFLOTRAN post-processing" style="max-width: 100%; height: auto; border: 1px solid #ccc;">
 							<figcaption style="margin-top: 0.5em; font-style: italic; color: #666;">
-								<strong>Figure 3:</strong> Flux of methane, at day one, of the modelled cube, dependent on the water activity. Note that different water activities were achieved with different concentrations of sea water, which was approximated with the top four ions: chloride (Cl⁻), sodium (Na⁺), sulfate (SO₄²⁻), and magnesium (Mg²⁺).
+								<strong>Figure 5:</strong> Example surface-flux visualization from the post-processing pipeline (CO<sub>2</sub> and CH<sub>4</sub>). Hover interactions expose exact flux values at grid coordinates.
 							</figcaption>
 						</figure>
 
 						<figure style="margin: 2em 0; text-align: center;">
-							<img src="images/surf_images/figure4_placeholder.png" alt="Figure 4: Experimental concentration of CH4 and CO2, depending on days since start" style="max-width: 100%; height: auto; border: 1px solid #ccc;">
+							<img src="images/surf_images/figure3_placeholder.png" alt="Methane flux dependence on water activity" style="max-width: 100%; height: auto; border: 1px solid #ccc;">
 							<figcaption style="margin-top: 0.5em; font-style: italic; color: #666;">
-								<strong>Figure 4:</strong> Experimental concentration of CH<sub>4</sub> (left) and CO<sub>2</sub> (right), depending on days since start, along with the best-fit line. The different water activities were achieved with different concentrations of sea salt, and/or MgCl<sub>2</sub>, depending on the treatment group.
+								<strong>Figure 6:</strong> Modeled methane flux dependence on water activity. Different water activities were achieved with different concentrations of seawater, approximated using the top four ions: chloride (Cl⁻), sodium (Na⁺), sulfate (SO₄²⁻), and magnesium (Mg²⁺).
 							</figcaption>
 						</figure>
 
-						<h3>V. References</h3>
+						<h3>6. AI Usage Disclosure</h3>
+						<p>Generative AI tools, including Codex and Claude Code, and AI-enabled development environments such as Cursor were used during software implementation, code review, and refactoring. The authors have reviewed, verified, and validated the resulting code.</p>
+
+						<h3>7. Acknowledgements</h3>
+						<p>The authors would like to thank the Orphan Lab and the Sessions Lab for their mentorship and support, as well as O’Meara and Glenn for their support and feedback. Sanskriti additionally thanks fellow SURF fellows and mentors at Caltech.</p>
+
+						<h3>8. References</h3>
 						<ol style="padding-left: 1.5em;">
-							<li>Global Carbon Project. (2024, November 13). Fossil fuel CO₂ emissions increase again in 2024. Global Carbon Budget. <a href="https://globalcarbonbudget.org/fossil-fuel-co2-emissions-increase-again-in-2024/" target="_blank">https://globalcarbonbudget.org/fossil-fuel-co2-emissions-increase-again-in-2024/</a></li>
-							<li>Perkins, O., Alexander, P., Arneth, A., Brown, C., Millington, J. D. A., &amp; Rounsevell, M. (2023). Toward quantification of the feasible potential of land-based carbon dioxide removal. <em>One Earth (Cambridge, Mass.)</em>, 6(12), 1638–1651. <a href="https://doi.org/10.1016/j.oneear.2023.11.011" target="_blank">https://doi.org/10.1016/j.oneear.2023.11.011</a></li>
-							<li>De Luna, P. (2024, November 29). Will Direct Air Capture Ever Cost Less Than $100 Per Ton of CO₂? <em>Forbes</em>. <a href="https://www.forbes.com/sites/phildeluna/2024/11/29/will-direct-air-capture-ever-cost-less-than-100-per-ton-of-co/" target="_blank">https://www.forbes.com/sites/phildeluna/2024/11/29/will-direct-air-capture-ever-cost-less-than-100-per-ton-of-co/</a></li>
-							<li>O'Meara, T. A., Yuan, F., Sulman, B. N., Noyce, G. L., Rich, R., Thornton, P. E., &amp; Megonigal, J. P. (2024). Developing a redox network for coastal saltmarsh systems in the PFLOTRAN reaction model. <em>Journal of Geophysical Research: Biogeosciences</em>, 129(3), Article e2023JG007633. <a href="https://doi.org/10.1029/2023JG007633" target="_blank">https://doi.org/10.1029/2023JG007633</a></li>
-							<li>Stevenson, A., Cray, J., Williams, J. et al. Is there a common water-activity limit for the three domains of life?. <em>ISME J</em> 9, 1333–1351 (2015). <a href="https://doi.org/10.1038/ismej.2014.219" target="_blank">https://doi.org/10.1038/ismej.2014.219</a></li>
-							<li>Stevenson, A., Burkhardt, J., Cockell, C. S., Cray, J. A., Dijksterhuis, J., Fox-Powell, M., Kee, T. P., Kminek, G., McGenity, T. J., Timmis, K. N., Timson, D. J., Voytek, M. A., Westall, F., Yakimov, M. M., &amp; Hallsworth, J. E. (2015). Multiplication of microbes below 0.690 water activity: implications for terrestrial and extraterrestrial life. <em>Applied and Environmental Microbiology</em>, 17(2), 257–277. <a href="https://doi.org/10.1111/1462-2920.12598" target="_blank">https://doi.org/10.1111/1462-2920.12598</a></li>
-							<li>Sela-Adler, M., Ronen, Z., Herut, B., Antler, G., Vigderovich, H., Eckert, W., &amp; Sivan, O. (2017). Co-existence of Methanogenesis and Sulfate Reduction with Common Substrates in Sulfate-Rich Estuarine Sediments. <em>Frontiers in microbiology</em>, 8, 766. <a href="https://doi.org/10.3389/fmicb.2017.00766" target="_blank">https://doi.org/10.3389/fmicb.2017.00766</a></li>
+							<li>O'Meara, T. A., Yuan, F., Sulman, B. N., Noyce, G. L., Rich, R., Thornton, P. E., &amp; Megonigal, J. P. (2024). Developing a redox network for coastal saltmarsh systems in the PFLOTRAN reaction model. <em>Journal of Geophysical Research: Biogeosciences</em>, 129(3), Article e2023JG007633. <a href="https://doi.org/10.1029/2023JG007633" target="_blank" rel="noopener">https://doi.org/10.1029/2023JG007633</a></li>
+							<li>Sela-Adler, M., Ronen, Z., Herut, B., Antler, G., Vigderovich, H., Eckert, W., &amp; Sivan, O. (2017). Co-existence of methanogenesis and sulfate reduction with common substrates in sulfate-rich estuarine sediments. <em>Frontiers in Microbiology</em>, 8, 766. <a href="https://doi.org/10.3389/fmicb.2017.00766" target="_blank" rel="noopener">https://doi.org/10.3389/fmicb.2017.00766</a></li>
 						</ol>
-
-						<h3>VI. Acknowledgements</h3>
-						<p>I would like to extend a thank you to Madison Dunitz for her mentorship, as well as Prof. Victoria Orphan, Dr. Stephanie Connon, and Prof. Alex Sessions, as well as my fellow SURF fellows.</p>
-
-						<h3>VII. Appendix</h3>
-						<figure style="margin: 2em 0; text-align: center;">
-							<img src="images/surf_images/figure5_placeholder.png" alt="Figure 5: Simplified diagram of the reactions represented in our model" style="max-width: 100%; height: auto; border: 1px solid #ccc;">
-							<figcaption style="margin-top: 0.5em; font-style: italic; color: #666;">
-								<strong>Figure 5:</strong> Simplified diagram of the reactions represented in our model.
-							</figcaption>
-						</figure>
 					</div>
 				</section>
 			</article>

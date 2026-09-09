@@ -1,6 +1,6 @@
 /* ================================
    BOOK OPENING TRANSITION — Pure CSS 3D
-   Pulls from clicked shelf book, opens cover, turns pages, soft dissolve.
+   Faster, smoother: fewer pages, shorter timeline, GPU-friendly.
    ================================ */
 
 (function() {
@@ -8,11 +8,31 @@
 
   var CONFIG = {
     enableTransition: true,
-    debug: false
+    debug: false,
+    // Timeline (ms) — total ~1.25s before navigate
+    enterMs: 400,
+    coverLeadMs: 40,
+    flipStartMs: 560,
+    flipIntervalMs: 90,
+    exitLeadMs: 160,
+    navigateLeadMs: 240,
+    pageCount: 2
   };
 
   var overlay, flash, book3d, stage;
   var isAnimating = false;
+  var timers = [];
+
+  function later(fn, ms) {
+    var id = setTimeout(fn, ms);
+    timers.push(id);
+    return id;
+  }
+
+  function clearTimers() {
+    for (var i = 0; i < timers.length; i++) clearTimeout(timers[i]);
+    timers = [];
+  }
 
   function createTransitionElements() {
     overlay = document.createElement('div');
@@ -52,10 +72,10 @@
     front.appendChild(titleEl);
     book.appendChild(front);
 
-    for (var i = 0; i < 4; i++) {
+    for (var i = 0; i < CONFIG.pageCount; i++) {
       var page = document.createElement('div');
       page.className = 'flip-page';
-      page.style.transform = 'translateZ(' + (-2 - i * 2.5) + 'px) rotateY(0deg)';
+      page.style.transform = 'translateZ(' + (-2 - i * 2) + 'px) rotateY(0deg)';
       page.dataset.index = String(i);
 
       var pageFront = document.createElement('div');
@@ -73,6 +93,7 @@
   }
 
   function resetAnimation() {
+    clearTimers();
     if (book3d && book3d.parentNode) {
       book3d.parentNode.removeChild(book3d);
     }
@@ -97,16 +118,28 @@
     var vy = window.innerHeight / 2;
     var ox = cx - vx;
     var oy = cy - vy;
-    var os = Math.max(0.12, Math.min(0.28, Math.max(rect.width, rect.height) / 340));
+    var os = Math.max(0.14, Math.min(0.3, Math.max(rect.width, rect.height) / 320));
 
     book3d.style.setProperty('--ox', ox + 'px');
     book3d.style.setProperty('--oy', oy + 'px');
     book3d.style.setProperty('--os', String(os));
   }
 
+  function prefetch(href) {
+    try {
+      var link = document.createElement('link');
+      link.rel = 'prefetch';
+      link.href = href;
+      document.head.appendChild(link);
+    } catch (e) { /* ignore */ }
+  }
+
   function animateBookOpen(bookElement, href) {
     if (isAnimating) return;
     isAnimating = true;
+    clearTimers();
+
+    prefetch(href);
 
     var color = getComputedStyle(bookElement).getPropertyValue('--book-color').trim() || '#5b6a82';
     var spineText = bookElement.querySelector('.spine-text');
@@ -121,51 +154,55 @@
     stage.appendChild(book3d);
     overlay.appendChild(stage);
 
+    // Double rAF so the browser paints the starting pose before animating
     requestAnimationFrame(function() {
-      overlay.classList.add('active');
-      book3d.classList.add('animate-enter');
+      requestAnimationFrame(function() {
+        if (!book3d) return;
+        overlay.classList.add('active');
+        book3d.classList.add('animate-enter');
+      });
     });
 
-    // Settle, then open cover
-    setTimeout(function() {
+    // Settle → open cover
+    later(function() {
       if (!book3d) return;
       book3d.classList.remove('animate-enter');
       book3d.classList.add('animate-open');
       book3d.classList.add('cover-open');
-    }, 740);
+    }, CONFIG.enterMs + CONFIG.coverLeadMs);
 
-    // Enable page flips
-    setTimeout(function() {
+    // Enable + trigger page flips
+    later(function() {
       if (!book3d) return;
       book3d.classList.add('pages-flip');
-    }, 1140);
+    }, CONFIG.flipStartMs - 40);
 
     var flipPages = book3d.querySelectorAll('.flip-page');
-    var flipStart = 1240;
-    var flipInterval = 170;
     for (var i = 0; i < flipPages.length; i++) {
       (function(page, delay) {
-        setTimeout(function() {
+        later(function() {
           if (page) page.classList.add('flipped');
         }, delay);
-      })(flipPages[i], flipStart + i * flipInterval);
+      })(flipPages[i], CONFIG.flipStartMs + i * CONFIG.flipIntervalMs);
     }
 
-    var exitTime = flipStart + flipPages.length * flipInterval + 280;
+    var exitTime = CONFIG.flipStartMs +
+      (CONFIG.pageCount - 1) * CONFIG.flipIntervalMs +
+      CONFIG.exitLeadMs;
 
-    setTimeout(function() {
+    later(function() {
       if (!book3d) return;
       flash.classList.add('active');
       book3d.classList.add('animate-exit');
     }, exitTime);
 
-    setTimeout(function() {
+    later(function() {
       if (CONFIG.debug) {
-        setTimeout(resetAnimation, 1200);
+        later(resetAnimation, 800);
       } else {
         window.location.href = href;
       }
-    }, exitTime + 420);
+    }, exitTime + CONFIG.navigateLeadMs);
   }
 
   function handleBookClick(event) {

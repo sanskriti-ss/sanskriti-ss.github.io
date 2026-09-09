@@ -100,8 +100,8 @@
     if (stage && stage.parentNode) {
       stage.parentNode.removeChild(stage);
     }
-    overlay.classList.remove('active');
-    flash.classList.remove('active');
+    if (overlay) overlay.classList.remove('active');
+    if (flash) flash.classList.remove('active');
     book3d = null;
     stage = null;
     isAnimating = false;
@@ -271,6 +271,11 @@
       }
     });
   }
+
+  // Back/forward cache restores the page mid-transition (overlay still .active),
+  // which looks like a stuck grey/purple screen. Clear transition UI on leave + return.
+  window.addEventListener('pagehide', resetAnimation);
+  window.addEventListener('pageshow', resetAnimation);
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);

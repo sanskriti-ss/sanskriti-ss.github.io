@@ -187,32 +187,6 @@
 						pointer-events: none;
 					}
 					.project-stamp img { display: block; width: 100%; height: 100%; object-fit: cover; filter: saturate(0.82) contrast(1.04); }
-					.project-stamp-label {
-						display: flex;
-						align-items: center;
-						justify-content: center;
-						box-sizing: border-box;
-						padding: 0.55rem;
-						background: linear-gradient(135deg, #4a8f8f 0%, #2d6a6a 100%);
-						color: #f7f2e9;
-						font-family: 'Cormorant Garamond', Georgia, serif;
-						font-size: 0.82rem;
-						font-weight: 700;
-						letter-spacing: 0.1em;
-						line-height: 1.05;
-						text-align: center;
-						text-decoration: none;
-						text-shadow: 0 1px 1px rgba(22, 47, 47, 0.55);
-					}
-					.project-stamp-label::after {
-						content: '';
-						position: absolute;
-						inset: 0.42rem;
-						border: 1px solid rgba(255, 245, 223, 0.64);
-						pointer-events: none;
-					}
-					.project-stamp-label.stamp-violet { background: linear-gradient(135deg, #77638e 0%, #554166 100%); }
-					.project-stamp-label.stamp-gold { background: linear-gradient(135deg, #b88d55 0%, #805c36 100%); }
 					.timeline-table tr:nth-of-type(even) .project-stamp { transform: rotate(2deg); }
 					@media screen and (max-width: 736px) {
 						.timeline-table th, .timeline-table td { padding: 0.7rem 0.35rem; }
@@ -231,7 +205,7 @@
 					<tr>
 						<td class="item">
 							<div class="project-with-preview">
-								<a class="project-stamp project-stamp-label stamp-violet" href="https://surrogate-sci.github.io/prism2026/posts/mid-august-update/paper.pdf" target="_blank" rel="noopener" aria-label="Read the PRISM 2026 paper">PRISM<br />PXR</a>
+								<a class="project-stamp" href="https://surrogate-sci.github.io/prism2026/posts/mid-august-update/paper.pdf" target="_blank" rel="noopener" aria-label="Read the PRISM 2026 paper"><img src="images/projects/prism-pxr-protein.png" alt="Colourful PXR protein structure preview" /></a>
 								<a href="https://surrogate-sci.github.io/prism2026/posts/mid-august-update/paper.pdf" target="_blank" rel="noopener">PRISM 2026 · OpenADMET / PXR</a>
 							</div>
 						</td>
@@ -270,16 +244,7 @@
 					<tr>
 						<td class="item">
 							<div class="project-with-preview">
-								<span class="project-stamp project-stamp-label stamp-gold" aria-hidden="true">QML<br />2025</span>
-								<span>QIntern 2025</span>
-							</div>
-						</td>
-						<td class="desc">Tested classical and QML models to predict molecular pIC50 values from feature sets, achieving R<sup>2</sup> up to 0.43. Maintained a code repository documenting model comparisons, with thorough documentation.</td>
-					</tr>
-					<tr>
-						<td class="item">
-							<div class="project-with-preview">
-								<a class="project-stamp project-stamp-label" href="https://bacdive.streamlit.app/" target="_blank" rel="noopener" aria-label="Open BacDive Visualizations">DATA<br />VIZ</a>
+								<a class="project-stamp" href="https://bacdive.streamlit.app/" target="_blank" rel="noopener" aria-label="Open BacDive Visualizations"><img src="images/projects/bacdive-logo.png" alt="BacDive logo preview" /></a>
 								<a href="https://bacdive.streamlit.app/" target="_blank" rel="noopener">BacDive Visualizations</a>
 							</div>
 						</td>

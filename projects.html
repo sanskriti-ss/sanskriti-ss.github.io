@@ -65,93 +65,229 @@
 				<!-- ► BEGIN: VARIOUS HAPPENINGS TABLE ◄ -->
 				<section id="various-happenings" class="wrapper style3 container">
 					<style>
-					/* Centre the table inside the container */
+					/* Timeline */
 					#various-happenings .timeline-table {
-						margin: 0 auto;        /* horizontally center */
-						max-width: 800px;      /* optional: limit its width */
-						width: 100%;           /* responsive */
+						margin: 0 auto;
+						max-width: 880px;
+						width: 100%;
 					}
 					.timeline-table {
-						border-collapse: collapse;
-						margin-top: 1em;
+						border-collapse: separate;
+						border-spacing: 0;
+						margin-top: 0;
 					}
 					.timeline-table th,
 					.timeline-table td {
 						border: none;
-						padding: 6px 8px;
+						padding: 0.85rem 0.9rem;
+						vertical-align: top;
 					}
 					.timeline-table .year-shelf {
 						position: relative;
-						background: linear-gradient(180deg, #e8dcc4 0%, #d4c4b0 50%, #c4b49a 100%);
-						color: #4a3b3b;
-						font-size: 1em;
+						height: 4.2rem;
+						padding: 0;
 						text-align: center;
-						text-transform: uppercase;
-						letter-spacing: 0.08em;
-						font-weight: 700;
-						border: 2px solid #b8a890;
-						border-radius: 8px;
-						padding: 10px 10px;
-						box-shadow:
-							0 10px 25px rgba(0, 0, 0, 0.18),
-							inset 0 2px 6px rgba(255, 255, 255, 0.35),
-							inset 0 -2px 6px rgba(0, 0, 0, 0.08);
-						overflow: hidden;
+						vertical-align: middle;
 					}
-					.timeline-table .year-shelf span {
-						display: flex;
-						align-items: center;
-						justify-content: center;
-						gap: 8px;
+					.timeline-table .year-shelf::before {
+						content: '';
+						position: absolute;
+						left: 0;
+						right: 0;
+						top: 2.85rem;
+						height: 0.95rem;
+						border: 1px solid #604638;
+						border-radius: 0 0 4px 4px;
+						background:
+							url("assets/css/images/wood-grain.png"),
+							linear-gradient(180deg, #e5d9c8 0%, #c8b69f 47%, #a9937c 100%);
+						background-size: 800px 100%, 100% 100%;
+						background-repeat: repeat-x, no-repeat;
+						background-blend-mode: multiply, normal;
+						box-shadow: 0 8px 17px rgba(69, 54, 42, 0.28), inset 0 2px 3px rgba(255, 255, 255, 0.45), inset 0 -2px 3px rgba(93, 72, 55, 0.25);
 					}
 					.timeline-table .year-shelf::after {
 						content: '';
 						position: absolute;
-						left: 6%;
-						right: 6%;
-						bottom: -7px;
-						height: 9px;
-						background: linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, transparent 100%);
-						border-radius: 0 0 8px 8px;
+						left: 4%;
+						right: 4%;
+						top: 3.8rem;
+						height: 0.72rem;
+						background: linear-gradient(180deg, rgba(49, 34, 25, 0.22), transparent);
+						filter: blur(2px);
 						z-index: -1;
 					}
-					.timeline-table .item { width: 32%; font-weight: 600; }
-					.timeline-table .desc { width: 68%; }
+					.timeline-table .year-digits {
+						position: absolute;
+						left: 50%;
+						bottom: 1.24rem;
+						z-index: 1;
+						display: inline-flex;
+						align-items: center;
+						justify-content: center;
+						gap: 0.02em;
+						font-family: 'Cormorant Garamond', Georgia, serif;
+						line-height: 0.9;
+						transform: translateX(-50%);
+					}
+					.timeline-table .year-digit {
+						display: inline-block;
+						font-family: Georgia, 'Times New Roman', serif;
+						font-size: 3.45rem;
+						font-weight: 700;
+						letter-spacing: -0.08em;
+						background:
+							url("assets/css/images/wood-grain.png"),
+							linear-gradient(180deg, #f3eadc 0%, #d8c5ab 40%, #af9478 100%);
+						background-size: 360px 100%, 100% 100%;
+						background-repeat: repeat-x, no-repeat;
+						background-blend-mode: multiply, normal;
+						-webkit-background-clip: text;
+						background-clip: text;
+						-webkit-text-fill-color: transparent;
+						-webkit-text-stroke: 0.4px rgba(113, 88, 66, 0.48);
+						filter: drop-shadow(0 1px 0 rgba(255, 250, 239, 0.75)) drop-shadow(0 2px 0 #b49c82) drop-shadow(0 3px 0 #92785f) drop-shadow(0 6px 4px rgba(72, 53, 40, 0.4));
+						transform-origin: center bottom;
+					}
+					.timeline-table .year-digit:nth-child(4n + 1) { transform: rotate(-4deg) translateY(0.05em); }
+					.timeline-table .year-digit:nth-child(4n + 2) { transform: rotate(2deg) translateY(-0.02em); }
+					.timeline-table .year-digit:nth-child(4n + 3) { transform: rotate(-1.5deg) translateY(0.03em); }
+					.timeline-table .year-digit:nth-child(4n) { transform: rotate(3.5deg) translateY(-0.03em); }
+					.timeline-table .year-separator,
+					.timeline-table .year-suffix {
+						padding-left: 0.6rem;
+						color: #694735;
+						font-family: 'Cormorant Garamond', Georgia, serif;
+						font-size: 1.05rem;
+						font-style: italic;
+						font-weight: 600;
+						letter-spacing: 0.03em;
+						text-shadow: 0 1px rgba(255, 232, 205, 0.42);
+					}
+					.timeline-table .item { width: 35%; font-weight: 600; }
+					.timeline-table .desc { width: 65%; }
+					.timeline-table .item a { color: #2d8f9a; }
+					.project-with-preview { display: flex; align-items: flex-start; gap: 0.9rem; }
+					.project-stamp {
+						position: relative;
+						flex: 0 0 5rem;
+						width: 5rem;
+						aspect-ratio: 1;
+						padding: 0.3rem;
+						border: 1px dashed rgba(104, 74, 56, 0.72);
+						background: #f2e6d3;
+						box-shadow: 2px 3px 0 rgba(128, 94, 67, 0.2), 0 5px 9px rgba(69, 49, 37, 0.15);
+						transform: rotate(-3deg);
+					}
+					.project-stamp::before {
+						content: '';
+						position: absolute;
+						inset: 0.17rem;
+						border: 1px solid rgba(104, 74, 56, 0.34);
+						pointer-events: none;
+					}
+					.project-stamp img { display: block; width: 100%; height: 100%; object-fit: cover; filter: saturate(0.82) contrast(1.04); }
+					.project-stamp-label {
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						box-sizing: border-box;
+						padding: 0.55rem;
+						background: linear-gradient(135deg, #4a8f8f 0%, #2d6a6a 100%);
+						color: #f7f2e9;
+						font-family: 'Cormorant Garamond', Georgia, serif;
+						font-size: 0.82rem;
+						font-weight: 700;
+						letter-spacing: 0.1em;
+						line-height: 1.05;
+						text-align: center;
+						text-decoration: none;
+						text-shadow: 0 1px 1px rgba(22, 47, 47, 0.55);
+					}
+					.project-stamp-label::after {
+						content: '';
+						position: absolute;
+						inset: 0.42rem;
+						border: 1px solid rgba(255, 245, 223, 0.64);
+						pointer-events: none;
+					}
+					.project-stamp-label.stamp-violet { background: linear-gradient(135deg, #77638e 0%, #554166 100%); }
+					.project-stamp-label.stamp-gold { background: linear-gradient(135deg, #b88d55 0%, #805c36 100%); }
+					.timeline-table tr:nth-of-type(even) .project-stamp { transform: rotate(2deg); }
+					@media screen and (max-width: 736px) {
+						.timeline-table th, .timeline-table td { padding: 0.7rem 0.35rem; }
+						.timeline-table .item { width: 42%; }
+						.timeline-table .desc { width: 58%; }
+						.project-with-preview { gap: 0.55rem; }
+						.project-stamp { flex-basis: 3.65rem; width: 3.65rem; }
+						.timeline-table .year-digit { font-size: 2.7rem; }
+						.timeline-table .year-suffix { font-size: 0.92rem; padding-left: 0.35rem; }
+					}
 					</style>
 				
 					<table class="timeline-table">
 					<!-- 2026 -->
-					<tr><th class="year-shelf" colspan="2"><span>2026</span></th></tr>
+					<tr><th class="year-shelf" colspan="2"><span class="year-digits" aria-label="2026"><span class="year-digit">2</span><span class="year-digit">0</span><span class="year-digit">2</span><span class="year-digit">6</span></span></th></tr>
 					<tr>
-						<td class="item"><a href="https://surrogate-sci.github.io/prism2026/posts/mid-august-update/paper.pdf" target="_blank" rel="noopener">PRISM 2026 · OpenADMET / PXR</a></td>
+						<td class="item">
+							<div class="project-with-preview">
+								<a class="project-stamp project-stamp-label stamp-violet" href="https://surrogate-sci.github.io/prism2026/posts/mid-august-update/paper.pdf" target="_blank" rel="noopener" aria-label="Read the PRISM 2026 paper">PRISM<br />PXR</a>
+								<a href="https://surrogate-sci.github.io/prism2026/posts/mid-august-update/paper.pdf" target="_blank" rel="noopener">PRISM 2026 · OpenADMET / PXR</a>
+							</div>
+						</td>
 						<td class="desc">Investigating whether LLMs understand causality in potency and selectivity measurements (vs. arithmetic shortcuts), using OpenADMET PXR assays — probing, patching, and behavioural controls. <a href="eval-projects.html">Eval write-ups</a> · <a href="https://surrogate-sci.github.io/prism2026/posts/mid-august-update/" target="_blank" rel="noopener">post</a></td>
 					</tr>
 
 					<!-- 2025 -->
-					<tr><th class="year-shelf" colspan="2"><span>2025</span></th></tr>
+					<tr><th class="year-shelf" colspan="2"><span class="year-digits" aria-label="2025"><span class="year-digit">2</span><span class="year-digit">0</span><span class="year-digit">2</span><span class="year-digit">5</span></span></th></tr>
 					<tr>
-						<td class="item"><a href="miniscope-ucla.html">Miniscope @UCLA</a></td>
+						<td class="item">
+							<div class="project-with-preview">
+								<a class="project-stamp" href="miniscope-ucla.html" aria-label="Read about Miniscope at UCLA"><img src="images/miniscope/heart-on-a-miniscope-poster.png" alt="Heart-on-a-miniscope research poster preview" /></a>
+								<a href="miniscope-ucla.html">Miniscope @UCLA</a>
+							</div>
+						</td>
 						<td class="desc">Developing the software pipeline and electrical components, for using the miniscope on paced heart organoids.</td>
 					</tr>
 					<tr>
-						<td class="item"><a href="surf-caltech.html">SURF @ Caltech</a></td>
+						<td class="item">
+							<div class="project-with-preview">
+								<a class="project-stamp" href="surf-caltech.html" aria-label="Read about SURF at Caltech"><img src="images/surf_images/graphical_abstract.png" alt="PFLOTRAN research graphic preview" /></a>
+								<a href="surf-caltech.html">SURF @ Caltech</a>
+							</div>
+						</td>
 						<td class="desc">Built <em>pflotran-py</em>, a Python wrapper for generating PFLOTRAN input files and processing simulation results for long-term methane and CO<sub>2</sub> flux from salted algal biomass sequestration.</td>
 					</tr>
 					<tr>
-						<td class="item"><a href="varying-random-unitary-circuits.html">Varying Random Unitary Circuits in...</a></td>
+						<td class="item">
+							<div class="project-with-preview">
+								<a class="project-stamp" href="varying-random-unitary-circuits.html" aria-label="Read about varying random unitary circuits"><img src="images/random-unitaries/figure1.png" alt="Random unitary circuits results preview" /></a>
+								<a href="varying-random-unitary-circuits.html">Varying Random Unitary Circuits in...</a>
+							</div>
+						</td>
 						<td class="desc">Write-up on varying random unitary circuits in a 3D/SGCNN fusion network to test effects on predictability of protein-ligand binding affinity.</td>
 					</tr>
 					<tr>
-						<td class="item">QIntern 2025</td>
+						<td class="item">
+							<div class="project-with-preview">
+								<span class="project-stamp project-stamp-label stamp-gold" aria-hidden="true">QML<br />2025</span>
+								<span>QIntern 2025</span>
+							</div>
+						</td>
 						<td class="desc">Tested classical and QML models to predict molecular pIC50 values from feature sets, achieving R<sup>2</sup> up to 0.43. Maintained a code repository documenting model comparisons, with thorough documentation.</td>
 					</tr>
 					<tr>
-						<td class="item">BacDive Visualizations</td>
-						<td class="desc">Check it out! You can see connections between antibiotic resistance/sensitivity between genera. https://bacdive.streamlit.app/</td>
+						<td class="item">
+							<div class="project-with-preview">
+								<a class="project-stamp project-stamp-label" href="https://bacdive.streamlit.app/" target="_blank" rel="noopener" aria-label="Open BacDive Visualizations">DATA<br />VIZ</a>
+								<a href="https://bacdive.streamlit.app/" target="_blank" rel="noopener">BacDive Visualizations</a>
+							</div>
+						</td>
+						<td class="desc">Explore connections between antibiotic resistance and sensitivity across genera.</td>
 					</tr>
 				
 					<!-- 2024 -->
-					<tr><th class="year-shelf" colspan="2"><span>2024</span></th></tr>
+					<tr><th class="year-shelf" colspan="2"><span class="year-digits" aria-label="2024"><span class="year-digit">2</span><span class="year-digit">0</span><span class="year-digit">2</span><span class="year-digit">4</span></span></th></tr>
 					<tr>
 						<td class="item">Quantum Materials &amp; Devices Lab @ UCLA</td>
 						<td class="desc">Set up ODMR for hBN quantum-emitter characterisation.</td>
@@ -162,7 +298,7 @@
 					</tr>
 				
 					<!-- 2023 -->
-					<tr><th class="year-shelf" colspan="2"><span>2023</span></th></tr>
+					<tr><th class="year-shelf" colspan="2"><span class="year-digits" aria-label="2023"><span class="year-digit">2</span><span class="year-digit">0</span><span class="year-digit">2</span><span class="year-digit">3</span></span></th></tr>
 					<tr>
 						<td class="item">CRISPR &amp; VLP Lit Review</td>
 						<td class="desc">Co-authored review on VLP-mediated CRISPR delivery.</td>
@@ -177,7 +313,7 @@
 					<!-- no entries yet -->
 				
 					<!-- 2019–2021 -->
-					<tr><th class="year-shelf" colspan="2"><span>2019 – 2022</span></th></tr>
+					<tr><th class="year-shelf" colspan="2"><span class="year-digits" aria-label="2019 to 2022"><span class="year-digit">2</span><span class="year-digit">0</span><span class="year-digit">1</span><span class="year-digit">9</span><span class="year-separator">–</span><span class="year-digit">2</span><span class="year-digit">0</span><span class="year-digit">2</span><span class="year-digit">2</span></span></th></tr>
 					<tr>
 						<td class="item">DECA IBP track</td>
 						<td class="desc">Did this every year for three years, aced provincials every time :)</td>
@@ -192,7 +328,7 @@
 					</tr>
 				
 					<!-- 2018 and earlier -->
-					<tr><th class="year-shelf" colspan="2"><span>2018 and earlier</span></th></tr>
+					<tr><th class="year-shelf" colspan="2"><span class="year-digits" aria-label="2018 and earlier"><span class="year-digit">2</span><span class="year-digit">0</span><span class="year-digit">1</span><span class="year-digit">8</span><span class="year-suffix">and earlier</span></span></th></tr>
 					<tr>
 						<td class="item">Rube Goldberg Competitions</td>
 						<td class="desc">I think these might have been unnaturally popular where I grew up, but these were incredibly fun! To this day I am ready to make anything unnecessarily complicated but more exciting if prompted.</td>

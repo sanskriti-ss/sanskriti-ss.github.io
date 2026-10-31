@@ -1,0 +1,165 @@
+<!DOCTYPE HTML>
+<html lang="en">
+	<head>
+		<title>Navigation Preview</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="assets/css/library.css?v=landing26" />
+		<style>
+			#nav-preview {
+				max-width: 1000px;
+				margin: 0 auto;
+				padding: 2rem 1rem 5rem;
+				color: #3d3d4a;
+			}
+			#nav-preview h1,
+			#nav-preview h2 {
+				font-family: 'Cormorant Garamond', Georgia, serif;
+				letter-spacing: 0.02em;
+			}
+			#nav-preview h1 { color: #5b4a6f; font-size: 2.8rem; margin: 0; }
+			#nav-preview .intro { color: #625d6b; font-size: 1.12rem; max-width: 41rem; margin: 0.45rem 0 2.5rem; }
+			#nav-preview .nav-option {
+				background: rgba(255, 255, 255, 0.56);
+				border: 1px solid rgba(184, 168, 144, 0.52);
+				border-radius: 8px;
+				box-shadow: 0 12px 28px rgba(67, 54, 42, 0.09);
+				margin: 1.6rem 0;
+				overflow: hidden;
+			}
+			#nav-preview .option-copy { padding: 1.4rem 1.7rem 0.7rem; }
+			#nav-preview h2 { color: #2d6a6a; font-size: 1.75rem; margin: 0; }
+			#nav-preview .option-copy p { color: #625d6b; margin: 0.25rem 0 0; }
+			#nav-preview .nav-demo {
+				list-style: none;
+				margin: 0;
+				padding: 1.35rem 1.7rem 1.6rem;
+				display: flex;
+				align-items: end;
+				gap: 0.55rem;
+				flex-wrap: wrap;
+			}
+			#nav-preview .nav-demo a {
+				display: inline-block;
+				font-size: 0.96rem;
+				font-weight: 700;
+				letter-spacing: 0.035em;
+				text-decoration: none;
+				transition: transform 160ms ease, color 160ms ease;
+			}
+			#nav-preview .nav-demo a:hover { transform: translateY(-2px); }
+
+			/* Option A: a coloured book spine marks the current page. */
+			#nav-preview .spine-nav { border-bottom: 8px solid #c9b69e; position: relative; }
+			#nav-preview .spine-nav::after {
+				content: '';
+				position: absolute;
+				left: 1.7rem;
+				right: 1.7rem;
+				bottom: -15px;
+				height: 12px;
+				background: linear-gradient(180deg, rgba(65, 45, 35, 0.18), transparent);
+				filter: blur(2px);
+			}
+			#nav-preview .spine-nav a { color: #4e4b58; padding: 0.65rem 0.9rem 0.6rem; }
+			#nav-preview .spine-nav a[aria-current='page'] {
+				color: #fffdf8;
+				background: linear-gradient(90deg, #2d6a6a, #4a8f8f 55%, #2d6a6a);
+				border-radius: 4px 4px 0 0;
+				box-shadow: inset 2px 0 rgba(255, 255, 255, 0.18), inset -2px 0 rgba(30, 63, 63, 0.28), 0 -2px 6px rgba(45, 106, 106, 0.16);
+			}
+			#nav-preview .spine-nav a[aria-current='page']::before {
+				content: 'You are here';
+				display: block;
+				font-family: Lato, sans-serif;
+				font-size: 0.56rem;
+				font-weight: 400;
+				letter-spacing: 0.12em;
+				margin-bottom: 0.16rem;
+				text-transform: uppercase;
+			}
+
+			/* Option B: a quiet underline plus a breadcrumb. */
+			#nav-preview .trail { padding: 0 1.7rem; color: #77638e; font-size: 0.83rem; letter-spacing: 0.06em; }
+			#nav-preview .trail span { color: #8a8290; padding: 0 0.35rem; }
+			#nav-preview .underline-nav { gap: 1.15rem; padding-top: 0.65rem; border-bottom: 1px solid #d7cbb9; }
+			#nav-preview .underline-nav a { color: #5c5864; padding: 0.65rem 0.1rem 0.55rem; position: relative; }
+			#nav-preview .underline-nav a[aria-current='page'] { color: #5b4a6f; }
+			#nav-preview .underline-nav a[aria-current='page']::after {
+				content: '';
+				position: absolute;
+				left: 0;
+				right: 0;
+				bottom: -1px;
+				height: 4px;
+				border-radius: 5px 5px 0 0;
+				background: linear-gradient(90deg, #7d6b8f, #b89a6a);
+				box-shadow: 0 -1px 4px rgba(91, 74, 111, 0.15);
+			}
+			#nav-preview .recommendation {
+				margin: 2rem 0 0;
+				padding: 1.1rem 1.3rem;
+				border-left: 4px solid #4a8f8f;
+				background: rgba(74, 143, 143, 0.09);
+				color: #4e4b58;
+			}
+			@media screen and (max-width: 600px) {
+				#nav-preview .nav-demo { align-items: stretch; display: grid; grid-template-columns: 1fr 1fr; }
+				#nav-preview .nav-demo a { display: block; }
+				#nav-preview .underline-nav { gap: 0.4rem; }
+			}
+		</style>
+	</head>
+	<body class="nav-preview is-preload">
+		<div id="page-wrapper">
+			<header id="header">
+				<h1 id="logo"><a href="index.html">Home Page</a></h1>
+				<nav id="nav"><ul><li><a href="index.html">Return home</a></li></ul></nav>
+			</header>
+			<article id="main">
+				<section id="nav-preview">
+					<h1>Navigation state preview</h1>
+					<p class="intro">Both examples show the Projects page as active. The links are live, so they also show how the treatment would feel in the site.</p>
+
+					<section class="nav-option">
+						<div class="option-copy">
+							<h2>Option A: active book spine</h2>
+							<p>More decorative and closely tied to the bookshelf theme. The active section becomes a small teal book resting on a shelf.</p>
+						</div>
+						<nav aria-label="Sample primary navigation">
+							<ul class="nav-demo spine-nav">
+								<li><a href="index.html">Welcome</a></li>
+								<li><a href="projects.html" aria-current="page">Projects</a></li>
+								<li><a href="papers.html">Papers</a></li>
+								<li><a href="oldwriting.html">Writing</a></li>
+								<li><a href="interests.html">Interests</a></li>
+								<li><a href="contact.html">Contact</a></li>
+							</ul>
+						</nav>
+					</section>
+
+					<section class="nav-option">
+						<div class="option-copy">
+							<h2>Option B: breadcrumb and underline</h2>
+							<p>Quieter and faster to scan. The location is stated in plain language, while a purple-and-gold underline marks the active link.</p>
+						</div>
+						<p class="trail">You are here <span>/</span> Projects</p>
+						<nav aria-label="Sample primary navigation">
+							<ul class="nav-demo underline-nav">
+								<li><a href="index.html">Welcome</a></li>
+								<li><a href="projects.html" aria-current="page">Projects</a></li>
+								<li><a href="papers.html">Papers</a></li>
+								<li><a href="oldwriting.html">Writing</a></li>
+								<li><a href="interests.html">Interests</a></li>
+								<li><a href="contact.html">Contact</a></li>
+							</ul>
+						</nav>
+					</section>
+
+					<p class="recommendation"><strong>My pick:</strong> Option B for the persistent site navigation. It is easier to read and leaves the book-and-shelf illustrations to carry the page personality. Option A would work especially well for section landing pages.</p>
+				</section>
+			</article>
+		</div>
+	</body>
+</html>

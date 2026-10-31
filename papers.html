@@ -17,52 +17,128 @@
 				margin: 0 auto;
 			}
 			.paper-entry {
-				margin: 0 0 2.2em;
-				padding-bottom: 1.8em;
-				border-bottom: 1px solid rgba(184, 168, 144, 0.45);
+				margin: 0;
+				border-bottom: 1px solid rgba(125, 107, 143, 0.2);
 			}
 			.paper-entry:last-child {
 				border-bottom: none;
-				padding-bottom: 0;
 			}
-			.paper-entry h3 {
-				margin: 0 0 0.35em;
+			.paper-title {
+				list-style: none;
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				gap: 1.25rem;
+				padding: 1.1em 0.15em;
+				cursor: pointer;
 				font-family: 'Cormorant Garamond', Georgia, serif;
-				font-size: 1.55rem;
+				font-size: 1.5rem;
 				font-weight: 600;
 				color: #3f3550;
-				line-height: 1.25;
+				line-height: 1.3;
+				letter-spacing: 0.01em;
+				text-transform: none;
+				transition: color 0.2s ease;
+			}
+			.paper-title::-webkit-details-marker {
+				display: none;
+			}
+			.paper-title::marker {
+				content: '';
+			}
+			.paper-title:hover,
+			.paper-entry[open] > .paper-title {
+				color: #725d81;
+			}
+			.paper-title:focus-visible {
+				outline: 2px solid rgba(125, 107, 143, 0.55);
+				outline-offset: 3px;
+				border-radius: 3px;
+			}
+			.paper-chevron {
+				flex: 0 0 1.8rem;
+				width: 1.8rem;
+				height: 1.8rem;
+				display: grid;
+				place-items: center;
+				border: 1px solid rgba(125, 107, 143, 0.35);
+				border-radius: 50%;
+				color: #7d6b8f;
+				font-family: 'Source Sans 3', sans-serif;
+				font-size: 1.05rem;
+				line-height: 1;
+				transition: transform 0.2s ease, background-color 0.2s ease;
+			}
+			.paper-entry[open] .paper-chevron {
+				transform: rotate(180deg);
+				background: rgba(125, 107, 143, 0.08);
+			}
+			.paper-details {
+				padding: 0.1em 2.9rem 1.15em 0.15em;
 			}
 			.paper-meta {
-				margin: 0 0 0.7em;
+				margin: 0 0 0.65em;
 				font-family: 'Source Sans 3', 'Lato', sans-serif;
 				font-size: 0.92rem;
 				color: #6d6678;
 				letter-spacing: 0.02em;
 			}
-			.paper-entry p {
+			.paper-details p {
 				font-family: 'Source Sans 3', 'Lato', sans-serif;
 				font-size: 1rem;
 				line-height: 1.65;
 				color: #4d4658;
-				margin: 0 0 0.7em;
+				margin: 0 0 0.8em;
 			}
 			.paper-links a {
+				display: inline-block;
+				margin: 0.1em 0.45em 0.1em 0;
+				padding: 0.22em 0.75em;
+				border: 1px solid rgba(125, 107, 143, 0.28);
+				border-radius: 999px;
+				background: rgba(255, 255, 255, 0.42);
 				font-family: 'Source Sans 3', 'Lato', sans-serif;
 				font-size: 0.92rem;
 				color: #5b4a6f;
-				text-decoration: underline;
-				text-underline-offset: 3px;
-				margin-right: 1.1em;
+				text-decoration: none;
+				transition: background-color 0.2s ease, border-color 0.2s ease;
+			}
+			.paper-links a:hover {
+				background: rgba(125, 107, 143, 0.1);
+				border-color: rgba(125, 107, 143, 0.55);
 			}
 			.papers-section-label {
-				margin: 2.5em 0 1.1em;
+				margin: 0.75em 0 0.75em;
 				font-family: 'Cormorant Garamond', Georgia, serif;
 				font-size: 1.15rem;
 				font-weight: 600;
 				letter-spacing: 0.08em;
 				text-transform: uppercase;
 				color: #7d6b8f;
+			}
+			/* Reduce the large default gaps around this page's decorative header. */
+			#main > .papers-page-header {
+				padding-top: 1.5em;
+				margin-bottom: 0.75em;
+			}
+			#main > .papers-page-content {
+				padding-top: 1.5em;
+			}
+			.papers-page-content header.major {
+				padding-bottom: 0.75em;
+			}
+			.papers-page-content header.major p {
+				margin-bottom: 0;
+			}
+			@media screen and (max-width: 736px) {
+				.paper-title {
+					font-size: 1.28rem;
+					gap: 0.8rem;
+					padding: 0.95em 0.1em;
+				}
+				.paper-details {
+					padding-right: 0.1em;
+				}
 			}
 		</style>
 	</head>
@@ -95,7 +171,7 @@
 			</header>
 
 			<article id="main">
-				<header class="special container">
+				<header class="special container papers-page-header">
 					<div class="bookshelf page-header-shelf">
 						<div class="shelf-board"></div>
 						<div class="books-row compact">
@@ -106,7 +182,7 @@
 					</div>
 				</header>
 
-				<section class="wrapper style3 container">
+				<section class="wrapper style3 container papers-page-content">
 					<div class="content papers-list">
 						<header class="major">
 							<h2>Papers &amp; Write-ups</h2>
@@ -115,69 +191,81 @@
 
 						<p class="papers-section-label">Published &amp; Preprints</p>
 
-						<div class="paper-entry">
-							<h3>Virus-Like Particles as a CRISPR-Cas9 Delivery Tool</h3>
-							<p class="paper-meta">Sanskriti Shindadkar, Kari M. Severson · Journal of Undergraduate Life Sciences (JULS), 2024</p>
-							<p>A review of virus-like particles as delivery vehicles for CRISPR-Cas9 genome editing components, covering clinical context, advantages and limitations of VLPs, and key studies that couple the two technologies.</p>
-							<p class="paper-links">
-								<a href="https://doi.org/10.33137/juls.v16i1.42386" target="_blank" rel="noopener">DOI</a>
-								<a href="https://jps.library.utoronto.ca/index.php/juls/article/view/42386" target="_blank" rel="noopener">JULS</a>
-							</p>
-						</div>
+						<details class="paper-entry">
+							<summary class="paper-title"><span>Virus-Like Particles as a CRISPR-Cas9 Delivery Tool</span><span class="paper-chevron" aria-hidden="true">⌄</span></summary>
+							<div class="paper-details">
+								<p class="paper-meta">Sanskriti Shindadkar, Kari M. Severson · Journal of Undergraduate Life Sciences (JULS), 2024</p>
+								<p>A review of virus-like particles as delivery vehicles for CRISPR-Cas9 genome editing components, covering clinical context, advantages and limitations of VLPs, and key studies that bring VLPs and CRISPR together.</p>
+								<p class="paper-links">
+									<a href="https://doi.org/10.33137/juls.v16i1.42386" target="_blank" rel="noopener">DOI</a>
+									<a href="https://jps.library.utoronto.ca/index.php/juls/article/view/42386" target="_blank" rel="noopener">JULS</a>
+								</p>
+							</div>
+						</details>
 
-						<div class="paper-entry">
-							<h3>Comparing the Performance of Leading VQE Algorithms for Computing Ground-State Energies of Amino Acids</h3>
-							<p class="paper-meta">Sanskriti Shindadkar, Clyde Villacrusis, Jasper Andrews, Brandon Yan · arXiv, 2026</p>
-							<p>An integrated benchmarking repository for variational quantum eigensolver ansatzes and truncation methods, applied to amino-acid Hamiltonians from the QMProt dataset across noise resilience, trainability, adaptive growth, and accuracy–expressivity tradeoffs.</p>
-							<p class="paper-links">
-								<a href="https://arxiv.org/abs/2607.02620" target="_blank" rel="noopener">arXiv</a>
-								<a href="https://doi.org/10.48550/arxiv.2607.02620" target="_blank" rel="noopener">DOI</a>
-							</p>
-						</div>
+						<details class="paper-entry">
+							<summary class="paper-title"><span>Comparing the Performance of Leading VQE Algorithms for Computing Ground-State Energies of Amino Acids</span><span class="paper-chevron" aria-hidden="true">⌄</span></summary>
+							<div class="paper-details">
+								<p class="paper-meta">Sanskriti Shindadkar, Clyde Villacrusis, Jasper Andrews, Brandon Yan · arXiv, 2026</p>
+								<p>An integrated benchmarking repository for variational quantum eigensolver ansatzes and truncation methods, applied to amino-acid Hamiltonians from the QMProt dataset across noise resilience, trainability, adaptive growth, and accuracy–expressivity tradeoffs.</p>
+								<p class="paper-links">
+									<a href="https://arxiv.org/abs/2607.02620" target="_blank" rel="noopener">arXiv</a>
+									<a href="https://doi.org/10.48550/arxiv.2607.02620" target="_blank" rel="noopener">DOI</a>
+								</p>
+							</div>
+						</details>
 
 						<p class="papers-section-label">White Papers &amp; Polished Notes</p>
 
-						<div class="paper-entry">
-							<h3>Investigating LLMs&rsquo; Understanding of Causality in Measurements Using OpenADMET Experiments</h3>
-							<p class="paper-meta">PRISM 2026 · Surrogate Science · Mid-August 2026</p>
-							<p>Uses paired PXR primary and counter-screen assays as a causal identification testbed to ask whether LLMs distinguish assay activity from evidence of target engagement — probing selectivity representations, counter-screen fragility, activation patching across equivalent notations, and whether models request the missing scientific control.</p>
-							<p class="paper-links">
-								<a href="https://surrogate-sci.github.io/prism2026/posts/mid-august-update/paper.pdf" target="_blank" rel="noopener">PDF</a>
-								<a href="https://surrogate-sci.github.io/prism2026/posts/mid-august-update/" target="_blank" rel="noopener">Project post</a>
-								<a href="eval-projects.html">Eval Projs</a>
-							</p>
-						</div>
+						<details class="paper-entry">
+							<summary class="paper-title"><span>Investigating LLMs&rsquo; Understanding of Causality in Measurements Using OpenADMET Experiments</span><span class="paper-chevron" aria-hidden="true">⌄</span></summary>
+							<div class="paper-details">
+								<p class="paper-meta">PRISM 2026 · Surrogate Science · Mid-August 2026</p>
+								<p>Uses paired PXR primary and counter-screen assays as a causal identification testbed to ask whether LLMs distinguish assay activity from evidence of target engagement — probing selectivity representations, counter-screen fragility, activation patching across equivalent notations, and whether models request the missing scientific control.</p>
+								<p class="paper-links">
+									<a href="files/llm-causal-measurements.pdf" target="_blank" rel="noopener">PDF</a>
+									<a href="https://surrogate-sci.github.io/prism2026/posts/mid-august-update/" target="_blank" rel="noopener">Project post</a>
+									<a href="eval-projects.html">Eval Projs</a>
+								</p>
+							</div>
+						</details>
 
-						<div class="paper-entry">
-							<h3>Varying Random Unitary Circuits in a Classically-Modelled Quantum Neural Network</h3>
-							<p class="paper-meta">Based on work by Sanskriti Shindadkar, Clyde Villacrusis, Manvi Agrawal, Hayk, and Karen · 2026</p>
-							<p>Explores how circuit choice affects predictive accuracy when a classical layer in a 3D/SGCNN fusion model for protein–ligand binding affinity is replaced with parameterized random G3 unitary circuits.</p>
-							<p class="paper-links">
-								<a href="varying-random-unitary-circuits.html">On this site</a>
-								<a href="https://sanskritis.substack.com/p/varying-random-unitary-circuits-in" target="_blank" rel="noopener">Substack</a>
-								<a href="https://openreview.net/forum?id=vmma8SnJh6" target="_blank" rel="noopener">OpenReview</a>
-								<a href="https://github.com/sanskriti-ss/bindingaffinity" target="_blank" rel="noopener">Code</a>
-							</p>
-						</div>
+						<details class="paper-entry">
+							<summary class="paper-title"><span>Varying Random Unitary Circuits in a Classically-Modelled Quantum Neural Network</span><span class="paper-chevron" aria-hidden="true">⌄</span></summary>
+							<div class="paper-details">
+								<p class="paper-meta">Based on work by Sanskriti Shindadkar, Clyde Villacrusis, Manvi Agrawal, Hayk, and Karen · 2026</p>
+								<p>Explores how circuit choice affects predictive accuracy when a classical layer in a 3D/SGCNN fusion model for protein–ligand binding affinity is replaced with parameterized random G3 unitary circuits.</p>
+								<p class="paper-links">
+									<a href="varying-random-unitary-circuits.html">On this site</a>
+									<a href="https://sanskritis.substack.com/p/varying-random-unitary-circuits-in" target="_blank" rel="noopener">Substack</a>
+									<a href="https://openreview.net/forum?id=vmma8SnJh6" target="_blank" rel="noopener">OpenReview</a>
+									<a href="https://github.com/sanskriti-ss/bindingaffinity" target="_blank" rel="noopener">Code</a>
+								</p>
+							</div>
+						</details>
 
-						<div class="paper-entry">
-							<h3>Modelling Antibody Therapy Dynamics with Applications to Glofitamab</h3>
-							<p class="paper-meta">Collaboration with Joseph Fisher, Mia A. Calvillo, Rhea Jain, Brianna Ozomaro, Kody Seow, Mehreen Suzaan, David Wang, Dylan Warner, Nini Yang, and others · 2025</p>
-							<p>A summary of modelling experiments on antibody therapy dynamics, with applications to Glofitamab.</p>
-							<p class="paper-links">
-								<a href="https://sanskritis.substack.com/p/modelling-antibody-therapy-dynamics" target="_blank" rel="noopener">Substack write-up</a>
-							</p>
-						</div>
+						<details class="paper-entry">
+							<summary class="paper-title"><span>Modelling Antibody Therapy Dynamics with Applications to Glofitamab</span><span class="paper-chevron" aria-hidden="true">⌄</span></summary>
+							<div class="paper-details">
+								<p class="paper-meta">Collaboration with Joseph Fisher, Mia A. Calvillo, Rhea Jain, Brianna Ozomaro, Kody Seow, Mehreen Suzaan, David Wang, Dylan Warner, Nini Yang, and others · 2025</p>
+								<p>A summary of modelling experiments on antibody therapy dynamics, with applications to Glofitamab.</p>
+								<p class="paper-links">
+									<a href="https://sanskritis.substack.com/p/modelling-antibody-therapy-dynamics" target="_blank" rel="noopener">Substack write-up</a>
+								</p>
+							</div>
+						</details>
 
-						<div class="paper-entry">
-							<h3>pflotran-py: A Python Wrapper for Generating PFLOTRAN Input Files and Processing Simulation Results</h3>
-							<p class="paper-meta">Sanskriti Shindadkar &amp; Madison Dunitz · SURF @ Caltech · JOSS manuscript</p>
-							<p>A Python package that generates experiment-specific PFLOTRAN input files, supports custom sandbox reactions (including water-activity inhibition of methanogenesis), and post-processes simulation outputs for bio-based carbon sequestration modeling.</p>
-							<p class="paper-links">
-								<a href="surf-caltech.html">On this site</a>
-								<a href="https://github.com/MDunitz/pflotran-py" target="_blank" rel="noopener">Code</a>
-							</p>
-						</div>
+						<details class="paper-entry">
+							<summary class="paper-title"><span>pflotran-py: A Python Wrapper for Generating PFLOTRAN Input Files and Processing Simulation Results</span><span class="paper-chevron" aria-hidden="true">⌄</span></summary>
+							<div class="paper-details">
+								<p class="paper-meta">Sanskriti Shindadkar &amp; Madison Dunitz · SURF @ Caltech · JOSS manuscript</p>
+								<p>A Python package that generates experiment-specific PFLOTRAN input files, supports custom sandbox reactions (including water-activity inhibition of methanogenesis), and post-processes simulation outputs for bio-based carbon sequestration modeling.</p>
+								<p class="paper-links">
+									<a href="surf-caltech.html">On this site</a>
+									<a href="https://github.com/MDunitz/pflotran-py" target="_blank" rel="noopener">Code</a>
+								</p>
+							</div>
+						</details>
 
 					</div>
 				</section>

@@ -32,7 +32,7 @@
 				padding: 1.1em 0.15em;
 				cursor: pointer;
 				font-family: 'Cormorant Garamond', Georgia, serif;
-				font-size: 1.5rem;
+				font-size: 1.35rem;
 				font-weight: 600;
 				color: #3f3550;
 				line-height: 1.3;
@@ -107,6 +107,10 @@
 				background: rgba(125, 107, 143, 0.1);
 				border-color: rgba(125, 107, 143, 0.55);
 			}
+			.papers-section-label:not(:first-of-type) { margin-top: 2.6em; }
+			.paper-icon { flex: 0 0 3.5rem; width: 3.5rem; height: 3.5rem; }
+			.paper-title > span:first-of-type { flex: 1; }
+			@media screen and (max-width: 736px) { .paper-icon { flex-basis: 2.7rem; width: 2.7rem; height: 2.7rem; } }
 			.papers-section-label {
 				margin: 0.75em 0 0.75em;
 				font-family: 'Cormorant Garamond', Georgia, serif;
@@ -132,7 +136,7 @@
 			}
 			@media screen and (max-width: 736px) {
 				.paper-title {
-					font-size: 1.28rem;
+					font-size: 1.16rem;
 					gap: 0.8rem;
 					padding: 0.95em 0.1em;
 				}
@@ -192,7 +196,7 @@
 						<p class="papers-section-label">Published &amp; Preprints</p>
 
 						<details class="paper-entry">
-							<summary class="paper-title"><span>Virus-Like Particles as a CRISPR-Cas9 Delivery Tool</span><span class="paper-chevron" aria-hidden="true">⌄</span></summary>
+							<summary class="paper-title"><svg class="paper-icon" viewBox="0 0 64 64" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="#806c90" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="32" cy="32" r="17" fill="#ede7ef"/><circle cx="32" cy="32" r="12.5"/><path d="M32 8v7M32 49v7M8 32h7M49 32h7M15 15l5 5M44 44l5 5M49 15l-5 5M20 44l-5 5"/><circle cx="28" cy="29" r="2.2" fill="#ad99b9" stroke="none"/><circle cx="36" cy="35" r="3" fill="#c8b8d0" stroke="none"/><circle cx="36" cy="27" r="1.5" fill="#ad99b9" stroke="none"/></g></svg><span>Virus-Like Particles as a CRISPR-Cas9 Delivery Tool</span><span class="paper-chevron" aria-hidden="true">⌄</span></summary>
 							<div class="paper-details">
 								<p class="paper-meta">Sanskriti Shindadkar, Kari M. Severson · Journal of Undergraduate Life Sciences (JULS), 2024</p>
 								<p>A review of virus-like particles as delivery vehicles for CRISPR-Cas9 genome editing components, covering clinical context, advantages and limitations of VLPs, and key studies that bring VLPs and CRISPR together.</p>
@@ -204,7 +208,7 @@
 						</details>
 
 						<details class="paper-entry">
-							<summary class="paper-title"><span>Comparing the Performance of Leading VQE Algorithms for Computing Ground-State Energies of Amino Acids</span><span class="paper-chevron" aria-hidden="true">⌄</span></summary>
+							<summary class="paper-title"><svg class="paper-icon" viewBox="0 0 64 64" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="#806c90" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 39l17-19 18 17M31 20l-3 27M14 39l14 8 21-10"/><circle cx="14" cy="39" r="5.5" fill="#d9cddd"/><circle cx="31" cy="20" r="7" fill="#b9a6c2"/><circle cx="49" cy="37" r="6" fill="#eee8ef"/><circle cx="28" cy="47" r="4.5" fill="#c9b9d0"/><circle cx="29" cy="18" r="1.4" fill="#fff" stroke="none"/></g></svg><span>Comparing the Performance of Leading VQE Algorithms for Computing Ground-State Energies of Amino Acids</span><span class="paper-chevron" aria-hidden="true">⌄</span></summary>
 							<div class="paper-details">
 								<p class="paper-meta">Sanskriti Shindadkar, Clyde Villacrusis, Jasper Andrews, Brandon Yan · arXiv, 2026</p>
 								<p>An integrated benchmarking repository for variational quantum eigensolver ansatzes and truncation methods, applied to amino-acid Hamiltonians from the QMProt dataset across noise resilience, trainability, adaptive growth, and accuracy–expressivity tradeoffs.</p>
@@ -215,23 +219,8 @@
 							</div>
 						</details>
 
-						<p class="papers-section-label">White Papers &amp; Polished Notes</p>
-
 						<details class="paper-entry">
-							<summary class="paper-title"><span>Investigating LLMs&rsquo; Understanding of Causality in Measurements Using OpenADMET Experiments</span><span class="paper-chevron" aria-hidden="true">⌄</span></summary>
-							<div class="paper-details">
-								<p class="paper-meta">PRISM 2026 · Surrogate Science · Mid-August 2026</p>
-								<p>Uses paired PXR primary and counter-screen assays as a causal identification testbed to ask whether LLMs distinguish assay activity from evidence of target engagement — probing selectivity representations, counter-screen fragility, activation patching across equivalent notations, and whether models request the missing scientific control.</p>
-								<p class="paper-links">
-									<a href="files/llm-causal-measurements.pdf" target="_blank" rel="noopener">PDF</a>
-									<a href="https://surrogate-sci.github.io/prism2026/posts/mid-august-update/" target="_blank" rel="noopener">Project post</a>
-									<a href="eval-projects.html">Eval Projs</a>
-								</p>
-							</div>
-						</details>
-
-						<details class="paper-entry">
-							<summary class="paper-title"><span>Varying Random Unitary Circuits in a Classically-Modelled Quantum Neural Network</span><span class="paper-chevron" aria-hidden="true">⌄</span></summary>
+							<summary class="paper-title"><svg class="paper-icon" viewBox="0 0 64 64" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="#806c90" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="32" cy="32" r="3" fill="#8b7699" stroke="none"/><ellipse cx="32" cy="32" rx="24" ry="9" transform="rotate(-45 32 32)"/><ellipse cx="32" cy="32" rx="24" ry="9" transform="rotate(45 32 32)"/><ellipse cx="32" cy="32" rx="24" ry="9"/><circle cx="48" cy="16" r="3.2" fill="#d4c4da"/><circle cx="12" cy="29" r="2.8" fill="#eee8ef"/></g></svg><span>Varying Random Unitary Circuits in a Classically-Modelled Quantum Neural Network</span><span class="paper-chevron" aria-hidden="true">⌄</span></summary>
 							<div class="paper-details">
 								<p class="paper-meta">Based on work by Sanskriti Shindadkar, Clyde Villacrusis, Manvi Agrawal, Hayk, and Karen · 2026</p>
 								<p>Explores how circuit choice affects predictive accuracy when a classical layer in a 3D/SGCNN fusion model for protein–ligand binding affinity is replaced with parameterized random G3 unitary circuits.</p>
@@ -244,8 +233,25 @@
 							</div>
 						</details>
 
+						<p class="papers-section-label">White Papers &amp; Polished Notes</p>
+
 						<details class="paper-entry">
-							<summary class="paper-title"><span>Modelling Antibody Therapy Dynamics with Applications to Glofitamab</span><span class="paper-chevron" aria-hidden="true">⌄</span></summary>
+							<summary class="paper-title"><svg class="paper-icon" viewBox="0 0 64 64" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="#806c90" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 42V20M14 42h38"/><path d="M21 35l10-12 9 7 10-15" stroke-dasharray="2 3"/><circle cx="21" cy="35" r="3.5" fill="#d9cddd"/><circle cx="31" cy="23" r="4.5" fill="#b9a6c2"/><circle cx="40" cy="30" r="3.5" fill="#d9cddd"/><circle cx="50" cy="15" r="4" fill="#eee8ef"/><path d="M24 52h26" stroke="#b9a6c2"/></g></svg><span>Investigating LLMs&rsquo; Understanding of Causality in Measurements Using OpenADMET Experiments</span><span class="paper-chevron" aria-hidden="true">⌄</span></summary>
+							<div class="paper-details">
+								<p class="paper-meta">PRISM 2026 · Surrogate Science · Mid-August 2026</p>
+								<p>Uses paired PXR primary and counter-screen assays as a causal identification testbed to ask whether LLMs distinguish assay activity from evidence of target engagement — probing selectivity representations, counter-screen fragility, activation patching across equivalent notations, and whether models request the missing scientific control.</p>
+								<p class="paper-links">
+									<a href="files/llm-causal-measurements.pdf" target="_blank" rel="noopener">PDF</a>
+									<a href="https://surrogate-sci.github.io/prism2026/posts/mid-august-update/" target="_blank" rel="noopener">Project post</a>
+									<a href="eval-projects.html">Eval Projs</a>
+								</p>
+							</div>
+						</details>
+
+
+
+						<details class="paper-entry">
+							<summary class="paper-title"><svg class="paper-icon" viewBox="0 0 64 64" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="#806c90" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M32 51V33M32 33L18 18M32 33l14-15" stroke-width="3"/><path d="M17 17l-5-6M18 18l-7 1M18 18l1-7M47 17l5-6M46 18l7 1M46 18l-1-7"/><circle cx="32" cy="33" r="4" fill="#d9cddd"/><path d="M28 51h8"/></g></svg><span>Modelling Antibody Therapy Dynamics with Applications to Glofitamab</span><span class="paper-chevron" aria-hidden="true">⌄</span></summary>
 							<div class="paper-details">
 								<p class="paper-meta">Collaboration with Joseph Fisher, Mia A. Calvillo, Rhea Jain, Brianna Ozomaro, Kody Seow, Mehreen Suzaan, David Wang, Dylan Warner, Nini Yang, and others · 2025</p>
 								<p>A summary of modelling experiments on antibody therapy dynamics, with applications to Glofitamab.</p>
@@ -256,7 +262,7 @@
 						</details>
 
 						<details class="paper-entry">
-							<summary class="paper-title"><span>pflotran-py: A Python Wrapper for Generating PFLOTRAN Input Files and Processing Simulation Results</span><span class="paper-chevron" aria-hidden="true">⌄</span></summary>
+							<summary class="paper-title"><svg class="paper-icon" viewBox="0 0 64 64" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="#806c90" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14h26v35H19z" fill="#f1eaf0"/><path d="M25 22l-4 4 4 4M39 22l4 4-4 4M35 20l-6 12M25 39h14M25 44h10"/><path d="M15 18v35h26" stroke="#b9a6c2"/></g></svg><span>pflotran-py: A Python Wrapper for Generating PFLOTRAN Input Files and Processing Simulation Results</span><span class="paper-chevron" aria-hidden="true">⌄</span></summary>
 							<div class="paper-details">
 								<p class="paper-meta">Sanskriti Shindadkar &amp; Madison Dunitz · SURF @ Caltech · JOSS manuscript</p>
 								<p>A Python package that generates experiment-specific PFLOTRAN input files, supports custom sandbox reactions (including water-activity inhibition of methanogenesis), and post-processes simulation outputs for bio-based carbon sequestration modeling.</p>
